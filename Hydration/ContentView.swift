@@ -33,7 +33,8 @@ extension CLLocationCoordinate2D{
     static let water_student_center = CLLocationCoordinate2D(
         latitude: 33.649373517138784, longitude: -117.84252289745093)
     
-    
+    static let center_uci = CLLocationCoordinate2D(
+        latitude: 33.648613, longitude: -117.842753)
     
 }
 struct ContentView: View {
@@ -54,7 +55,6 @@ struct ContentView: View {
     @State private var showAlert_howard = false
     @State private var showAlert_science_library = false
     @State private var showAlert_student_center = false
-    let center_uci = CLLocationCoordinate2D(latitude: 33.648613, longitude: -117.842753)
     let hydration_icon = "hydration_icon"
     var body: some View {
         VStack {
@@ -248,7 +248,7 @@ struct ContentView: View {
                     
                     
                     
-                    Annotation("", coordinate: center_uci){
+                    Annotation("", coordinate: .center_uci){
                         ZStack{
                             Image(systemName: "circle.fill")
                                 .resizable()
