@@ -41,20 +41,35 @@ struct ContentView: View {
     @State private var directions: [String] = []
     @State private var showDirections = false
     @State private var showMapView: Bool = false
-    
     @State var camera: MapCameraPosition = .automatic
     @State private var isSatelliteView: Bool = false
     @StateObject var manager = LocationManager()
-    @State private var showAlert_dbh = false
-    @State private var showAlert_eng_tower = false
-    @State private var showAlert_langson_library = false
-    @State private var showAlert_sslh = false
-    @State private var showAlert_sst = false
-    @State private var showAlert_ssl = false
-    @State private var showAlert_steinhaus = false
-    @State private var showAlert_howard = false
-    @State private var showAlert_science_library = false
-    @State private var showAlert_student_center = false
+    
+    
+    @State private var showAlert = false
+
+    
+    struct Locations {
+        var name: String
+        var coordinates: CLLocationCoordinate2D
+    }
+    
+    // Define the locations array
+    private var locations: [Locations] = [
+        Locations(name: "DBH", coordinates: .water_dbh),
+        Locations(name: "Engineering Tower", coordinates: .water_eng_tower),
+        Locations(name: "Langson Library", coordinates: .water_langson_library),
+        Locations(name: "SSLH", coordinates: .water_sslh),
+        Locations(name: "SST", coordinates: .water_sst),
+        Locations(name: "SSL", coordinates: .water_ssl),
+        Locations(name: "Steinhaus Hall", coordinates: .water_steinhaus),
+        Locations(name: "Howard Schneiderman", coordinates: .water_howard),
+        Locations(name: "Science Library", coordinates: .water_science_library),
+        Locations(name: "Student Center", coordinates: .water_student_center),
+    ]
+
+    
+    
     let hydration_icon = "hydration_icon"
     var body: some View {
         VStack {
@@ -80,7 +95,7 @@ struct ContentView: View {
                         HStack{
                             Spacer()
                             Button{
-                                camera = .region(MKCoordinateRegion(center:center_uci, latitudinalMeters: 150,
+                                camera = .region(MKCoordinateRegion(center:.center_uci, latitudinalMeters: 150,
                                                                     longitudinalMeters: 150))
                                 showMapView.toggle()
                             } label:{
@@ -103,150 +118,30 @@ struct ContentView: View {
                         .background(Color(red: 0, green: 0.3922, blue: 0.6431))
                     }
             }
+            
+            
             else {
-                
-                Map(position: $camera){
-                    Annotation("DBH", coordinate: .water_dbh){
-                        ZStack{
-                            Image(hydration_icon)
-                                .resizable()
-                                .padding(5)
-                                .frame(width: 35, height: 35)
-                                .foregroundColor(.red)
-                        }.onTapGesture {
-                            showAlert_dbh = true
-                        }.sheet(isPresented: $showAlert_dbh) {
-                            CustomAlertView(showAlert: $showAlert_dbh, water_name: "water_dbh")
+                var selectedLocationName: String = ""
+                Map(position: $camera)
+                {
+                    ForEach(locations, id: \.name) { location in
+                        Annotation(location.name, coordinate: location.coordinates) {
+                            ZStack {
+                                Image(hydration_icon)
+                                    .resizable()
+                                    .padding(5)
+                                    .frame(width: 35, height: 35)
+                                    .foregroundColor(.red)
+                            }
+                            .onTapGesture {
+                                showAlert = true
+                                selectedLocationName = location.name
+                            }
+                            .sheet(isPresented: $showAlert) {
+                                CustomAlertView(showAlert: $showAlert, water_name: selectedLocationName)
+                            }
                         }
                     }
-                    
-                    Annotation("Engineering Tower", coordinate: .water_eng_tower){
-                        ZStack{
-                            Image(hydration_icon)
-                                .resizable()
-                                .padding(5)
-                                .frame(width: 35, height: 35)
-                                .foregroundColor(.red)
-                        }.onTapGesture {
-                            showAlert_eng_tower = true
-                        }.sheet(isPresented: $showAlert_eng_tower) {
-                            CustomAlertView(showAlert: $showAlert_eng_tower, water_name: "water_eng_tower")
-                        }
-                    }
-                    
-                    Annotation("Langson Library", coordinate: .water_langson_library){
-                        ZStack{
-                            Image(hydration_icon)
-                                .resizable()
-                                .padding(5)
-                                .frame(width: 35, height: 35)
-                                .foregroundColor(.red)
-                        }.onTapGesture {
-                            showAlert_langson_library = true
-                        }.sheet(isPresented: $showAlert_langson_library) {
-                            CustomAlertView(showAlert: $showAlert_langson_library, water_name: "water_langson_library")
-                        }
-                    }
-                    
-                    Annotation("SSLH", coordinate: .water_sslh){
-                        ZStack{
-                            Image(hydration_icon)
-                                .resizable()
-                                .padding(5)
-                                .frame(width: 35, height: 35)
-                                .foregroundColor(.red)
-                        }.onTapGesture {
-                            showAlert_sslh = true
-                        }.sheet(isPresented: $showAlert_sslh) {
-                            CustomAlertView(showAlert: $showAlert_sslh, water_name: "water_sslh")
-                        }
-                    }
-                    
-                    Annotation("SST", coordinate: .water_sst){
-                        ZStack{
-                            Image(hydration_icon)
-                                .resizable()
-                                .padding(5)
-                                .frame(width: 35, height: 35)
-                                .foregroundColor(.red)
-                        }.onTapGesture {
-                            showAlert_sst = true
-                        }.sheet(isPresented: $showAlert_sst) {
-                            CustomAlertView(showAlert: $showAlert_sst, water_name: "water_sst")
-                        }
-                    }
-                    
-                    Annotation("SSL", coordinate: .water_ssl){
-                        ZStack{
-                            Image(hydration_icon)
-                                .resizable()
-                                .padding(5)
-                                .frame(width: 35, height: 35)
-                                .foregroundColor(.red)
-                        }.onTapGesture {
-                            showAlert_ssl = true
-                        }.sheet(isPresented: $showAlert_ssl) {
-                            CustomAlertView(showAlert: $showAlert_ssl, water_name: "water_ssl")
-                        }
-                    }
-                    
-                    Annotation("Steinhaus Hall", coordinate: .water_steinhaus){
-                        ZStack{
-                            Image(hydration_icon)
-                                .resizable()
-                                .padding(5)
-                                .frame(width: 35, height: 35)
-                                .foregroundColor(.red)
-                        }.onTapGesture {
-                            showAlert_steinhaus = true
-                        }.sheet(isPresented: $showAlert_steinhaus) {
-                            CustomAlertView(showAlert: $showAlert_steinhaus, water_name: "water_steinhaus")
-                        }
-                    }
-                    
-                    Annotation("Howard Schneiderman", coordinate: .water_howard){
-                        ZStack{
-                            Image(hydration_icon)
-                                .resizable()
-                                .padding(5)
-                                .frame(width: 35, height: 35)
-                                .foregroundColor(.red)
-                        }.onTapGesture {
-                            showAlert_howard = true
-                        }.sheet(isPresented: $showAlert_howard) {
-                            CustomAlertView(showAlert: $showAlert_howard, water_name: "water_howard")
-                        }
-                    }
-                    
-                    Annotation("Science Library", coordinate: .water_science_library){
-                        ZStack{
-                            Image(hydration_icon)
-                                .resizable()
-                                .padding(5)
-                                .frame(width: 35, height: 35)
-                                .foregroundColor(.red)
-                        }.onTapGesture {
-                            showAlert_science_library = true
-                        }.sheet(isPresented: $showAlert_science_library) {
-                            CustomAlertView(showAlert: $showAlert_science_library, water_name: "water_science_library")
-                        }
-                    }
-                    
-                    Annotation("Student Center", coordinate: .water_student_center){
-                        ZStack{
-                            Image(hydration_icon)
-                                .resizable()
-                                .padding(5)
-                                .frame(width: 35, height: 35)
-                                .foregroundColor(.red)
-                        }.onTapGesture {
-                            showAlert_student_center = true
-                        }.sheet(isPresented: $showAlert_student_center) {
-                            CustomAlertView(showAlert: $showAlert_student_center, water_name: "water_student_center")
-                        }
-                    }
-                    
-                    
                     
                     Annotation("", coordinate: .center_uci){
                         ZStack{
@@ -279,7 +174,7 @@ struct ContentView: View {
                         Spacer()
                         
                         Button{
-                            camera = .region(MKCoordinateRegion(center:center_uci, latitudinalMeters: 150,
+                            camera = .region(MKCoordinateRegion(center:.center_uci, latitudinalMeters: 150,
                                                                 longitudinalMeters: 150))
                             showMapView.toggle()
                         } label:{
@@ -374,17 +269,18 @@ struct CustomAlertView: View {
     
     var water_name: String
     var myDictionary: [String: Bathroom] = [
-        "water_dbh": Bathroom(description: "DBH", image: "science_library_restroom"),
-        "water_eng_tower": Bathroom(description: "Engineering Tower", image: "restroom2"),
-        "water_langson_library": Bathroom(description: "Langson Library", image: "restroom3"),
-        "water_sslh": Bathroom(description: "Social Science Lecture", image: "restroom4"),
-        "water_sst": Bathroom(description: "Social Science Tower", image: "restroom5"),
-        "water_ssl": Bathroom(description: "Social Science Lab", image: "restroom6"),
-        "water_steinhaus": Bathroom(description: "Steinhaus Hall", image: "restroom2"),
-        "water_howard": Bathroom(description: "Howard Schneiderman", image: "restroom2"),
-        "water_science_library": Bathroom(description: "Science Library", image: "restroom2"),
-        "water_student_center": Bathroom(description: "Student Center", image: "restroom2")
+        "DBH": Bathroom(description: "DBH", image: "science_library_restroom"),
+        "Engineering Tower": Bathroom(description: "Engineering Tower", image: "restroom2"),
+        "Langson Library": Bathroom(description: "Langson Library", image: "restroom3"),
+        "SSLH": Bathroom(description: "Social Science Lecture", image: "restroom4"),
+        "SST": Bathroom(description: "Social Science Tower", image: "restroom5"),
+        "SSL": Bathroom(description: "Social Science Lab", image: "restroom6"),
+        "Steinhaus Hall": Bathroom(description: "Steinhaus Hall", image: "restroom2"),
+        "Howard Schneiderman": Bathroom(description: "Howard Schneiderman", image: "restroom2"),
+        "Science Library": Bathroom(description: "Science Library", image: "restroom2"),
+        "Student Center": Bathroom(description: "Student Center", image: "restroom2")
     ]
+
 
     var body: some View {
         VStack (
