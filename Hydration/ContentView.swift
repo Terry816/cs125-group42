@@ -44,8 +44,6 @@ struct ContentView: View {
     @State var camera: MapCameraPosition = .userLocation(fallback: .automatic)
     @State private var isSatelliteView: Bool = false
 //    @StateObject var manager = LocationManager()
-    
-    
     @State private var showAlert = false
 
     
@@ -68,8 +66,6 @@ struct ContentView: View {
         Locations(name: "Student Center", coordinates: .water_student_center),
     ]
 
-    
-    
     let hydration_icon = "hydration_icon"
     var body: some View {
         VStack {
@@ -156,16 +152,37 @@ struct ContentView: View {
                 }
                 //-------------------------------------------------
                 .safeAreaInset(edge: .top){
-                    HStack{
-                        Spacer()
-                        VStack {
-                            Text("ZotWater")
-                                .foregroundColor(.white)
-                                .font(.system(size: 30, weight: .bold))
-                            Spacer()
-                        }
-                        .frame(height: 50)
-                        Spacer()
+                    HStack(alignment: .center){
+
+                        ZStack{
+                                HStack{
+                                    Button(action: {
+                                                    // Action to perform when hamburger button is tapped
+                                                    
+                                                }) {
+                                                    Image(systemName: "line.horizontal.3")
+                                                        .resizable()
+                                                        .frame(width: 30, height: 20)
+                                                        .foregroundColor(.white)
+                                                }.padding([.leading])
+                                    Spacer()
+                                }
+                                HStack{
+                                    Spacer()
+                                    VStack {
+                                        Text("ZotWater")
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 30, weight: .bold))
+                                        Spacer()
+                                    }
+                                    .frame(height: 50)
+                                    Spacer()
+                                }
+                                    
+                            }
+                        
+                                    
+    
                     }
                     .background(Color(red: 0, green: 0.3922, blue: 0.6431))
                 }
@@ -325,5 +342,26 @@ struct CustomAlertView: View {
         .frame(minWidth: 500, maxWidth: 500, minHeight: 700, maxHeight: 900)
         .background(Color(red: 0, green: 0.3922, blue: 0.6431))
         
+    }
+}
+
+class SideMenuViewController: UIViewController {
+    
+    var isVisible = false
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Additional setup for your side menu
+    }
+    
+    func show() {
+        // Implement animation to show the side menu
+        isVisible = true
+    }
+    
+    func hide() {
+        // Implement animation to hide the side menu
+        isVisible = false
     }
 }
