@@ -158,7 +158,7 @@ struct ContentView: View {
                                 HStack{
                                     Button(action: {
                                                     // Action to perform when hamburger button is tapped
-                                                    
+                                        
                                                 }) {
                                                     Image(systemName: "line.horizontal.3")
                                                         .resizable()
