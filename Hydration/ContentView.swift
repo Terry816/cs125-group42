@@ -45,7 +45,11 @@ struct ContentView: View {
     @State private var isSatelliteView: Bool = false
 //    @StateObject var manager = LocationManager()
     @State private var showAlert = false
+    @State private var getDirections = false
 
+    @State private var routeDisplaying = false
+    @State private var route: MKRoute?
+    @State private var routeDestination: MKMapItem?
     
     struct Locations {
         var name: String
@@ -67,155 +71,113 @@ struct ContentView: View {
     ]
 
     let hydration_icon = "hydration_icon"
+    @State private var selectedLocationName: String = ""
+    
     var body: some View {
         VStack {
             
-            // NEED TO FIX
-            if showMapView{
-                MapView(directions: $directions, camera: $camera)
-                .safeAreaInset(edge: .top){
-                    HStack{
-                        Spacer()
-                        VStack {
-                            Text("ZotWater")
-                                .foregroundColor(.white)
-                                .font(.system(size: 30, weight: .bold))
+            // MAIN PAGE
+//            var selectedLocationName: String = ""
+            Map(position: $camera){
+                UserAnnotation()
+                ForEach(locations, id: \.name) { location in
+                    Annotation(location.name, coordinate: location.coordinates) {
+                        ZStack {
+                            Image(hydration_icon)
+                                .resizable()
+                                .padding(5)
+                                .frame(width: 35, height: 35)
+                                .foregroundColor(.red)
+                        }
+                        .onTapGesture {
+                            showAlert = true
+                            selectedLocationName = location.name
+                            print("Selected Location Name in onTapGesture: \(selectedLocationName)")
+                        }
+                        .sheet(isPresented: $showAlert) {
+                            CustomAlertView(showAlert: $showAlert, getDirections: $getDirections, water_name: selectedLocationName)
+                        }
+                    }
+                }
+                
+                if let route{
+                    MapPolyline(route.polyline)
+                        .stroke(.blue, lineWidth:6)
+                }
+            }
+            //-------------------------------------------------
+            .mapControls{
+                MapUserLocationButton()
+                //MapPitchToggle()
+            }
+            //-------------------------------------------------
+            .onAppear{
+                CLLocationManager().requestWhenInUseAuthorization()
+            }
+            //-------------------------------------------------
+            .safeAreaInset(edge: .top){
+                HStack(alignment: .center){
+                    ZStack{
+                        HStack{
+                            Button(action: {
+                                // Action to perform when hamburger button is tapped
+                                
+                            }) {
+                                Image(systemName: "line.horizontal.3")
+                                    .resizable()
+                                    .frame(width: 30, height: 20)
+                                    .foregroundColor(.white)
+                            }.padding([.leading])
                             Spacer()
                         }
-                        .frame(height: 50)
-                        
-                        Spacer()
-                    }
-                    .background(Color(red: 0, green: 0.3922, blue: 0.6431))
-                }
-                .safeAreaInset(edge: .bottom){
-                    HStack{
-                        Spacer()
-                        Button{
-                            camera = .region(MKCoordinateRegion(center:.center_uci, latitudinalMeters: 150,
-                                                                longitudinalMeters: 150))
-                            showMapView.toggle()
-                        } label:{
-                            Label("Locate Me", systemImage: "paperplane.circle.fill")
+                        HStack{
+                            Spacer()
+                            VStack {
+                                Text("ZotWater")
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 30, weight: .bold))
+                                Spacer()
+                            }
+                            .frame(height: 50)
+                            Spacer()
                         }
-                        .foregroundColor(.white)
-                        
-                        Spacer()
-                        Button{
-                            isSatelliteView.toggle()
-                        } label:{
-                            Label("Toogle", systemImage: "square.fill")
-                        }
-                        .foregroundColor(.white)
-                        
-                        Spacer()
-                            .buttonStyle(.borderedProminent)
                     }
-                    .padding(.top)
-                    .background(Color(red: 0, green: 0.3922, blue: 0.6431))
                 }
+                .background(Color(red: 0, green: 0.3922, blue: 0.6431))
             }
-            
-            // MAIN PAGE
-            else {
-                
-                var selectedLocationName: String = ""
-                Map(position: $camera){
-                    UserAnnotation()
-                    ForEach(locations, id: \.name) { location in
-                        Annotation(location.name, coordinate: location.coordinates) {
-                            ZStack {
-                                Image(hydration_icon)
-                                    .resizable()
-                                    .padding(5)
-                                    .frame(width: 35, height: 35)
-                                    .foregroundColor(.red)
-                            }
-                            .onTapGesture {
-                                showAlert = true
-                                selectedLocationName = location.name
-                            }
-                            .sheet(isPresented: $showAlert) {
-                                CustomAlertView(showAlert: $showAlert, water_name: selectedLocationName)
-                            }
-                        }
+            //-------------------------------------------------
+            .safeAreaInset(edge: .bottom){
+                HStack{
+                    Spacer()
+                    Button{
+//                        camera = .region(MKCoordinateRegion(center:.center_uci, latitudinalMeters: 150, longitudinalMeters: 150))
+//                        showMapView.toggle()
+                    } label:{
+                        Label("Locate Me", systemImage: "paperplane.circle.fill")
                     }
-                }
-                //-------------------------------------------------
-                .mapControls{
-                    MapUserLocationButton()
-                    //MapPitchToggle()
-                }
-                //-------------------------------------------------
-                .onAppear{
-                    CLLocationManager().requestWhenInUseAuthorization()
-                }
-                //-------------------------------------------------
-                .safeAreaInset(edge: .top){
-                    HStack(alignment: .center){
-
-                        ZStack{
-                                HStack{
-                                    Button(action: {
-                                                    // Action to perform when hamburger button is tapped
-                                                    
-                                                }) {
-                                                    Image(systemName: "line.horizontal.3")
-                                                        .resizable()
-                                                        .frame(width: 30, height: 20)
-                                                        .foregroundColor(.white)
-                                                }.padding([.leading])
-                                    Spacer()
-                                }
-                                HStack{
-                                    Spacer()
-                                    VStack {
-                                        Text("ZotWater")
-                                            .foregroundColor(.white)
-                                            .font(.system(size: 30, weight: .bold))
-                                        Spacer()
-                                    }
-                                    .frame(height: 50)
-                                    Spacer()
-                                }
-                                    
-                            }
-                        
-                                    
-    
+                    .foregroundColor(.white)
+                    Spacer()
+                    Button{
+                        isSatelliteView.toggle()
+                    } label:{
+                        Label("Toogle", systemImage: "square.fill")
                     }
-                    .background(Color(red: 0, green: 0.3922, blue: 0.6431))
+                    .foregroundColor(.white)
+                    
+                    Spacer()
+                        .buttonStyle(.borderedProminent)
                 }
-                //-------------------------------------------------
-                .safeAreaInset(edge: .bottom){
-                    HStack{
-                        Spacer()
-                        Button{
-                            camera = .region(MKCoordinateRegion(center:.center_uci, latitudinalMeters: 150,
-                                                                longitudinalMeters: 150))
-                            showMapView.toggle()
-                        } label:{
-                            Label("Locate Me", systemImage: "paperplane.circle.fill")
-                        }
-                        .foregroundColor(.white)
-                        Spacer()
-                        Button{
-                            isSatelliteView.toggle()
-                        } label:{
-                            Label("Toogle", systemImage: "square.fill")
-                        }
-                        .foregroundColor(.white)
-                        
-                        Spacer()
-                            .buttonStyle(.borderedProminent)
-                    }
-                    .padding(.top)
-                    .background(Color(red: 0, green: 0.3922, blue: 0.6431))
-                }
-                //-------------------------------------------------
-                .mapStyle(isSatelliteView ? .imagery : .standard)
-                
+                .padding(.top)
+                .background(Color(red: 0, green: 0.3922, blue: 0.6431))
             }
+            //-------------------------------------------------
+            .onChange(of: getDirections, {oldValue, newValue in
+                if newValue{
+                    print("Selected Location Name in onChange: \(selectedLocationName)")
+                    searchPlaces()
+                }
+            })
+            .mapStyle(isSatelliteView ? .imagery : .standard)
         }
     }
 }
@@ -275,8 +237,38 @@ struct MapView: UIViewRepresentable {
     }
 }
 
+
+extension ContentView{
+    func searchPlaces(){
+        let x = locations.first { $0.name == selectedLocationName }?.coordinates
+        if let userLocation = CLLocationManager().location?.coordinate, let destinationCoordinates = x {
+            let destinationPlacemark = MKPlacemark(coordinate: destinationCoordinates)
+            
+            let request = MKDirections.Request()
+            request.source = MKMapItem(placemark: MKPlacemark(coordinate: userLocation))
+            request.destination = MKMapItem(placemark: destinationPlacemark)
+            
+            Task{
+                let result = try? await MKDirections(request: request).calculate()
+                route = result?.routes.first
+                routeDestination = MKMapItem(placemark: destinationPlacemark)
+                
+//                withAnimation(.snappy){
+//                    routeDisplaying = true
+//                    showDetails = false
+//
+//                    if let rect - route?.polyline.boundingMapRect, routeDisplaying {
+//                        camera = .rect(rect)
+//                    }
+//                }
+            }
+        }
+    }
+}
+
 struct CustomAlertView: View {
     @Binding var showAlert: Bool
+    @Binding var getDirections: Bool
     
     struct Bathroom {
         var description: String
@@ -326,6 +318,7 @@ struct CustomAlertView: View {
                     .frame(width: 450)
             }
             Button("Locate") {
+                getDirections = true
                 showAlert = false
             }
             .padding()
