@@ -38,6 +38,8 @@ extension CLLocationCoordinate2D{
     
 }
 struct ContentView: View {
+    @State private var sideMenu = false
+    
     @State private var directions: [String] = []
     @State private var showDirections = false
     @State private var showMapView: Bool = false
@@ -74,119 +76,131 @@ struct ContentView: View {
     @State private var selectedLocationName: String = ""
     
     var body: some View {
-        VStack {
-            
-            // MAIN PAGE
-//            var selectedLocationName: String = ""
-            Map(position: $camera){
-                UserAnnotation()
-                ForEach(locations, id: \.name) { location in
-                    Annotation(location.name, coordinate: location.coordinates) {
-                        ZStack {
-                            Image(hydration_icon)
-                                .resizable()
-                                .padding(5)
-                                .frame(width: 35, height: 35)
-                                .foregroundColor(.red)
-                        }
-                        .onTapGesture {
-                            showAlert = true
-                            selectedLocationName = location.name
-                            print("Selected Location Name in onTapGesture: \(selectedLocationName)")
-                        }
-                        .sheet(isPresented: $showAlert) {
-                            CustomAlertView(showAlert: $showAlert, getDirections: $getDirections, water_name: selectedLocationName)
-                        }
-                    }
+        NavigationView {
+            ZStack {
+                if sideMenu {
+                    SideMenuView()
                 }
-                
-                if let route{
-                    MapPolyline(route.polyline)
-                        .stroke(.blue, lineWidth:6)
-                }
-            }
-            //-------------------------------------------------
-            .mapControls{
-                MapUserLocationButton()
-                //MapPitchToggle()
-            }
-            //-------------------------------------------------
-            .onAppear{
-                CLLocationManager().requestWhenInUseAuthorization()
-            }
-            //-------------------------------------------------
-            .safeAreaInset(edge: .top){
-                HStack(alignment: .center){
-                    ZStack{
-                        HStack{
-                            Button(action: {
-                                // Action to perform when hamburger button is tapped
-                                
-                            }) {
-                                Image(systemName: "line.horizontal.3")
-                                    .resizable()
-                                    .frame(width: 30, height: 20)
-                                    .foregroundColor(.white)
-                            }.padding([.leading])
-                            Spacer()
-                        }
-                        HStack{
-                            Spacer()
-                            VStack {
-                                Text("ZotWater")
-                                    .foregroundColor(.white)
-                                    .font(.system(size: 30, weight: .bold))
-                                Spacer()
+                VStack {
+                    Map(position: $camera){
+                        UserAnnotation()
+                        ForEach(locations, id: \.name) { location in
+                            Annotation(location.name, coordinate: location.coordinates) {
+                                ZStack {
+                                    Image(hydration_icon)
+                                        .resizable()
+                                        .padding(5)
+                                        .frame(width: 35, height: 35)
+                                        .foregroundColor(.red)
+                                }
+                                .onTapGesture {
+                                    showAlert = true
+                                    selectedLocationName = location.name
+                                    print("Selected Location Name in onTapGesture: \(selectedLocationName)")
+                                }
+                                .sheet(isPresented: $showAlert) {
+                                    CustomAlertView(showAlert: $showAlert, getDirections: $getDirections, water_name: selectedLocationName)
+                                }
                             }
-                            .frame(height: 50)
-                            Spacer()
+                        }
+                        
+                        if let route{
+                            MapPolyline(route.polyline)
+                                .stroke(.blue, lineWidth:6)
                         }
                     }
-                }
-                .background(Color(red: 0, green: 0.3922, blue: 0.6431))
-            }
-            //-------------------------------------------------
-            .safeAreaInset(edge: .bottom){
-                HStack{
-                    Spacer()
-                    Button{
-//                        camera = .region(MKCoordinateRegion(center:.center_uci, latitudinalMeters: 150, longitudinalMeters: 150))
-//                        showMapView.toggle()
-                    } label:{
-                        Label("Locate Me", systemImage: "paperplane.circle.fill")
+                    //-------------------------------------------------
+                    .mapControls{
+                        MapUserLocationButton()
+                        //MapPitchToggle()
                     }
-                    .foregroundColor(.white)
-                    Spacer()
-                    Button{
-                        isSatelliteView.toggle()
-                    } label:{
-                        Label("Toogle", systemImage: "square.fill")
+                    //-------------------------------------------------
+                    .onAppear{
+                        CLLocationManager().requestWhenInUseAuthorization()
                     }
-                    .foregroundColor(.white)
-                    
-                    Spacer()
-                        .buttonStyle(.borderedProminent)
+                    //-------------------------------------------------
+                    .safeAreaInset(edge: .top){
+                        HStack(alignment: .center){
+                            ZStack{
+                                HStack{
+                                    Button(action: {
+                                        withAnimation(.spring()) {
+                                            sideMenu.toggle()
+                                        }
+                                    }) {
+                                        Image(systemName: "line.horizontal.3")
+                                            .resizable()
+                                            .frame(width: 30, height: 20)
+                                            .foregroundColor(.white)
+                                    }.padding([.leading])
+                                    Spacer()
+                                }
+                                HStack{
+                                    Spacer()
+                                    VStack {
+                                        Text("ZotWater")
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 30, weight: .bold))
+                                        Spacer()
+                                    }
+                                    .frame(height: 50)
+                                    Spacer()
+                                }
+                            }
+                        }
+                        .background(Color(red: 0, green: 0.3922, blue: 0.6431))
+                    }
+                    //-------------------------------------------------
+                    .safeAreaInset(edge: .bottom){
+                        HStack{
+                            Spacer()
+                            Button{
+                            } label:{
+                                Label("Locate Me", systemImage: "paperplane.circle.fill")
+                            }
+                            .foregroundColor(.white)
+                            .font(.system(size: 18))
+                            Spacer()
+                            Button{
+                                isSatelliteView.toggle()
+                            } label:{
+                                Label("Toogle", systemImage: "square.fill")
+                            }
+                            .foregroundColor(.white)
+                            .font(.system(size: 18))
+                            Spacer()
+                                .buttonStyle(.borderedProminent)
+                        }
+                        .padding(.top)
+                        .padding(.bottom)
+                        .background(Color(red: 0, green: 0.3922, blue: 0.6431))
+                    }
+                    //-------------------------------------------------
+                    .onChange(of: getDirections, {oldValue, newValue in
+                        if newValue{
+                            print("Selected Location Name in onChange: \(selectedLocationName)")
+                            searchPlaces()
+                        }
+                    })
+                    .mapStyle(isSatelliteView ? .imagery : .standard)
                 }
-                .padding(.top)
-                .background(Color(red: 0, green: 0.3922, blue: 0.6431))
+                .offset(x: sideMenu ? 300 : 0)
             }
-            //-------------------------------------------------
-            .onChange(of: getDirections, {oldValue, newValue in
-                if newValue{
-                    print("Selected Location Name in onChange: \(selectedLocationName)")
-                    searchPlaces()
-                }
-            })
-            .mapStyle(isSatelliteView ? .imagery : .standard)
+            .onAppear {
+                sideMenu = false
+            }
+            
         }
     }
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
 }
+
 
 struct MapView: UIViewRepresentable {
     typealias UIViewType = MKMapView
@@ -266,6 +280,7 @@ extension ContentView{
     }
 }
 
+
 struct CustomAlertView: View {
     @Binding var showAlert: Bool
     @Binding var getDirections: Bool
@@ -289,11 +304,8 @@ struct CustomAlertView: View {
         "Student Center": Bathroom(description: "Student Center", image: "restroom2")
     ]
 
-
     var body: some View {
-        VStack (
-        )
-        {
+        VStack {
             HStack {
                 Spacer()
                 if let person = myDictionary[water_name] {
