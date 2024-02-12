@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum SideMenuViewModel: Int, CaseIterable {
     case ZotWater
@@ -24,6 +25,13 @@ enum SideMenuViewModel: Int, CaseIterable {
         case .ZotWater: return "drop.circle"
         case .ZotSleep: return "bed.double.circle"
         case .ZotMeditation: return "heart.circle"
+        }
+    }
+    var destination: some View {
+        switch self {
+        case .ZotWater: return AnyView(ContentView())
+        case .ZotSleep: return AnyView(ZotSleepView())
+        case .ZotMeditation: return AnyView(ZotMeditationView())
         }
     }
 }

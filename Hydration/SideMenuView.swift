@@ -18,7 +18,7 @@ struct SideMenuView: View {
                     .frame(height: 140)
                 // Cell items
                 ForEach(SideMenuViewModel.allCases, id: \.self) { option in
-                    NavigationLink(destination: Text(option.title), label: {
+                    NavigationLink(destination: option.destination.navigationBarBackButtonHidden(true), label: {
                         SideMenuOptionView(viewModel: option)
                     })
                 }

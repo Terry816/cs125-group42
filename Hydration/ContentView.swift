@@ -39,13 +39,11 @@ extension CLLocationCoordinate2D{
 }
 struct ContentView: View {
     @State private var sideMenu = false
-    
     @State private var directions: [String] = []
     @State private var showDirections = false
     @State private var showMapView: Bool = false
     @State var camera: MapCameraPosition = .userLocation(fallback: .automatic)
     @State private var isSatelliteView: Bool = false
-//    @StateObject var manager = LocationManager()
     @State private var showAlert = false
     @State private var getDirections = false
 
@@ -189,7 +187,6 @@ struct ContentView: View {
             .onAppear {
                 sideMenu = false
             }
-            
         }
     }
 }
@@ -347,26 +344,5 @@ struct CustomAlertView: View {
         .frame(minWidth: 500, maxWidth: 500, minHeight: 700, maxHeight: 900)
         .background(Color(red: 0, green: 0.3922, blue: 0.6431))
         
-    }
-}
-
-class SideMenuViewController: UIViewController {
-    
-    var isVisible = false
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Additional setup for your side menu
-    }
-    
-    func show() {
-        // Implement animation to show the side menu
-        isVisible = true
-    }
-    
-    func hide() {
-        // Implement animation to hide the side menu
-        isVisible = false
     }
 }
