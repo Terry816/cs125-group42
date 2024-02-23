@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ZotMeditationView: View {
+struct ZotFitView: View {
     @State private var sideMenu = false
     var body: some View {
         NavigationView {
@@ -34,7 +34,7 @@ struct ZotMeditationView: View {
                             HStack{
                                 Spacer()
                                 VStack {
-                                    Text("ZotMeditation")
+                                    Text("ZotFit")
                                         .foregroundColor(.white)
                                         .font(.system(size: 30, weight: .bold))
                                     Spacer()
@@ -71,5 +71,5 @@ struct ZotMeditationView: View {
 }
 
 #Preview {
-    ZotMeditationView()
+    ZotFitView()
 }

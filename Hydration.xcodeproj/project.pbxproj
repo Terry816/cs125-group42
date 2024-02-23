@@ -17,7 +17,7 @@
 		52C048792B783E2E001E4884 /* SideMenuOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C048782B783E2E001E4884 /* SideMenuOptionView.swift */; };
 		52C0487B2B783E61001E4884 /* SideMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C0487A2B783E61001E4884 /* SideMenuViewModel.swift */; };
 		52C0487D2B79772A001E4884 /* ZotSleepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C0487C2B79772A001E4884 /* ZotSleepView.swift */; };
-		52C0487F2B79D79E001E4884 /* ZotMeditationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C0487E2B79D79E001E4884 /* ZotMeditationView.swift */; };
+		52C0487F2B79D79E001E4884 /* ZotFitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C0487E2B79D79E001E4884 /* ZotFitView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,7 +32,7 @@
 		52C048782B783E2E001E4884 /* SideMenuOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuOptionView.swift; sourceTree = "<group>"; };
 		52C0487A2B783E61001E4884 /* SideMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewModel.swift; sourceTree = "<group>"; };
 		52C0487C2B79772A001E4884 /* ZotSleepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZotSleepView.swift; sourceTree = "<group>"; };
-		52C0487E2B79D79E001E4884 /* ZotMeditationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZotMeditationView.swift; sourceTree = "<group>"; };
+		52C0487E2B79D79E001E4884 /* ZotFitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZotFitView.swift; sourceTree = "<group>"; };
 		B6ADE1792B7611AE004CA936 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -69,7 +69,7 @@
 				B6ADE1792B7611AE004CA936 /* Info.plist */,
 				5246C2292B74663D00DB37E7 /* HydrationApp.swift */,
 				5246C22B2B74663D00DB37E7 /* ContentView.swift */,
-				52C0487E2B79D79E001E4884 /* ZotMeditationView.swift */,
+				52C0487E2B79D79E001E4884 /* ZotFitView.swift */,
 				5246C2372B74667500DB37E7 /* LocationManager.swift */,
 				52C048742B783E06001E4884 /* SideMenuView.swift */,
 				52C048762B783E19001E4884 /* SideMenuHeaderView.swift */,
@@ -161,7 +161,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5246C22C2B74663D00DB37E7 /* ContentView.swift in Sources */,
-				52C0487F2B79D79E001E4884 /* ZotMeditationView.swift in Sources */,
+				52C0487F2B79D79E001E4884 /* ZotFitView.swift in Sources */,
 				5246C22A2B74663D00DB37E7 /* HydrationApp.swift in Sources */,
 				52C048772B783E19001E4884 /* SideMenuHeaderView.swift in Sources */,
 				52C0487B2B783E61001E4884 /* SideMenuViewModel.swift in Sources */,
@@ -299,9 +299,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Hydration/Preview Content\"";
+				DEVELOPMENT_TEAM = F5UQSVF4PB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Hydration/Info.plist;
@@ -317,8 +319,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = simarcheema.Hydration;
+				PRODUCT_BUNDLE_IDENTIFIER = simarcheema.HydrationApp12;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -330,9 +333,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Hydration/Preview Content\"";
+				DEVELOPMENT_TEAM = F5UQSVF4PB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Hydration/Info.plist;
@@ -348,8 +353,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = simarcheema.Hydration;
+				PRODUCT_BUNDLE_IDENTIFIER = simarcheema.HydrationApp12;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
