@@ -1,11 +1,10 @@
-//
-//  ZotMeditationView.swift
-//  Hydration
-//
 //  Created by Simar Cheema on 2/11/24.
 //
-
 import SwiftUI
+
+var muscle = "biceps"
+var etype = "strength"
+var diff = ""
 
 struct ZotFitView: View {
     @State private var sideMenu = false
@@ -28,7 +27,8 @@ struct ZotFitView: View {
                                         .resizable()
                                         .frame(width: 30, height: 20)
                                         .foregroundColor(.white)
-                                }.padding([.leading])
+                                }
+                                .padding([.leading])
                                 Spacer()
                             }
                             HStack{
@@ -45,9 +45,60 @@ struct ZotFitView: View {
                         }
                     }
                     .background(Color(red: 0, green: 0.3922, blue: 0.6431))
+                    //Main body of app is here:
                     VStack {
                         Spacer()
                         //Main content goes here
+                        VStack {
+                            Spacer()
+                                HStack{
+                                    Spacer()
+                                    Button(action: {}, label: {
+                                        VStack{
+                                            Image(systemName: "questionmark")
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                            Text("Abs")
+                                        }
+                                        .task {
+                                            do{
+                                                var user: String
+                                                user = try await getUser()
+                                                print(user)
+                                            } catch GHError.invalidURL {
+                                                print("invalid URL")
+                                            } catch GHError.invalidResponse{
+                                                print("invalid Response")
+                                            } catch GHError.invalidData{
+                                                print("invalid Data")
+                                            } catch {
+                                                print("unexpected error")
+                                            }
+                                        }
+                                    })
+                                    Spacer()
+                                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                                        VStack{
+                                            Image("biceps")
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+    
+                                            Text("Biceps")
+                                        }
+                                    })
+                                    Spacer()
+                                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                                        VStack{
+                                            Image("calves")
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                            Text("Calves")
+                                        }
+                                    })
+                                    Spacer()
+                                }
+                            Spacer()
+                        }
                         Spacer()
                     }
                     HStack{
@@ -61,13 +112,57 @@ struct ZotFitView: View {
                     .padding(.bottom)
                     .background(Color(red: 0, green: 0.3922, blue: 0.6431))
                 }
-                .offset(x: sideMenu ? 300 : 0)
+                .offset(x: sideMenu ? 250 : 0)
+                .onTapGesture {
+                    if sideMenu {
+                        withAnimation {
+                            sideMenu = false
+                        }
+                    }
+                }
             }
             .onAppear {
                 sideMenu = false
             }
         }
     }
+    
+func getUser() async throws -> String {
+    let endpoint = "https://api.api-ninjas.com/v1/exercises?muscle=\(muscle)&type=\(etype)&difficulty=\(diff)"
+    guard let url = URL(string: endpoint) else {
+        throw GHError.invalidURL
+    }
+    var urlRequest = URLRequest(url: url)
+    urlRequest.setValue("5SAcm6jn9u26Pkuk4iIu3Q==oZLXyNGrMRXxKjQx", forHTTPHeaderField: "X-Api-Key")
+    let (data, response) = try await URLSession.shared.data(for: urlRequest)
+    guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+        throw GHError.invalidResponse
+    }
+    do {
+        if let dataString = String(data: data, encoding: .utf8) {
+            return dataString
+        } else {
+            print("Unable to convert data to string")
+        }
+    }
+    return ""
+}
+
+}
+
+struct ExerciseResult: Codable{
+    let name: String
+    let type: String
+    let muscle: String
+    let equipment: String
+    let difficulty: String
+    let instructions: String
+}
+
+enum GHError: Error{
+    case invalidURL
+    case invalidResponse
+    case invalidData
 }
 
 #Preview {
