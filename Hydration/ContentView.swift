@@ -36,7 +36,6 @@ extension CLLocationCoordinate2D{
     
     static let center_uci = CLLocationCoordinate2D(
         latitude: 33.648613, longitude: -117.842753)
-    
 }
 
 
@@ -142,7 +141,7 @@ struct ContentView: View {
                                         VStack {
                                             Text("ZotWater")
                                                 .foregroundColor(.white)
-                                                .font(.system(size: 30, weight: .bold))
+                                                .font(.system(size: 30, weight: .heavy))
                                             Spacer()
                                         }
                                         .frame(height: 50)
@@ -161,7 +160,7 @@ struct ContentView: View {
                                     Label("Locate Me", systemImage: "paperplane.circle.fill")
                                 }
                                 .foregroundColor(.white)
-                                .font(.system(size: 18))
+                                .font(.system(size: 18, weight: .bold))
                                 Spacer()
                                 Button{
                                     isSatelliteView.toggle()
@@ -169,7 +168,7 @@ struct ContentView: View {
                                     Label("Toogle", systemImage: "square.fill")
                                 }
                                 .foregroundColor(.white)
-                                .font(.system(size: 18))
+                                .font(.system(size: 18, weight: .bold))
                                 Spacer()
                                     .buttonStyle(.borderedProminent)
                             }

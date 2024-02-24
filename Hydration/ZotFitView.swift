@@ -36,7 +36,7 @@ struct ZotFitView: View {
                                 VStack {
                                     Text("ZotFit")
                                         .foregroundColor(.white)
-                                        .font(.system(size: 30, weight: .bold))
+                                        .font(.system(size: 30, weight: .heavy))
                                     Spacer()
                                 }
                                 .frame(height: 50)
@@ -112,6 +112,7 @@ struct ZotFitView: View {
                     .padding(.bottom)
                     .background(Color(red: 0, green: 0.3922, blue: 0.6431))
                 }
+                .background(.white)
                 .offset(x: sideMenu ? 250 : 0)
                 .onTapGesture {
                     if sideMenu {

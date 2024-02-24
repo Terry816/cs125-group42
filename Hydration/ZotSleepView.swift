@@ -1,13 +1,35 @@
+//
+//  ZotSleepView.swift
+//  Hydration
+//
+//  Created by Simar Cheema on 2/11/24.
+//
+
 import SwiftUI
+
+
+struct GrowingButton: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding()
+            .background(.blue)
+            .foregroundStyle(.white)
+            .clipShape(Capsule())
+            .scaleEffect(configuration.isPressed ? 1.2 : 1)
+            .animation(.easeOut(duration: 0.2), value: configuration.isPressed)
+    }
+}
 
 struct TimePickerView: UIViewRepresentable {
     @Binding var selectedTime: Date
+
     func makeUIView(context: Context) -> UIDatePicker {
         let timePicker = UIDatePicker()
         timePicker.datePickerMode = .time
         timePicker.addTarget(context.coordinator, action: #selector(Coordinator.timeChanged(_:)), for: .valueChanged)
         return timePicker
     }
+
     func updateUIView(_ uiView: UIDatePicker, context: Context) {
         uiView.date = selectedTime
     }
@@ -15,6 +37,7 @@ struct TimePickerView: UIViewRepresentable {
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
+
     class Coordinator: NSObject {
         var parent: TimePickerView
 
@@ -28,6 +51,12 @@ struct TimePickerView: UIViewRepresentable {
     }
 }
 
+func formattedTime(from date: Date) -> String {
+    let formatter = DateFormatter()
+    formatter.timeStyle = .short
+    return formatter.string(from: date)
+}
+
 struct ZotSleepView: View {
     @State private var sideMenu = false
     @State private var selectedTime = Date()
@@ -35,11 +64,13 @@ struct ZotSleepView: View {
     @State private var displayTime = Date()
     @State private var showAlert = false
     
-    private func formattedTime(from date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.timeStyle = .short
-        return formatter.string(from: date)
-    }
+    @State private var showSleepResult = false
+    
+//    private func formattedTime(from date: Date) -> String {
+//        let formatter = DateFormatter()
+//        formatter.timeStyle = .short
+//        return formatter.string(from: date)
+//    }
     
     var body: some View {
         NavigationView {
@@ -47,6 +78,7 @@ struct ZotSleepView: View {
                 if sideMenu {
                     SideMenuView()
                 }
+                
                 VStack {
                     HStack(alignment: .center){
                         ZStack{
@@ -100,10 +132,12 @@ struct ZotSleepView: View {
                                     selectedHours -= 1
                                 }
                             }
+                            .buttonStyle(.bordered)
                             Text("\(selectedHours) hours")
                             Button("+") {
                                 selectedHours += 1
                             }
+                            .buttonStyle(.bordered)
                             
                         }
                         
@@ -118,18 +152,18 @@ struct ZotSleepView: View {
                     
                     HStack{
                         Spacer()
-                        Button("Test"){
-                            showAlert = true
-                        }
-                        .alert(isPresented: $showAlert) {
-                            Alert(title: Text("SLEEP BY"), message: Text("Selected Time: \(formattedTime(from: displayTime))"), dismissButton: .default(Text("OK")))
-                        }
+                        NavigationLink(destination: SleepResultView(displayTime: formattedTime(from: displayTime))) {
+                                                    Text("Test")
+                                                }
+
+
                         Spacer()
                     }
                     .padding(.top)
                     .padding(.bottom)
                     .background(Color(red: 0, green: 0.3922, blue: 0.6431))
                 }
+                .background(.white)
                 .offset(x: sideMenu ? 250 : 0)
                 .onTapGesture {
                     if sideMenu {
@@ -144,6 +178,115 @@ struct ZotSleepView: View {
             }
         }
     }
+}
+
+func calculateBedtimeOptions(wakeUpTime: Date, totalSleepDuration: TimeInterval) -> [Date] {
+    // Define the average sleep cycle duration in seconds (90 minutes)
+    let sleepCycleDuration: TimeInterval = 90 * 60
+    
+    // Calculate the optimal bedtime
+    let optimalBedtime = wakeUpTime.addingTimeInterval(-totalSleepDuration)
+    
+    // Calculate the number of sleep cycles needed
+    let numberOfCycles = Int(totalSleepDuration / sleepCycleDuration)
+    
+    // Generate an array of suggested bedtimes
+    var bedtimeOptions: [Date] = []
+    for i in 0...numberOfCycles {
+        let bedtime = optimalBedtime.addingTimeInterval(-TimeInterval(i) * sleepCycleDuration)
+        bedtimeOptions.append(bedtime)
+    }
+    
+    return bedtimeOptions
+}
+
+struct SleepResultView: View {
+    var displayTime: String
+    @State private var sideMenu = false
+    
+    var body: some View {
+        
+        NavigationView {
+            ZStack {
+                if sideMenu {
+                    SideMenuView()
+                }
+                VStack {
+                    HStack(alignment: .center){
+                        ZStack{
+                            HStack{
+                                Button(action: {
+                                    withAnimation(.spring()) {
+                                        sideMenu.toggle()
+                                    }
+                                }) {
+                                    Image(systemName: "line.horizontal.3")
+                                        .resizable()
+                                        .frame(width: 30, height: 20)
+                                        .foregroundColor(.white)
+                                }.padding([.leading])
+                                Spacer()
+                            }
+                            HStack{
+                                Spacer()
+                                VStack {
+                                    Text("ZotSleep")
+                                        .foregroundColor(.white)
+                                        .font(.system(size: 30, weight: .bold))
+                                    Spacer()
+                                }
+                                .frame(height: 50)
+                                Spacer()
+                            }
+                        }
+                    }
+                    .background(Color(red: 0, green: 0.3922, blue: 0.6431))
+                    
+                    VStack {
+                        
+                        VStack {
+                            
+                            HStack{
+                                Text("Bedtime Options")
+                                    .font(.system(size: 24, weight: .bold))  // Adjust the size as needed
+                            }
+                            Spacer()
+                            HStack{
+                                Text("To wake up refreshed at \(displayTime), you can consider going to sleep at one of the following times:")
+                                    .multilineTextAlignment(.center)
+                            }
+                            Spacer()
+                            VStack{
+                                ForEach(calculateBedtimeOptions(wakeUpTime: Date(), totalSleepDuration: 7 * 3600), id: \.self) { bedtime in
+                                        Text("\(formattedTime(from: bedtime))")
+                                            .font(.headline) // Adjust the font style and size
+                                            .foregroundColor(.black) // Choose an appropriate text color
+                                            .padding()
+                                            .background(Color(.systemGray6)) // Choose a neutral background color
+                                            .cornerRadius(10)
+                                            .shadow(radius: 2)
+                                            .padding(.horizontal) // Adjust horizontal padding
+                                            .padding(.bottom, 8) // Add bottom spacing
+                                    }
+                            }
+                            Spacer()
+                        }
+                        HStack{
+                            Spacer()
+                        }
+                        .padding(.top)
+                        .padding(.bottom)
+                        .background(Color(red: 0, green: 0.3922, blue: 0.6431))
+                    }
+                }
+                .offset(x: sideMenu ? 300 : 0)
+            }
+            .onAppear {
+                sideMenu = false
+            }
+        }
+    }
+    
 }
 
 #Preview {
