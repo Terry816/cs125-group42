@@ -19,6 +19,7 @@
 		52C0487D2B79772A001E4884 /* ZotSleepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C0487C2B79772A001E4884 /* ZotSleepView.swift */; };
 		52C0487F2B79D79E001E4884 /* ZotFitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C0487E2B79D79E001E4884 /* ZotFitView.swift */; };
 		52C048832B8AC9EE001E4884 /* ExerciseTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C048822B8AC9EE001E4884 /* ExerciseTypeView.swift */; };
+		B67480EE2B8AF35E00C94876 /* SleepResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67480ED2B8AF35E00C94876 /* SleepResultView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,8 @@
 		52C0487C2B79772A001E4884 /* ZotSleepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZotSleepView.swift; sourceTree = "<group>"; };
 		52C0487E2B79D79E001E4884 /* ZotFitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZotFitView.swift; sourceTree = "<group>"; };
 		52C048822B8AC9EE001E4884 /* ExerciseTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTypeView.swift; sourceTree = "<group>"; };
+		B67480ED2B8AF35E00C94876 /* SleepResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepResultView.swift; sourceTree = "<group>"; };
+		B67480EF2B8B0A9800C94876 /* Hydration.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hydration.entitlements; sourceTree = "<group>"; };
 		B6ADE1792B7611AE004CA936 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -68,6 +71,7 @@
 		5246C2282B74663D00DB37E7 /* Hydration */ = {
 			isa = PBXGroup;
 			children = (
+				B67480EF2B8B0A9800C94876 /* Hydration.entitlements */,
 				B6ADE1792B7611AE004CA936 /* Info.plist */,
 				5246C2292B74663D00DB37E7 /* HydrationApp.swift */,
 				5246C22B2B74663D00DB37E7 /* ContentView.swift */,
@@ -78,6 +82,7 @@
 				52C048782B783E2E001E4884 /* SideMenuOptionView.swift */,
 				52C0487A2B783E61001E4884 /* SideMenuViewModel.swift */,
 				52C0487C2B79772A001E4884 /* ZotSleepView.swift */,
+				B67480ED2B8AF35E00C94876 /* SleepResultView.swift */,
 				52C048822B8AC9EE001E4884 /* ExerciseTypeView.swift */,
 				5246C22D2B74663E00DB37E7 /* Assets.xcassets */,
 				5246C22F2B74663E00DB37E7 /* Preview Content */,
@@ -170,6 +175,7 @@
 				52C0487B2B783E61001E4884 /* SideMenuViewModel.swift in Sources */,
 				52C048752B783E06001E4884 /* SideMenuView.swift in Sources */,
 				5246C2382B74667500DB37E7 /* LocationManager.swift in Sources */,
+				B67480EE2B8AF35E00C94876 /* SleepResultView.swift in Sources */,
 				52C0487D2B79772A001E4884 /* ZotSleepView.swift in Sources */,
 				52C048832B8AC9EE001E4884 /* ExerciseTypeView.swift in Sources */,
 				52C048792B783E2E001E4884 /* SideMenuOptionView.swift in Sources */,
@@ -303,14 +309,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Hydration/Hydration.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Hydration/Preview Content\"";
-				DEVELOPMENT_TEAM = F5UQSVF4PB;
+				DEVELOPMENT_TEAM = 849NU86R8K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Hydration/Info.plist;
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "We want to read your health data";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "We want to read your health data";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We want to write your health data";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Allow To Share Current Location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -337,14 +347,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Hydration/Hydration.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Hydration/Preview Content\"";
-				DEVELOPMENT_TEAM = F5UQSVF4PB;
+				DEVELOPMENT_TEAM = 849NU86R8K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Hydration/Info.plist;
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "We want to read your health data";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "We want to read your health data";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We want to write your health data";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Allow To Share Current Location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

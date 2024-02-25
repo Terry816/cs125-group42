@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import HealthKit
 
 struct GrowingButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
@@ -66,17 +66,60 @@ struct ZotSleepView: View {
     
     @State private var showSleepResult = false
     
+    @State private var isAuthorized = false
+    var healthStore: HKHealthStore = HKHealthStore()
+    
 //    private func formattedTime(from date: Date) -> String {
 //        let formatter = DateFormatter()
 //        formatter.timeStyle = .short
 //        return formatter.string(from: date)
 //    }
     
+    private func requestAuthorization() {
+        let healthStore = HKHealthStore()
+        
+        // Request authorization to access sleep data
+        let sleepType = HKObjectType.categoryType(forIdentifier: HKCategoryTypeIdentifier.sleepAnalysis)!
+        healthStore.requestAuthorization(toShare: nil, read: [sleepType]) { (success, error) in
+            if success {
+                // Query for sleep data
+                let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
+                let query = HKSampleQuery(sampleType: sleepType, predicate: nil, limit: 30, sortDescriptors: [sortDescriptor]) { (query, samples, error) in
+                    guard let samples = samples as? [HKCategorySample], error == nil else {
+                        print("Failed to fetch sleep data: \(error!.localizedDescription)")
+                        return
+                    }
+                    for sample in samples {
+                        let startDate = sample.startDate
+                        let endDate = sample.endDate
+                        print("Sleep start: \(startDate), end: \(endDate)")
+                    }
+                }
+                healthStore.execute(query)
+            } else {
+                print("Authorization to access sleep data was denied.")
+            }
+        }
+    }
+    
     var body: some View {
         NavigationView {
             ZStack {
                 if sideMenu {
                     SideMenuView()
+                }
+                
+                VStack {
+                    if isAuthorized {
+                        Text("HealthKit Authorization Successful")
+                            .padding()
+                    } else {
+                        Text("Please authorize HealthKit")
+                            .padding()
+                            .onAppear {
+                                requestAuthorization()
+                            }
+                    }
                 }
                 
                 VStack {
@@ -109,8 +152,9 @@ struct ZotSleepView: View {
                         }
                     }
                     .background(Color(red: 0, green: 0.3922, blue: 0.6431))
+                    
                     VStack {
-                        
+                        Spacer()
                         Text("When do you want to wake up?")
                             .font(.system(size: 20, weight: .bold))
 
@@ -122,30 +166,30 @@ struct ZotSleepView: View {
                                             displayTime = newValue
                                         }
 
-                        Text("What's the minimum amount of sleep you need?")
-                            .font(.system(size: 20, weight: .bold))
+//                        Text("What's the minimum amount of sleep you need?")
+//                            .font(.system(size: 20, weight: .bold))
+//                        
+//                        HStack {
+//                            
+//                            Button("-") {
+//                                if selectedHours > 0 {
+//                                    selectedHours -= 1
+//                                }
+//                            }
+//                            .buttonStyle(.bordered)
+//                            Text("\(selectedHours) hours")
+//                            Button("+") {
+//                                selectedHours += 1
+//                            }
+//                            .buttonStyle(.bordered)
+//                            
+//                        }
                         
-                        HStack {
-                            
-                            Button("-") {
-                                if selectedHours > 0 {
-                                    selectedHours -= 1
-                                }
-                            }
-                            .buttonStyle(.bordered)
-                            Text("\(selectedHours) hours")
-                            Button("+") {
-                                selectedHours += 1
-                            }
-                            .buttonStyle(.bordered)
-                            
-                        }
-                        
-                        Spacer()
-                        
-                        HStack{
-                            Text("Last Selected Time: \(formattedTime(from: displayTime))")
-                        }
+//                        Spacer()
+//                        
+//                        HStack{
+//                            Text("Last Selected Time: \(formattedTime(from: displayTime))")
+//                        }
                         
                         Spacer()
                     }
@@ -155,8 +199,6 @@ struct ZotSleepView: View {
                         NavigationLink(destination: SleepResultView(displayTime: formattedTime(from: displayTime))) {
                                                     Text("Test")
                                                 }
-
-
                         Spacer()
                     }
                     .padding(.top)
@@ -180,17 +222,20 @@ struct ZotSleepView: View {
     }
 }
 
-func calculateBedtimeOptions(wakeUpTime: Date, totalSleepDuration: TimeInterval) -> [Date] {
-    // Define the average sleep cycle duration in seconds (90 minutes)
+func calculateBedtimeOptions(displayTime: String, totalSleepDuration: TimeInterval) -> [Date] {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "h:mma"
+    
+    // Convert displayTime string to Date
+    guard let wakeUpTime = formatter.date(from: displayTime) else {
+        return []  // Return an empty array if the conversion fails
+    }
+
+    // Rest of the function remains the same
     let sleepCycleDuration: TimeInterval = 90 * 60
-    
-    // Calculate the optimal bedtime
     let optimalBedtime = wakeUpTime.addingTimeInterval(-totalSleepDuration)
-    
-    // Calculate the number of sleep cycles needed
     let numberOfCycles = Int(totalSleepDuration / sleepCycleDuration)
     
-    // Generate an array of suggested bedtimes
     var bedtimeOptions: [Date] = []
     for i in 0...numberOfCycles {
         let bedtime = optimalBedtime.addingTimeInterval(-TimeInterval(i) * sleepCycleDuration)
@@ -250,23 +295,27 @@ struct SleepResultView: View {
                                 Text("Bedtime Options")
                                     .font(.system(size: 24, weight: .bold))  // Adjust the size as needed
                             }
+                            
                             Spacer()
+                            
                             HStack{
                                 Text("To wake up refreshed at \(displayTime), you can consider going to sleep at one of the following times:")
                                     .multilineTextAlignment(.center)
                             }
+                            
                             Spacer()
+                            
                             VStack{
-                                ForEach(calculateBedtimeOptions(wakeUpTime: Date(), totalSleepDuration: 7 * 3600), id: \.self) { bedtime in
+                                ForEach(calculateBedtimeOptions(displayTime: displayTime, totalSleepDuration: 7 * 3600).sorted(), id: \.self) { bedtime in
                                         Text("\(formattedTime(from: bedtime))")
-                                            .font(.headline) // Adjust the font style and size
-                                            .foregroundColor(.black) // Choose an appropriate text color
+                                            .font(.headline)
+                                            .foregroundColor(.black)
                                             .padding()
-                                            .background(Color(.systemGray6)) // Choose a neutral background color
+                                            .background(Color(.systemGray6))
                                             .cornerRadius(10)
                                             .shadow(radius: 2)
-                                            .padding(.horizontal) // Adjust horizontal padding
-                                            .padding(.bottom, 8) // Add bottom spacing
+                                            .padding(.horizontal)
+                                            .padding(.bottom, 8)
                                     }
                             }
                             Spacer()
