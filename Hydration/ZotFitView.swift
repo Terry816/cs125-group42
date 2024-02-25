@@ -48,57 +48,8 @@ struct ZotFitView: View {
                     //Main body of app is here:
                     VStack {
                         Spacer()
+                        
                         //Main content goes here
-                        VStack {
-                            Spacer()
-                                HStack{
-                                    Spacer()
-                                    Button(action: {}, label: {
-                                        VStack{
-                                            Image(systemName: "questionmark")
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fit)
-                                            Text("Abs")
-                                        }
-                                        .task {
-                                            do{
-                                                var user: String
-                                                user = try await getUser()
-                                                print(user)
-                                            } catch GHError.invalidURL {
-                                                print("invalid URL")
-                                            } catch GHError.invalidResponse{
-                                                print("invalid Response")
-                                            } catch GHError.invalidData{
-                                                print("invalid Data")
-                                            } catch {
-                                                print("unexpected error")
-                                            }
-                                        }
-                                    })
-                                    Spacer()
-                                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                                        VStack{
-                                            Image("biceps")
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fit)
-    
-                                            Text("Biceps")
-                                        }
-                                    })
-                                    Spacer()
-                                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                                        VStack{
-                                            Image("calves")
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fit)
-                                            Text("Calves")
-                                        }
-                                    })
-                                    Spacer()
-                                }
-                            Spacer()
-                        }
                         Spacer()
                     }
                     HStack{
@@ -169,3 +120,54 @@ enum GHError: Error{
 #Preview {
     ZotFitView()
 }
+
+//VStack {
+//    Spacer()
+//        HStack{
+//            Spacer()
+//            Button(action: {}, label: {
+//                VStack{
+//                    Image(systemName: "questionmark")
+//                        .resizable()
+//                        .aspectRatio(contentMode: .fit)
+//                    Text("Abs")
+//                }
+//                .task {
+//                    do{
+//                        var user: String
+//                        user = try await getUser()
+//                        print(user)
+//                    } catch GHError.invalidURL {
+//                        print("invalid URL")
+//                    } catch GHError.invalidResponse{
+//                        print("invalid Response")
+//                    } catch GHError.invalidData{
+//                        print("invalid Data")
+//                    } catch {
+//                        print("unexpected error")
+//                    }
+//                }
+//            })
+//            Spacer()
+//            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+//                VStack{
+//                    Image("biceps")
+//                        .resizable()
+//                        .aspectRatio(contentMode: .fit)
+//
+//                    Text("Biceps")
+//                }
+//            })
+//            Spacer()
+//            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+//                VStack{
+//                    Image("calves")
+//                        .resizable()
+//                        .aspectRatio(contentMode: .fit)
+//                    Text("Calves")
+//                }
+//            })
+//            Spacer()
+//        }
+//    Spacer()
+//}

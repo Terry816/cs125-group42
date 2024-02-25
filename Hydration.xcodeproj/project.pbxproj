@@ -18,6 +18,7 @@
 		52C0487B2B783E61001E4884 /* SideMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C0487A2B783E61001E4884 /* SideMenuViewModel.swift */; };
 		52C0487D2B79772A001E4884 /* ZotSleepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C0487C2B79772A001E4884 /* ZotSleepView.swift */; };
 		52C0487F2B79D79E001E4884 /* ZotFitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C0487E2B79D79E001E4884 /* ZotFitView.swift */; };
+		52C048832B8AC9EE001E4884 /* ExerciseTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C048822B8AC9EE001E4884 /* ExerciseTypeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		52C0487A2B783E61001E4884 /* SideMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewModel.swift; sourceTree = "<group>"; };
 		52C0487C2B79772A001E4884 /* ZotSleepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZotSleepView.swift; sourceTree = "<group>"; };
 		52C0487E2B79D79E001E4884 /* ZotFitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZotFitView.swift; sourceTree = "<group>"; };
+		52C048822B8AC9EE001E4884 /* ExerciseTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTypeView.swift; sourceTree = "<group>"; };
 		B6ADE1792B7611AE004CA936 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,6 +78,7 @@
 				52C048782B783E2E001E4884 /* SideMenuOptionView.swift */,
 				52C0487A2B783E61001E4884 /* SideMenuViewModel.swift */,
 				52C0487C2B79772A001E4884 /* ZotSleepView.swift */,
+				52C048822B8AC9EE001E4884 /* ExerciseTypeView.swift */,
 				5246C22D2B74663E00DB37E7 /* Assets.xcassets */,
 				5246C22F2B74663E00DB37E7 /* Preview Content */,
 			);
@@ -168,6 +171,7 @@
 				52C048752B783E06001E4884 /* SideMenuView.swift in Sources */,
 				5246C2382B74667500DB37E7 /* LocationManager.swift in Sources */,
 				52C0487D2B79772A001E4884 /* ZotSleepView.swift in Sources */,
+				52C048832B8AC9EE001E4884 /* ExerciseTypeView.swift in Sources */,
 				52C048792B783E2E001E4884 /* SideMenuOptionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
