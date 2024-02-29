@@ -209,6 +209,55 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 
+struct MapView: UIViewRepresentable {
+    typealias UIViewType = MKMapView
+    @Binding var directions: [String]
+    @Binding var camera: MapCameraPosition
+    func makeCoordinator() -> MapViewCoordinator {
+        return MapViewCoordinator()
+      }
+    func makeUIView(context: Context) -> MKMapView {
+        let mapView = MKMapView()
+        mapView.delegate = context.coordinator
+        let region = MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: 33.648613, longitude: -117.842753),
+            span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+        mapView.setRegion(region, animated: true)
+        let p1 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 33.648613, longitude: -117.842753))
+        
+        // Boston
+        let p2 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 33.64922407437117, longitude: -117.8424157076793))
+        
+        let request = MKDirections.Request()
+        request.source = MKMapItem(placemark: p1)
+        request.destination = MKMapItem(placemark: p2)
+        request.transportType = .walking
+        
+        let directions = MKDirections(request: request)
+        directions.calculate { response, error in
+            guard let route = response?.routes.first else { return }
+            mapView.addAnnotations([p1, p2])
+            mapView.addOverlay(route.polyline)
+            mapView.setVisibleMapRect(
+                route.polyline.boundingMapRect,
+                edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),
+                animated: true)
+        }
+        return mapView
+    }
+    
+    func updateUIView(_ uiView: MKMapView, context: Context) {}
+    
+    class MapViewCoordinator: NSObject, MKMapViewDelegate {
+        func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+            let renderer = MKPolylineRenderer(overlay: overlay)
+            renderer.strokeColor = .systemBlue
+            renderer.lineWidth = 5
+            return renderer
+        }
+    }
+}
+
 
 extension ContentView{
     func searchPlaces(){
