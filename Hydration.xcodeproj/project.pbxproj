@@ -19,7 +19,7 @@
 		52C0487D2B79772A001E4884 /* ZotSleepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C0487C2B79772A001E4884 /* ZotSleepView.swift */; };
 		52C0487F2B79D79E001E4884 /* ZotFitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C0487E2B79D79E001E4884 /* ZotFitView.swift */; };
 		52C048832B8AC9EE001E4884 /* ExerciseTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C048822B8AC9EE001E4884 /* ExerciseTypeView.swift */; };
-		52C048872B904C0A001E4884 /* MuscleGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C048862B904C0A001E4884 /* MuscleGroupView.swift */; };
+		B627E9172B904DE100E33AA7 /* MuscleGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B627E9162B904DE100E33AA7 /* MuscleGroupView.swift */; };
 		B67480EE2B8AF35E00C94876 /* SleepResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67480ED2B8AF35E00C94876 /* SleepResultView.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,7 +37,7 @@
 		52C0487C2B79772A001E4884 /* ZotSleepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZotSleepView.swift; sourceTree = "<group>"; };
 		52C0487E2B79D79E001E4884 /* ZotFitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZotFitView.swift; sourceTree = "<group>"; };
 		52C048822B8AC9EE001E4884 /* ExerciseTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTypeView.swift; sourceTree = "<group>"; };
-		52C048862B904C0A001E4884 /* MuscleGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MuscleGroupView.swift; path = ../../MuscleGroupView.swift; sourceTree = "<group>"; };
+		B627E9162B904DE100E33AA7 /* MuscleGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MuscleGroupView.swift; path = "../../../Downloads/cs125-group42/Hydration/MuscleGroupView.swift"; sourceTree = "<group>"; };
 		B67480ED2B8AF35E00C94876 /* SleepResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepResultView.swift; sourceTree = "<group>"; };
 		B67480EF2B8B0A9800C94876 /* Hydration.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hydration.entitlements; sourceTree = "<group>"; };
 		B6ADE1792B7611AE004CA936 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -85,8 +85,8 @@
 				52C0487C2B79772A001E4884 /* ZotSleepView.swift */,
 				B67480ED2B8AF35E00C94876 /* SleepResultView.swift */,
 				52C0487E2B79D79E001E4884 /* ZotFitView.swift */,
+				B627E9162B904DE100E33AA7 /* MuscleGroupView.swift */,
 				52C048822B8AC9EE001E4884 /* ExerciseTypeView.swift */,
-				52C048862B904C0A001E4884 /* MuscleGroupView.swift */,
 				5246C22D2B74663E00DB37E7 /* Assets.xcassets */,
 				5246C22F2B74663E00DB37E7 /* Preview Content */,
 			);
@@ -180,7 +180,7 @@
 				5246C2382B74667500DB37E7 /* LocationManager.swift in Sources */,
 				B67480EE2B8AF35E00C94876 /* SleepResultView.swift in Sources */,
 				52C0487D2B79772A001E4884 /* ZotSleepView.swift in Sources */,
-				52C048872B904C0A001E4884 /* MuscleGroupView.swift in Sources */,
+				B627E9172B904DE100E33AA7 /* MuscleGroupView.swift in Sources */,
 				52C048832B8AC9EE001E4884 /* ExerciseTypeView.swift in Sources */,
 				52C048792B783E2E001E4884 /* SideMenuOptionView.swift in Sources */,
 			);
