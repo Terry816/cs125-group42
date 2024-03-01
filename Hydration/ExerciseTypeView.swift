@@ -3,7 +3,7 @@
 //  Hydration
 //
 //  Created by Simar Cheema on 2/24/24.
-//
+// 
 
 import SwiftUI
 
@@ -11,7 +11,7 @@ struct ExerciseTypeView: View {
     @State var muscleView = false
     @State var exercise: String = ""
     var body: some View {
-            NavigationLink(destination: MuscleGroupView(), isActive: $muscleView) {}
+            NavigationLink(destination: MuscleGroupView(type: $exercise).navigationBarBackButtonHidden(true), isActive: $muscleView) {}
             VStack
             {
                 Text("Please select exercise type")
@@ -28,7 +28,7 @@ struct ExerciseTypeView: View {
                          generator.impactOccurred()
                         //Execute Action
                         withAnimation {
-                            exercise = "olympic"
+                            exercise = "olympic_weightlifting"
                             muscleView.toggle()
                         }
                     } label: {
@@ -112,7 +112,7 @@ struct ExerciseTypeView: View {
                     Button {
                         //Execute Action
                         withAnimation {
-                            exercise = "bodybuilding"
+                            exercise = "strength"
                             muscleView.toggle()
                         }
                     } label: {
@@ -154,7 +154,7 @@ struct ExerciseTypeView: View {
                     Button {
                         //Execute Action
                         withAnimation {
-                            exercise = "warmup"
+                            exercise = "stretching"
                             muscleView.toggle()
                         }
                     } label: {

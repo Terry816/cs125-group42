@@ -64,42 +64,6 @@ struct ZotFitView: View {
     }
 }
 
-func getUser() async throws -> String {
-    let endpoint = "https://api.api-ninjas.com/v1/exercises?muscle=\(muscle)&type=\(etype)&difficulty=\(diff)"
-    guard let url = URL(string: endpoint) else {
-        throw GHError.invalidURL
-    }
-    var urlRequest = URLRequest(url: url)
-    urlRequest.setValue("5SAcm6jn9u26Pkuk4iIu3Q==oZLXyNGrMRXxKjQx", forHTTPHeaderField: "X-Api-Key")
-    let (data, response) = try await URLSession.shared.data(for: urlRequest)
-    guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-        throw GHError.invalidResponse
-    }
-    do {
-        if let dataString = String(data: data, encoding: .utf8) {
-            return dataString
-        } else {
-            print("Unable to convert data to string")
-        }
-    }
-    return ""
-}
-
-struct ExerciseResult: Codable{
-    let name: String
-    let type: String
-    let muscle: String
-    let equipment: String
-    let difficulty: String
-    let instructions: String
-}
-
-enum GHError: Error{
-    case invalidURL
-    case invalidResponse
-    case invalidData
-}
-
 #Preview {
     ZotFitView()
 }

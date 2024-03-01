@@ -8,285 +8,371 @@
 import SwiftUI
 
 struct MuscleGroupView: View {
+    @Binding var type: String
     @State var muscle: String = ""
     
+    @State var sideMenu = false
+    @State var muscleView = false
+    @State var exerciseView = false
     var body: some View {
-        
-        VStack
-        {
-            Text("Please select exercise type")
-                .font(.system(size: 24, weight: .bold))
-                .padding(.top, 10)
-                .foregroundStyle(.black)
-                
-            Spacer()
-            Button {
-                //Execute Action
-                withAnimation {
-                    muscle = "abs"
+        NavigationView {
+            ZStack {
+                if sideMenu {
+                    SideMenuView()
                 }
-                let generator = UIImpactFeedbackGenerator(style: .medium)
-                 generator.impactOccurred()
-            } label: {
-                HStack {
-                    Image("abs")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 60, height: 60)
-                        .background(.white)
-                        .cornerRadius(40)
-                    Spacer()
-                    Text("Abs")
-                        .font(.system(size: 20, weight: .bold))
-                        .foregroundStyle(.white)
-                        .padding(.bottom, 5)
-                    Spacer()
-                    Image(systemName: "chevron.right") // Navigation arrow symbol
-                        .foregroundColor(.white)
-                        .font(.system(size: 20))
-                        .padding(.trailing)
+                NavigationLink(destination: ZotFitView().navigationBarBackButtonHidden(true), isActive: $exerciseView) {}
+                NavigationLink(destination: ExerciseDifficultyView(type: $type, muscle: $muscle).navigationBarBackButtonHidden(true), isActive: $muscleView) {}
+                VStack {
+                    ZStack {
+                        HStack {
+                            Button(action: {
+                                withAnimation(.spring()) {
+                                    sideMenu.toggle()
+                                }
+                            }) {
+                                Image(systemName: "line.horizontal.3")
+                                    .resizable()
+                                    .frame(width: 30, height: 20)
+                                    .foregroundColor(.white)
+                            }
+                            .padding([.leading])
+                            Spacer()
+                        }
+                        HStack {
+                            Spacer()
+                            Text("ZotFit")
+                                .foregroundColor(.white)
+                                .font(.system(size: 30, weight: .heavy))
+                            Spacer()
+                        }
+                    }
+                    //Main body of app is here:
+                    VStack {
+                        Spacer()
+                        VStack
+                        {
+                            ZStack {
+                                HStack {
+                                    Button {
+                                        withAnimation(.spring()) {
+                                            exerciseView.toggle()
+                                        }
+                                    } label : {
+                                        Label("", systemImage: "arrow.left")
+                                            .font(.system(size: 22, weight: .bold))
+                                            .padding(.top, 10)
+                                            .padding(.leading, 10)
+                                            .foregroundColor(.white)
+                                    }
+                                    Spacer()
+                                }
+                                HStack {
+                                    Spacer()
+                                    Text("Select exercise type")
+                                        .font(.system(size: 24, weight: .bold))
+                                        .padding(.top, 10)
+                                        .foregroundStyle(.white)
+                                    Spacer()
+                                }
+                            }
+                                
+                            Spacer()
+                            
+                            ScrollView {
+                                Button {
+                                    //Execute Action
+                                    withAnimation {
+                                        muscle = "abdominals"
+                                        muscleView.toggle()
+                                    }
+                                    let generator = UIImpactFeedbackGenerator(style: .medium)
+                                    generator.impactOccurred()
+                                } label: {
+                                    HStack {
+                                        Image("abs")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 60, height: 60)
+                                            .background(.white)
+                                            .cornerRadius(40)
+                                        Spacer()
+                                        Text("Abs")
+                                            .font(.system(size: 20, weight: .bold))
+                                            .foregroundStyle(.white)
+                                            .padding(.bottom, 5)
+                                        Spacer()
+                                        Image(systemName: "chevron.right") // Navigation arrow symbol
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 20))
+                                            .padding(.trailing)
+                                    }
+                                }
+                                .buttonStyle(.bordered)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 40)
+                                        .stroke(Color.white, lineWidth: 2)
+                                )
+                                .background(.black)
+                                .cornerRadius(40)
+                                .padding(10)
+                                
+                                Spacer()
+                                
+                                Button {
+                                    //Execute Action
+                                    withAnimation {
+                                        muscle = "biceps"
+                                        muscleView.toggle()
+                                    }
+                                    let generator = UIImpactFeedbackGenerator(style: .medium)
+                                    generator.impactOccurred()
+                                } label: {
+                                    HStack {
+                                        Image("biceps")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 60, height: 60)
+                                            .background(.white)
+                                            .cornerRadius(40)
+                                        Spacer()
+                                        Text("Biceps")
+                                            .font(.system(size: 20, weight: .bold))
+                                            .foregroundStyle(.white)
+                                            .padding(.bottom, 5)
+                                        Spacer()
+                                        Image(systemName: "chevron.right") // Navigation arrow symbol
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 20))
+                                            .padding(.trailing)
+                                    }
+                                }
+                                .buttonStyle(.bordered)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 40)
+                                        .stroke(Color.white, lineWidth: 2)
+                                )
+                                .background(.black)
+                                .cornerRadius(40)
+                                .padding(5)
+                                
+                                Spacer()
+                                
+                                Button {
+                                    //Execute Action
+                                    withAnimation {
+                                        muscle = "abs"
+                                        muscleView.toggle()
+                                    }
+                                    let generator = UIImpactFeedbackGenerator(style: .medium)
+                                    generator.impactOccurred()
+                                } label: {
+                                    HStack {
+                                        Image("abs")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 60, height: 60)
+                                            .background(.white)
+                                            .cornerRadius(40)
+                                        Spacer()
+                                        Text("Abs")
+                                            .font(.system(size: 20, weight: .bold))
+                                            .foregroundStyle(.white)
+                                            .padding(.bottom, 5)
+                                        Spacer()
+                                        Image(systemName: "chevron.right") // Navigation arrow symbol
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 20))
+                                            .padding(.trailing)
+                                    }
+                                }
+                                .buttonStyle(.bordered)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 40)
+                                        .stroke(Color.white, lineWidth: 2)
+                                )
+                                .background(.black)
+                                .cornerRadius(40)
+                                .padding(5)
+                                
+                                Spacer()
+                                
+                                Button {
+                                    //Execute Action
+                                    withAnimation {
+                                        muscle = "abs"
+                                        muscleView.toggle()
+                                    }
+                                    let generator = UIImpactFeedbackGenerator(style: .medium)
+                                    generator.impactOccurred()
+                                } label: {
+                                    HStack {
+                                        Image("abs")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 60, height: 60)
+                                            .background(.white)
+                                            .cornerRadius(40)
+                                        Spacer()
+                                        Text("Abs")
+                                            .font(.system(size: 20, weight: .bold))
+                                            .foregroundStyle(.white)
+                                            .padding(.bottom, 5)
+                                        Spacer()
+                                        Image(systemName: "chevron.right") // Navigation arrow symbol
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 20))
+                                            .padding(.trailing)
+                                    }
+                                }
+                                .buttonStyle(.bordered)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 40)
+                                        .stroke(Color.white, lineWidth: 2)
+                                )
+                                .background(.black)
+                                .cornerRadius(40)
+                                .padding(5)
+                                
+                                Spacer()
+                                
+                                Button {
+                                    //Execute Action
+                                    withAnimation {
+                                        muscle = "abs"
+                                        muscleView.toggle()
+                                    }
+                                    let generator = UIImpactFeedbackGenerator(style: .medium)
+                                    generator.impactOccurred()
+                                } label: {
+                                    HStack {
+                                        Image("abs")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 60, height: 60)
+                                            .background(.white)
+                                            .cornerRadius(40)
+                                        Spacer()
+                                        Text("Abs")
+                                            .font(.system(size: 20, weight: .bold))
+                                            .foregroundStyle(.white)
+                                            .padding(.bottom, 5)
+                                        Spacer()
+                                        Image(systemName: "chevron.right") // Navigation arrow symbol
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 20))
+                                            .padding(.trailing)
+                                    }
+                                }
+                                .buttonStyle(.bordered)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 40)
+                                        .stroke(Color.white, lineWidth: 2)
+                                )
+                                .background(.black)
+                                .cornerRadius(40)
+                                .padding(5)
+                                
+                                Spacer()
+                                
+                                Button {
+                                    //Execute Action
+                                    withAnimation {
+                                        muscle = "abs"
+                                    }
+                                    let generator = UIImpactFeedbackGenerator(style: .medium)
+                                    generator.impactOccurred()
+                                } label: {
+                                    HStack {
+                                        Image("abs")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 60, height: 60)
+                                            .background(.white)
+                                            .cornerRadius(40)
+                                        Spacer()
+                                        Text("Abs")
+                                            .font(.system(size: 20, weight: .bold))
+                                            .foregroundStyle(.white)
+                                            .padding(.bottom, 5)
+                                        Spacer()
+                                        Image(systemName: "chevron.right") // Navigation arrow symbol
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 20))
+                                            .padding(.trailing)
+                                    }
+                                }
+                                .buttonStyle(.bordered)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 40)
+                                        .stroke(Color.white, lineWidth: 2)
+                                )
+                                .background(.black)
+                                .cornerRadius(40)
+                                .padding(5)
+                                
+                                Spacer()
+                                
+                                Button {
+                                    //Execute Action
+                                    withAnimation {
+                                        muscle = "abs"
+                                    }
+                                    let generator = UIImpactFeedbackGenerator(style: .medium)
+                                    generator.impactOccurred()
+                                } label: {
+                                    HStack {
+                                        Image("abs")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 60, height: 60)
+                                            .background(.white)
+                                            .cornerRadius(40)
+                                        Spacer()
+                                        Text("Abs")
+                                            .font(.system(size: 20, weight: .bold))
+                                            .foregroundStyle(.white)
+                                            .padding(.bottom, 5)
+                                        Spacer()
+                                        Image(systemName: "chevron.right") // Navigation arrow symbol
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 20))
+                                            .padding(.trailing)
+                                    }
+                                }
+                                .buttonStyle(.bordered)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 40)
+                                        .stroke(Color.white, lineWidth: 2)
+                                )
+                                .background(.black)
+                                .cornerRadius(40)
+                                .padding(5)
+                            }
+                            .padding(.top, 20)
+                        }
+                        Spacer()
+                    }
+                }
+                .background(LinearGradient(gradient: Gradient(colors: [Color(red: 0, green: 0, blue: 0.81), Color(red: 0, green: 0, blue: 0.5)]), startPoint: .top, endPoint: .bottom))
+                .offset(x: sideMenu ? 250 : 0)
+                .onTapGesture {
+                    if sideMenu {
+                        withAnimation {
+                            sideMenu = false
+                        }
+                    }
                 }
             }
-            .buttonStyle(.bordered)
-            .background(
-                        RoundedRectangle(cornerRadius: 40)
-                            .stroke(Color.white, lineWidth: 2)
-                    )
-            .background(.black)
-            .cornerRadius(40)
-            .padding(5)
-            
-            Spacer()
-            
-            Button {
-                //Execute Action
-                withAnimation {
-                    muscle = "abs"
-                }
-                let generator = UIImpactFeedbackGenerator(style: .medium)
-                 generator.impactOccurred()
-            } label: {
-                HStack {
-                    Image("abs")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 60, height: 60)
-                        .background(.white)
-                        .cornerRadius(40)
-                    Spacer()
-                    Text("Abs")
-                        .font(.system(size: 20, weight: .bold))
-                        .foregroundStyle(.white)
-                        .padding(.bottom, 5)
-                    Spacer()
-                    Image(systemName: "chevron.right") // Navigation arrow symbol
-                        .foregroundColor(.white)
-                        .font(.system(size: 20))
-                        .padding(.trailing)
-                }
+            .onAppear {
+                sideMenu = false
             }
-            .buttonStyle(.bordered)
-            .background(
-                        RoundedRectangle(cornerRadius: 40)
-                            .stroke(Color.white, lineWidth: 2)
-                    )
-            .background(.black)
-            .cornerRadius(40)
-            .padding(5)
-            
-            Spacer()
-            
-            Button {
-                //Execute Action
-                withAnimation {
-                    muscle = "abs"
-                }
-                let generator = UIImpactFeedbackGenerator(style: .medium)
-                 generator.impactOccurred()
-            } label: {
-                HStack {
-                    Image("abs")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 60, height: 60)
-                        .background(.white)
-                        .cornerRadius(40)
-                    Spacer()
-                    Text("Abs")
-                        .font(.system(size: 20, weight: .bold))
-                        .foregroundStyle(.white)
-                        .padding(.bottom, 5)
-                    Spacer()
-                    Image(systemName: "chevron.right") // Navigation arrow symbol
-                        .foregroundColor(.white)
-                        .font(.system(size: 20))
-                        .padding(.trailing)
-                }
-            }
-            .buttonStyle(.bordered)
-            .background(
-                        RoundedRectangle(cornerRadius: 40)
-                            .stroke(Color.white, lineWidth: 2)
-                    )
-            .background(.black)
-            .cornerRadius(40)
-            .padding(5)
-            
-            Spacer()
-            
-            Button {
-                //Execute Action
-                withAnimation {
-                    muscle = "abs"
-                }
-                let generator = UIImpactFeedbackGenerator(style: .medium)
-                 generator.impactOccurred()
-            } label: {
-                HStack {
-                    Image("abs")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 60, height: 60)
-                        .background(.white)
-                        .cornerRadius(40)
-                    Spacer()
-                    Text("Abs")
-                        .font(.system(size: 20, weight: .bold))
-                        .foregroundStyle(.white)
-                        .padding(.bottom, 5)
-                    Spacer()
-                    Image(systemName: "chevron.right") // Navigation arrow symbol
-                        .foregroundColor(.white)
-                        .font(.system(size: 20))
-                        .padding(.trailing)
-                }
-            }
-            .buttonStyle(.bordered)
-            .background(
-                        RoundedRectangle(cornerRadius: 40)
-                            .stroke(Color.white, lineWidth: 2)
-                    )
-            .background(.black)
-            .cornerRadius(40)
-            .padding(5)
-            
-            Spacer()
-            
-            Button {
-                //Execute Action
-                withAnimation {
-                    muscle = "abs"
-                }
-                let generator = UIImpactFeedbackGenerator(style: .medium)
-                 generator.impactOccurred()
-            } label: {
-                HStack {
-                    Image("abs")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 60, height: 60)
-                        .background(.white)
-                        .cornerRadius(40)
-                    Spacer()
-                    Text("Abs")
-                        .font(.system(size: 20, weight: .bold))
-                        .foregroundStyle(.white)
-                        .padding(.bottom, 5)
-                    Spacer()
-                    Image(systemName: "chevron.right") // Navigation arrow symbol
-                        .foregroundColor(.white)
-                        .font(.system(size: 20))
-                        .padding(.trailing)
-                }
-            }
-            .buttonStyle(.bordered)
-            .background(
-                        RoundedRectangle(cornerRadius: 40)
-                            .stroke(Color.white, lineWidth: 2)
-                    )
-            .background(.black)
-            .cornerRadius(40)
-            .padding(5)
-            
-            Spacer()
-            
-            Button {
-                //Execute Action
-                withAnimation {
-                    muscle = "abs"
-                }
-                let generator = UIImpactFeedbackGenerator(style: .medium)
-                 generator.impactOccurred()
-            } label: {
-                HStack {
-                    Image("abs")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 60, height: 60)
-                        .background(.white)
-                        .cornerRadius(40)
-                    Spacer()
-                    Text("Abs")
-                        .font(.system(size: 20, weight: .bold))
-                        .foregroundStyle(.white)
-                        .padding(.bottom, 5)
-                    Spacer()
-                    Image(systemName: "chevron.right") // Navigation arrow symbol
-                        .foregroundColor(.white)
-                        .font(.system(size: 20))
-                        .padding(.trailing)
-                }
-            }
-            .buttonStyle(.bordered)
-            .background(
-                        RoundedRectangle(cornerRadius: 40)
-                            .stroke(Color.white, lineWidth: 2)
-                    )
-            .background(.black)
-            .cornerRadius(40)
-            .padding(5)
-            
-            Spacer()
-            
-            Button {
-                //Execute Action
-                withAnimation {
-                    muscle = "abs"
-                }
-                let generator = UIImpactFeedbackGenerator(style: .medium)
-                 generator.impactOccurred()
-            } label: {
-                HStack {
-                    Image("abs")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 60, height: 60)
-                        .background(.white)
-                        .cornerRadius(40)
-                    Spacer()
-                    Text("Abs")
-                        .font(.system(size: 20, weight: .bold))
-                        .foregroundStyle(.white)
-                        .padding(.bottom, 5)
-                    Spacer()
-                    Image(systemName: "chevron.right") // Navigation arrow symbol
-                        .foregroundColor(.white)
-                        .font(.system(size: 20))
-                        .padding(.trailing)
-                }
-            }
-            .buttonStyle(.bordered)
-            .background(
-                        RoundedRectangle(cornerRadius: 40)
-                            .stroke(Color.white, lineWidth: 2)
-                    )
-            .background(.black)
-            .cornerRadius(40)
-            .padding(5)
         }
     }
 }
 
-#Preview {
-    MuscleGroupView()
+struct MuscleGroupView_Preview: PreviewProvider {
+  @State static var type = ""
+  static var previews: some View {
+      MuscleGroupView(type: $type)
+  }
 }

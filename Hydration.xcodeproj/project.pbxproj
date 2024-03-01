@@ -13,6 +13,8 @@
 		5246C2312B74663E00DB37E7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5246C2302B74663E00DB37E7 /* Preview Assets.xcassets */; };
 		5246C2382B74667500DB37E7 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246C2372B74667500DB37E7 /* LocationManager.swift */; };
 		52BEE20E2B904EFE00F90F3A /* MuscleGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BEE20D2B904EFE00F90F3A /* MuscleGroupView.swift */; };
+		52BEE2102B91443C00F90F3A /* ExerciseDifficultyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BEE20F2B91443C00F90F3A /* ExerciseDifficultyView.swift */; };
+		52BEE2122B915BBD00F90F3A /* ExerciseSuggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BEE2112B915BBD00F90F3A /* ExerciseSuggestionView.swift */; };
 		52C048752B783E06001E4884 /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C048742B783E06001E4884 /* SideMenuView.swift */; };
 		52C048772B783E19001E4884 /* SideMenuHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C048762B783E19001E4884 /* SideMenuHeaderView.swift */; };
 		52C048792B783E2E001E4884 /* SideMenuOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C048782B783E2E001E4884 /* SideMenuOptionView.swift */; };
@@ -31,6 +33,8 @@
 		5246C2302B74663E00DB37E7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5246C2372B74667500DB37E7 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		52BEE20D2B904EFE00F90F3A /* MuscleGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MuscleGroupView.swift; sourceTree = "<group>"; };
+		52BEE20F2B91443C00F90F3A /* ExerciseDifficultyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDifficultyView.swift; sourceTree = "<group>"; };
+		52BEE2112B915BBD00F90F3A /* ExerciseSuggestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSuggestionView.swift; sourceTree = "<group>"; };
 		52C048742B783E06001E4884 /* SideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
 		52C048762B783E19001E4884 /* SideMenuHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuHeaderView.swift; sourceTree = "<group>"; };
 		52C048782B783E2E001E4884 /* SideMenuOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuOptionView.swift; sourceTree = "<group>"; };
@@ -85,8 +89,10 @@
 				52C0487C2B79772A001E4884 /* ZotSleepView.swift */,
 				B67480ED2B8AF35E00C94876 /* SleepResultView.swift */,
 				52C0487E2B79D79E001E4884 /* ZotFitView.swift */,
-				52BEE20D2B904EFE00F90F3A /* MuscleGroupView.swift */,
 				52C048822B8AC9EE001E4884 /* ExerciseTypeView.swift */,
+				52BEE20D2B904EFE00F90F3A /* MuscleGroupView.swift */,
+				52BEE20F2B91443C00F90F3A /* ExerciseDifficultyView.swift */,
+				52BEE2112B915BBD00F90F3A /* ExerciseSuggestionView.swift */,
 				5246C22D2B74663E00DB37E7 /* Assets.xcassets */,
 				5246C22F2B74663E00DB37E7 /* Preview Content */,
 			);
@@ -176,6 +182,8 @@
 				5246C22A2B74663D00DB37E7 /* HydrationApp.swift in Sources */,
 				52C048772B783E19001E4884 /* SideMenuHeaderView.swift in Sources */,
 				52C0487B2B783E61001E4884 /* SideMenuViewModel.swift in Sources */,
+				52BEE2102B91443C00F90F3A /* ExerciseDifficultyView.swift in Sources */,
+				52BEE2122B915BBD00F90F3A /* ExerciseSuggestionView.swift in Sources */,
 				52BEE20E2B904EFE00F90F3A /* MuscleGroupView.swift in Sources */,
 				52C048752B783E06001E4884 /* SideMenuView.swift in Sources */,
 				5246C2382B74667500DB37E7 /* LocationManager.swift in Sources */,
