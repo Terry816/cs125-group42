@@ -7,66 +7,102 @@
 
 import Foundation
 import SwiftUI
-
-//
-//  ContentView.swift
-//  HealthSleep
-//
-//  Created by Philip Nguyen on 2/24/24.
-//
-
 import HealthKit
 
 
-struct HealthKitView: View {
-    @State private var isAuthorized = false
-    var healthStore: HKHealthStore = HKHealthStore()
 
+struct SleepResultView: View {
+//    var displayTime: String
+    @State private var sideMenu = false
+    @State private var selectedTime = Date()
+    @State private var displayTime = Date()
+    
     var body: some View {
-        VStack {
-            if isAuthorized {
-                Text("HealthKit Authorization Successful")
-                    .padding()
-            } else {
-                Text("Please authorize HealthKit")
-                    .padding()
-                    .onAppear {
-                        requestAuthorization()
-                    }
-            }
-        }
-    }
-
-    private func requestAuthorization() {
-        let healthStore = HKHealthStore()
         
-        // Request authorization to access sleep data
-        let sleepType = HKObjectType.categoryType(forIdentifier: HKCategoryTypeIdentifier.sleepAnalysis)!
-        healthStore.requestAuthorization(toShare: nil, read: [sleepType]) { (success, error) in
-            if success {
-                // Query for sleep data
-                let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
-                let query = HKSampleQuery(sampleType: sleepType, predicate: nil, limit: 30, sortDescriptors: [sortDescriptor]) { (query, samples, error) in
-                    guard let samples = samples as? [HKCategorySample], error == nil else {
-                        print("Failed to fetch sleep data: \(error!.localizedDescription)")
-                        return
+//        NavigationView {
+            ZStack {
+                if sideMenu {
+                    SideMenuView()
+                }
+                VStack {
+                    HStack(alignment: .center){
+                        ZStack{
+                            HStack{
+                                Button(action: {
+                                    withAnimation(.spring()) {
+                                        sideMenu.toggle()
+                                    }
+                                }) {
+                                    Image(systemName: "line.horizontal.3")
+                                        .resizable()
+                                        .frame(width: 30, height: 20)
+                                        .foregroundColor(.white)
+                                }.padding([.leading])
+                                Spacer()
+                            }
+                            HStack{
+                                Spacer()
+                                VStack {
+                                    Text("ZotSleep")
+                                        .foregroundColor(.white)
+                                        .font(.system(size: 30, weight: .bold))
+                                    Spacer()
+                                }
+                                .frame(height: 50)
+                                Spacer()
+                            }
+                        }
                     }
-                    for sample in samples {
-                        let startDate = sample.startDate
-                        let endDate = sample.endDate
-                        print("Sleep start: \(startDate), end: \(endDate)")
+                    .background(Color(red: 0, green: 0.3922, blue: 0.6431))
+                    
+                    VStack {
+                        
+                        VStack {
+                            Spacer()
+                            Text("When do you want to wake up?")
+                                .font(.system(size: 20, weight: .bold))
+    
+                            //Main content goes here
+                            DatePicker("Select Time", selection: $selectedTime, displayedComponents: .hourAndMinute)
+                                            .datePickerStyle(.wheel)
+                                            .labelsHidden()
+                                            .onChange(of: selectedTime) { oldvalue, newValue in
+                                                displayTime = newValue
+                                            }
+    
+                            Spacer()
+                        }
+                        
+                        NavigationLink(destination: SleepCalcView(displayTime: $displayTime)) {
+                            Text("Confirm Time: \(formattedTime(from:displayTime))")
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                        }
+
+                        HStack{
+                            Spacer()
+                        }
+                        .padding(.top)
+                        .padding(.bottom)
+                        .background(Color(red: 0, green: 0.3922, blue: 0.6431))
                     }
                 }
-                healthStore.execute(query)
-            } else {
-                print("Authorization to access sleep data was denied.")
+                .offset(x: sideMenu ? 300 : 0)
             }
-        }
+            .onAppear {
+                sideMenu = false
+            }
+//        }
     }
+    
 }
 
-struct HealthKitView_Previews: PreviewProvider {
+
+
+struct SleepTimeView: PreviewProvider {
     static var previews: some View {
-        HealthKitView()
+        SleepResultView()
     }
 }

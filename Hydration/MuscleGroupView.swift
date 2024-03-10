@@ -92,7 +92,7 @@ struct MuscleGroupView: View {
                                         Image("abs")
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
-                                            .frame(width: 60, height: 60)
+                                            .frame(width: 70, height: 70)
                                             .background(.white)
                                             .cornerRadius(40)
                                         Spacer()
@@ -112,7 +112,7 @@ struct MuscleGroupView: View {
                                     RoundedRectangle(cornerRadius: 40)
                                         .stroke(Color.white, lineWidth: 2)
                                 )
-                                .background(.black)
+                                .background(.gray)
                                 .cornerRadius(40)
                                 .padding(10)
                                 
@@ -160,21 +160,21 @@ struct MuscleGroupView: View {
                                 Button {
                                     //Execute Action
                                     withAnimation {
-                                        muscle = "abs"
+                                        muscle = "calves"
                                         muscleView.toggle()
                                     }
                                     let generator = UIImpactFeedbackGenerator(style: .medium)
                                     generator.impactOccurred()
                                 } label: {
                                     HStack {
-                                        Image("abs")
+                                        Image("calves")
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                             .frame(width: 60, height: 60)
                                             .background(.white)
                                             .cornerRadius(40)
                                         Spacer()
-                                        Text("Abs")
+                                        Text("Calves")
                                             .font(.system(size: 20, weight: .bold))
                                             .foregroundStyle(.white)
                                             .padding(.bottom, 5)
@@ -199,21 +199,21 @@ struct MuscleGroupView: View {
                                 Button {
                                     //Execute Action
                                     withAnimation {
-                                        muscle = "abs"
+                                        muscle = "chest"
                                         muscleView.toggle()
                                     }
                                     let generator = UIImpactFeedbackGenerator(style: .medium)
                                     generator.impactOccurred()
                                 } label: {
                                     HStack {
-                                        Image("abs")
+                                        Image("chest")
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                             .frame(width: 60, height: 60)
                                             .background(.white)
                                             .cornerRadius(40)
                                         Spacer()
-                                        Text("Abs")
+                                        Text("Chest")
                                             .font(.system(size: 20, weight: .bold))
                                             .foregroundStyle(.white)
                                             .padding(.bottom, 5)
@@ -238,21 +238,21 @@ struct MuscleGroupView: View {
                                 Button {
                                     //Execute Action
                                     withAnimation {
-                                        muscle = "abs"
+                                        muscle = "forearms"
                                         muscleView.toggle()
                                     }
                                     let generator = UIImpactFeedbackGenerator(style: .medium)
                                     generator.impactOccurred()
                                 } label: {
                                     HStack {
-                                        Image("abs")
+                                        Image("forearms")
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                             .frame(width: 60, height: 60)
                                             .background(.white)
                                             .cornerRadius(40)
                                         Spacer()
-                                        Text("Abs")
+                                        Text("Forearms")
                                             .font(.system(size: 20, weight: .bold))
                                             .foregroundStyle(.white)
                                             .padding(.bottom, 5)
@@ -277,20 +277,21 @@ struct MuscleGroupView: View {
                                 Button {
                                     //Execute Action
                                     withAnimation {
-                                        muscle = "abs"
+                                        muscle = "hamstrings"
+                                        muscleView.toggle()
                                     }
                                     let generator = UIImpactFeedbackGenerator(style: .medium)
                                     generator.impactOccurred()
                                 } label: {
                                     HStack {
-                                        Image("abs")
+                                        Image("hamstring")
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                             .frame(width: 60, height: 60)
                                             .background(.white)
                                             .cornerRadius(40)
                                         Spacer()
-                                        Text("Abs")
+                                        Text("Hamstring")
                                             .font(.system(size: 20, weight: .bold))
                                             .foregroundStyle(.white)
                                             .padding(.bottom, 5)
@@ -315,20 +316,21 @@ struct MuscleGroupView: View {
                                 Button {
                                     //Execute Action
                                     withAnimation {
-                                        muscle = "abs"
+                                        muscle = "lats"
+                                        muscleView.toggle()
                                     }
                                     let generator = UIImpactFeedbackGenerator(style: .medium)
                                     generator.impactOccurred()
                                 } label: {
                                     HStack {
-                                        Image("abs")
+                                        Image("lats")
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                             .frame(width: 60, height: 60)
                                             .background(.white)
                                             .cornerRadius(40)
                                         Spacer()
-                                        Text("Abs")
+                                        Text("Lats")
                                             .font(.system(size: 20, weight: .bold))
                                             .foregroundStyle(.white)
                                             .padding(.bottom, 5)
@@ -347,6 +349,124 @@ struct MuscleGroupView: View {
                                 .background(.black)
                                 .cornerRadius(40)
                                 .padding(5)
+                                
+                                Spacer()
+                                
+                                Button {
+                                    //Execute Action
+                                    withAnimation {
+                                        muscle = "middle_back"
+                                        muscleView.toggle()
+                                    }
+                                    let generator = UIImpactFeedbackGenerator(style: .medium)
+                                    generator.impactOccurred()
+                                } label: {
+                                    HStack {
+                                        Image("middleback")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 60, height: 60)
+                                            .background(.white)
+                                            .cornerRadius(40)
+                                        Spacer()
+                                        Text("Back")
+                                            .font(.system(size: 20, weight: .bold))
+                                            .foregroundStyle(.white)
+                                            .padding(.bottom, 5)
+                                        Spacer()
+                                        Image(systemName: "chevron.right") // Navigation arrow symbol
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 20))
+                                            .padding(.trailing)
+                                    }
+                                }
+                                .buttonStyle(.bordered)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 40)
+                                        .stroke(Color.white, lineWidth: 2)
+                                )
+                                .background(.black)
+                                .cornerRadius(40)
+                                .padding(5)
+                                
+                                Spacer()
+                                
+                                Button {
+                                    //Execute Action
+                                    withAnimation {
+                                        muscle = "quadriceps"
+                                        muscleView.toggle()
+                                    }
+                                    let generator = UIImpactFeedbackGenerator(style: .medium)
+                                    generator.impactOccurred()
+                                } label: {
+                                    HStack {
+                                        Image("quads")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 60, height: 60)
+                                            .background(.white)
+                                            .cornerRadius(40)
+                                        Spacer()
+                                        Text("Quads")
+                                            .font(.system(size: 20, weight: .bold))
+                                            .foregroundStyle(.white)
+                                            .padding(.bottom, 5)
+                                        Spacer()
+                                        Image(systemName: "chevron.right") // Navigation arrow symbol
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 20))
+                                            .padding(.trailing)
+                                    }
+                                }
+                                .buttonStyle(.bordered)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 40)
+                                        .stroke(Color.white, lineWidth: 2)
+                                )
+                                .background(.black)
+                                .cornerRadius(40)
+                                .padding(5)
+                                
+                                Spacer()
+                                
+                                Button {
+                                    //Execute Action
+                                    withAnimation {
+                                        muscle = "triceps"
+                                        muscleView.toggle()
+                                    }
+                                    let generator = UIImpactFeedbackGenerator(style: .medium)
+                                    generator.impactOccurred()
+                                } label: {
+                                    HStack {
+                                        Image("triceps")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 60, height: 60)
+                                            .background(.white)
+                                            .cornerRadius(40)
+                                        Spacer()
+                                        Text("Triceps")
+                                            .font(.system(size: 20, weight: .bold))
+                                            .foregroundStyle(.white)
+                                            .padding(.bottom, 5)
+                                        Spacer()
+                                        Image(systemName: "chevron.right") // Navigation arrow symbol
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 20))
+                                            .padding(.trailing)
+                                    }
+                                }
+                                .buttonStyle(.bordered)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 40)
+                                        .stroke(Color.white, lineWidth: 2)
+                                )
+                                .background(.black)
+                                .cornerRadius(40)
+                                .padding(5)
+                                
                             }
                             .padding(.top, 20)
                         }
