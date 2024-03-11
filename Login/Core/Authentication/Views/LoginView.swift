@@ -13,7 +13,6 @@ struct LoginView: View {
     @State private var password = ""
     @EnvironmentObject var viewModel: AuthViewModel
     
-    
     var body: some View{
         NavigationStack{
             VStack{

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5246C22A2B74663D00DB37E7 /* HydrationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246C2292B74663D00DB37E7 /* HydrationApp.swift */; };
-		5246C22C2B74663D00DB37E7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246C22B2B74663D00DB37E7 /* ContentView.swift */; };
+		5246C22C2B74663D00DB37E7 /* HydrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246C22B2B74663D00DB37E7 /* HydrationView.swift */; };
 		5246C22E2B74663E00DB37E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5246C22D2B74663E00DB37E7 /* Assets.xcassets */; };
 		5246C2312B74663E00DB37E7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5246C2302B74663E00DB37E7 /* Preview Assets.xcassets */; };
 		5246C2382B74667500DB37E7 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246C2372B74667500DB37E7 /* LocationManager.swift */; };
@@ -16,8 +16,8 @@
 		5297317D2B9E94D7004D13FD /* SettingsRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529731642B9E94D7004D13FD /* SettingsRowView.swift */; };
 		5297317E2B9E94D7004D13FD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529731662B9E94D7004D13FD /* LoginView.swift */; };
 		5297317F2B9E94D7004D13FD /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529731672B9E94D7004D13FD /* RegistrationView.swift */; };
-		529731802B9E94D7004D13FD /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5297316A2B9E94D7004D13FD /* ProfileView.swift */; };
-		529731812B9E94D7004D13FD /* ContentView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5297316C2B9E94D7004D13FD /* ContentView2.swift */; };
+		529731802B9E94D7004D13FD /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5297316A2B9E94D7004D13FD /* UserView.swift */; };
+		529731812B9E94D7004D13FD /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5297316C2B9E94D7004D13FD /* HomeView.swift */; };
 		529731822B9E94D7004D13FD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5297316F2B9E94D7004D13FD /* User.swift */; };
 		529731832B9E94D7004D13FD /* SwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529731732B9E94D7004D13FD /* SwiftUIApp.swift */; };
 		529731842B9E94D7004D13FD /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529731772B9E94D7004D13FD /* AuthViewModel.swift */; };
@@ -27,6 +27,7 @@
 		5297318F2B9E979D004D13FD /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5297318E2B9E979D004D13FD /* FirebaseFirestoreSwift */; };
 		529731912B9E979D004D13FD /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 529731902B9E979D004D13FD /* FirebaseStorage */; };
 		529731932B9E994A004D13FD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 529731922B9E994A004D13FD /* GoogleService-Info.plist */; };
+		529731952B9FAD6F004D13FD /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529731942B9FAD6F004D13FD /* ProfileView.swift */; };
 		52BEE20E2B904EFE00F90F3A /* MuscleGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BEE20D2B904EFE00F90F3A /* MuscleGroupView.swift */; };
 		52BEE2102B91443C00F90F3A /* ExerciseDifficultyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BEE20F2B91443C00F90F3A /* ExerciseDifficultyView.swift */; };
 		52BEE2122B915BBD00F90F3A /* ExerciseSuggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BEE2112B915BBD00F90F3A /* ExerciseSuggestionView.swift */; };
@@ -44,7 +45,7 @@
 /* Begin PBXFileReference section */
 		5246C2262B74663D00DB37E7 /* Hydration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hydration.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5246C2292B74663D00DB37E7 /* HydrationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HydrationApp.swift; sourceTree = "<group>"; };
-		5246C22B2B74663D00DB37E7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		5246C22B2B74663D00DB37E7 /* HydrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HydrationView.swift; sourceTree = "<group>"; };
 		5246C22D2B74663E00DB37E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5246C2302B74663E00DB37E7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5246C2372B74667500DB37E7 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -52,12 +53,13 @@
 		529731642B9E94D7004D13FD /* SettingsRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsRowView.swift; sourceTree = "<group>"; };
 		529731662B9E94D7004D13FD /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		529731672B9E94D7004D13FD /* RegistrationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
-		5297316A2B9E94D7004D13FD /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		5297316C2B9E94D7004D13FD /* ContentView2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView2.swift; sourceTree = "<group>"; };
+		5297316A2B9E94D7004D13FD /* UserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
+		5297316C2B9E94D7004D13FD /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		5297316F2B9E94D7004D13FD /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		529731732B9E94D7004D13FD /* SwiftUIApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUIApp.swift; sourceTree = "<group>"; };
 		529731772B9E94D7004D13FD /* AuthViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		529731922B9E994A004D13FD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		529731942B9FAD6F004D13FD /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		52BEE20D2B904EFE00F90F3A /* MuscleGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MuscleGroupView.swift; sourceTree = "<group>"; };
 		52BEE20F2B91443C00F90F3A /* ExerciseDifficultyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDifficultyView.swift; sourceTree = "<group>"; };
 		52BEE2112B915BBD00F90F3A /* ExerciseSuggestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSuggestionView.swift; sourceTree = "<group>"; };
@@ -113,7 +115,7 @@
 				B67480EF2B8B0A9800C94876 /* Hydration.entitlements */,
 				B6ADE1792B7611AE004CA936 /* Info.plist */,
 				5246C2292B74663D00DB37E7 /* HydrationApp.swift */,
-				5246C22B2B74663D00DB37E7 /* ContentView.swift */,
+				5246C22B2B74663D00DB37E7 /* HydrationView.swift */,
 				5246C2372B74667500DB37E7 /* LocationManager.swift */,
 				52C048742B783E06001E4884 /* SideMenuView.swift */,
 				52C048762B783E19001E4884 /* SideMenuHeaderView.swift */,
@@ -170,7 +172,8 @@
 		5297316B2B9E94D7004D13FD /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				5297316A2B9E94D7004D13FD /* ProfileView.swift */,
+				5297316A2B9E94D7004D13FD /* UserView.swift */,
+				529731942B9FAD6F004D13FD /* ProfileView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -178,7 +181,7 @@
 		5297316D2B9E94D7004D13FD /* Root */ = {
 			isa = PBXGroup;
 			children = (
-				5297316C2B9E94D7004D13FD /* ContentView2.swift */,
+				5297316C2B9E94D7004D13FD /* HomeView.swift */,
 				529731732B9E94D7004D13FD /* SwiftUIApp.swift */,
 			);
 			path = Root;
@@ -303,8 +306,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5246C22C2B74663D00DB37E7 /* ContentView.swift in Sources */,
+				5246C22C2B74663D00DB37E7 /* HydrationView.swift in Sources */,
 				52C0487F2B79D79E001E4884 /* ZotFitView.swift in Sources */,
+				529731952B9FAD6F004D13FD /* ProfileView.swift in Sources */,
 				5246C22A2B74663D00DB37E7 /* HydrationApp.swift in Sources */,
 				52C048772B783E19001E4884 /* SideMenuHeaderView.swift in Sources */,
 				529731832B9E94D7004D13FD /* SwiftUIApp.swift in Sources */,
@@ -317,14 +321,14 @@
 				529731822B9E94D7004D13FD /* User.swift in Sources */,
 				5246C2382B74667500DB37E7 /* LocationManager.swift in Sources */,
 				5297317D2B9E94D7004D13FD /* SettingsRowView.swift in Sources */,
-				529731802B9E94D7004D13FD /* ProfileView.swift in Sources */,
+				529731802B9E94D7004D13FD /* UserView.swift in Sources */,
 				5297317E2B9E94D7004D13FD /* LoginView.swift in Sources */,
 				5297317F2B9E94D7004D13FD /* RegistrationView.swift in Sources */,
 				B67480EE2B8AF35E00C94876 /* SleepResultView.swift in Sources */,
 				52C0487D2B79772A001E4884 /* ZotSleepView.swift in Sources */,
 				52C048832B8AC9EE001E4884 /* ExerciseTypeView.swift in Sources */,
 				529731842B9E94D7004D13FD /* AuthViewModel.swift in Sources */,
-				529731812B9E94D7004D13FD /* ContentView2.swift in Sources */,
+				529731812B9E94D7004D13FD /* HomeView.swift in Sources */,
 				52C2BBD82B9D6A6B002DADD2 /* SleepCalcView.swift in Sources */,
 				52C048792B783E2E001E4884 /* SideMenuOptionView.swift in Sources */,
 			);

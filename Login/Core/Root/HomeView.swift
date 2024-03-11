@@ -11,8 +11,9 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 
-struct ContentView2: View{
-    @StateObject var viewModel = AuthViewModel()
+struct HomeView: View{
+//    @StateObject var viewModel = AuthViewModel()
+    @EnvironmentObject var viewModel: AuthViewModel
     
     var body: some View{
         Group{
@@ -25,8 +26,8 @@ struct ContentView2: View{
     }
 }
 
-struct ContentView2_Previews: PreviewProvider{
+struct HomeView_Previews: PreviewProvider{
     static var previews: some View{
-        ContentView2()
+        HomeView()
     }
 }

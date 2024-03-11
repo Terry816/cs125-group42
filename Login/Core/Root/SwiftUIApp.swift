@@ -14,14 +14,13 @@ import FirebaseFirestore
 @main
 struct SwiftUIApp: App {
     @StateObject var viewModel = AuthViewModel()
-    
     init(){
         FirebaseApp.configure()
     }
     
     var body: some Scene{
         WindowGroup{
-            ContentView2()
+            HomeView()
                 .environmentObject(viewModel)
         }
     }

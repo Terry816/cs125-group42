@@ -39,7 +39,7 @@ extension CLLocationCoordinate2D{
 }
 
 
-struct ContentView: View {
+struct HydrationView: View {
     @State private var sideMenu = false
     @State private var directions: [String] = []
     @State private var showDirections = false
@@ -202,9 +202,9 @@ struct ContentView: View {
 }
 
 
-struct ContentView_Previews: PreviewProvider {
+struct Hydration_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        HydrationView()
     }
 }
 
@@ -259,7 +259,7 @@ struct MapView: UIViewRepresentable {
 }
 
 
-extension ContentView{
+extension HydrationView{
     func searchPlaces(){
         let x = locations.first { $0.name == selectedLocationName }?.coordinates
         if let userLocation = CLLocationManager().location?.coordinate, let destinationCoordinates = x {
