@@ -10,7 +10,7 @@ import SwiftUI
 struct SideMenuView: View {
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [Color(red: 0, green: 0.3922, blue: 0.6431), Color.black]), startPoint: .top, endPoint: .bottom)
+            LinearGradient(gradient: Gradient(colors: [Color(red: 0, green: 0, blue: 0), Color(red: 0, green: 0, blue: 0.91)]), startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
             VStack {
                 // Header

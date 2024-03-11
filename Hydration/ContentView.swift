@@ -76,7 +76,7 @@ struct ContentView: View {
     @State private var selectedLocationName: String = ""
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 if sideMenu {
                     SideMenuView()

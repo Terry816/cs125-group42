@@ -179,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				5297316C2B9E94D7004D13FD /* ContentView2.swift */,
+				529731732B9E94D7004D13FD /* SwiftUIApp.swift */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -201,46 +202,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		529731712B9E94D7004D13FD /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
-		529731722B9E94D7004D13FD /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-				529731712B9E94D7004D13FD /* New Group */,
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
-		529731742B9E94D7004D13FD /* App */ = {
-			isa = PBXGroup;
-			children = (
-				529731722B9E94D7004D13FD /* New Group */,
-				529731732B9E94D7004D13FD /* SwiftUIApp.swift */,
-			);
-			path = App;
-			sourceTree = "<group>";
-		};
-		529731752B9E94D7004D13FD /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-				529731742B9E94D7004D13FD /* App */,
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
-		529731762B9E94D7004D13FD /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-				529731752B9E94D7004D13FD /* New Group */,
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		529731782B9E94D7004D13FD /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,7 +217,6 @@
 				529731652B9E94D7004D13FD /* Components */,
 				5297316E2B9E94D7004D13FD /* Core */,
 				529731702B9E94D7004D13FD /* Model */,
-				529731762B9E94D7004D13FD /* New Group */,
 				529731782B9E94D7004D13FD /* ViewModel */,
 			);
 			path = Login;
