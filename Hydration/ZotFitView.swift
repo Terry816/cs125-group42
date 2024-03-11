@@ -9,7 +9,7 @@ var diff = ""
 struct ZotFitView: View {
     @State var sideMenu = false
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 if sideMenu {
                     SideMenuView()
@@ -42,12 +42,11 @@ struct ZotFitView: View {
                     }
                     //Main body of app is here:
                     VStack {
-                        Spacer()
                         ExerciseTypeView()
                         Spacer()
                     }
                 }
-                .background(LinearGradient(gradient: Gradient(colors: [Color(red: 0, green: 0, blue: 0.81), Color(red: 0, green: 0, blue: 0.5)]), startPoint: .top, endPoint: .bottom))
+                .background(LinearGradient(gradient: Gradient(colors: [Color(red: 0, green: 0, blue: 0.91), Color(red: 1, green: 0, blue: 0.75)]), startPoint: .top, endPoint: .bottom))
                 .offset(x: sideMenu ? 250 : 0)
                 .onTapGesture {
                     if sideMenu {

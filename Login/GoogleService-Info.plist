@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyCb4Vq-ZngINBPbkWcTMOHuPySt7SPp6MU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>997765623622</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>simarcheema.HydrationApp12</string>
+	<key>PROJECT_ID</key>
+	<string>cs125-group42</string>
+	<key>STORAGE_BUCKET</key>
+	<string>cs125-group42.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:997765623622:ios:8fdd93d6ae132d5333ff47</string>
+</dict>
+</plist>

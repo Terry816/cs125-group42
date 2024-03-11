@@ -26,6 +26,7 @@ struct MuscleGroupView: View {
                     ZStack {
                         HStack {
                             Button(action: {
+                                
                                 withAnimation(.spring()) {
                                     sideMenu.toggle()
                                 }
@@ -54,6 +55,8 @@ struct MuscleGroupView: View {
                             ZStack {
                                 HStack {
                                     Button {
+                                        let generator = UIImpactFeedbackGenerator(style: .medium)
+                                         generator.impactOccurred()
                                         withAnimation(.spring()) {
                                             exerciseView.toggle()
                                         }
@@ -92,7 +95,7 @@ struct MuscleGroupView: View {
                                         Image("abs")
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
-                                            .frame(width: 70, height: 70)
+                                            .frame(width: 60, height: 60)
                                             .background(.white)
                                             .cornerRadius(40)
                                         Spacer()
@@ -112,9 +115,9 @@ struct MuscleGroupView: View {
                                     RoundedRectangle(cornerRadius: 40)
                                         .stroke(Color.white, lineWidth: 2)
                                 )
-                                .background(.gray)
+                                .background(Color.black.opacity(0.7))
                                 .cornerRadius(40)
-                                .padding(10)
+                                .padding(5)
                                 
                                 Spacer()
                                 
@@ -151,9 +154,10 @@ struct MuscleGroupView: View {
                                     RoundedRectangle(cornerRadius: 40)
                                         .stroke(Color.white, lineWidth: 2)
                                 )
-                                .background(.black)
+                                .background(Color.black.opacity(0.7))
                                 .cornerRadius(40)
                                 .padding(5)
+                                .padding(.top, 10)
                                 
                                 Spacer()
                                 
@@ -190,9 +194,10 @@ struct MuscleGroupView: View {
                                     RoundedRectangle(cornerRadius: 40)
                                         .stroke(Color.white, lineWidth: 2)
                                 )
-                                .background(.black)
+                                .background(Color.black.opacity(0.7))
                                 .cornerRadius(40)
                                 .padding(5)
+                                .padding(.top, 10)
                                 
                                 Spacer()
                                 
@@ -229,9 +234,10 @@ struct MuscleGroupView: View {
                                     RoundedRectangle(cornerRadius: 40)
                                         .stroke(Color.white, lineWidth: 2)
                                 )
-                                .background(.black)
+                                .background(Color.black.opacity(0.7))
                                 .cornerRadius(40)
                                 .padding(5)
+                                .padding(.top, 10)
                                 
                                 Spacer()
                                 
@@ -268,9 +274,10 @@ struct MuscleGroupView: View {
                                     RoundedRectangle(cornerRadius: 40)
                                         .stroke(Color.white, lineWidth: 2)
                                 )
-                                .background(.black)
+                                .background(Color.black.opacity(0.7))
                                 .cornerRadius(40)
                                 .padding(5)
+                                .padding(.top, 10)
                                 
                                 Spacer()
                                 
@@ -307,9 +314,10 @@ struct MuscleGroupView: View {
                                     RoundedRectangle(cornerRadius: 40)
                                         .stroke(Color.white, lineWidth: 2)
                                 )
-                                .background(.black)
+                                .background(Color.black.opacity(0.7))
                                 .cornerRadius(40)
                                 .padding(5)
+                                .padding(.top, 10)
                                 
                                 Spacer()
                                 
@@ -346,9 +354,10 @@ struct MuscleGroupView: View {
                                     RoundedRectangle(cornerRadius: 40)
                                         .stroke(Color.white, lineWidth: 2)
                                 )
-                                .background(.black)
+                                .background(Color.black.opacity(0.7))
                                 .cornerRadius(40)
                                 .padding(5)
+                                .padding(.top, 10)
                                 
                                 Spacer()
                                 
@@ -385,9 +394,10 @@ struct MuscleGroupView: View {
                                     RoundedRectangle(cornerRadius: 40)
                                         .stroke(Color.white, lineWidth: 2)
                                 )
-                                .background(.black)
+                                .background(Color.black.opacity(0.7))
                                 .cornerRadius(40)
                                 .padding(5)
+                                .padding(.top, 10)
                                 
                                 Spacer()
                                 
@@ -424,9 +434,10 @@ struct MuscleGroupView: View {
                                     RoundedRectangle(cornerRadius: 40)
                                         .stroke(Color.white, lineWidth: 2)
                                 )
-                                .background(.black)
+                                .background(Color.black.opacity(0.7))
                                 .cornerRadius(40)
                                 .padding(5)
+                                .padding(.top, 10)
                                 
                                 Spacer()
                                 
@@ -463,9 +474,10 @@ struct MuscleGroupView: View {
                                     RoundedRectangle(cornerRadius: 40)
                                         .stroke(Color.white, lineWidth: 2)
                                 )
-                                .background(.black)
+                                .background(Color.black.opacity(0.7))
                                 .cornerRadius(40)
                                 .padding(5)
+                                .padding(.top, 10)
                                 
                             }
                             .padding(.top, 20)
@@ -473,7 +485,7 @@ struct MuscleGroupView: View {
                         Spacer()
                     }
                 }
-                .background(LinearGradient(gradient: Gradient(colors: [Color(red: 0, green: 0, blue: 0.81), Color(red: 0, green: 0, blue: 0.5)]), startPoint: .top, endPoint: .bottom))
+                .background(LinearGradient(gradient: Gradient(colors: [Color(red: 0, green: 0, blue: 0.91), Color(red: 1, green: 0, blue: 0.75)]), startPoint: .top, endPoint: .bottom))
                 .offset(x: sideMenu ? 250 : 0)
                 .onTapGesture {
                     if sideMenu {

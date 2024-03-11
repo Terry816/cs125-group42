@@ -16,100 +16,19 @@ struct ExerciseTypeView: View {
             {
                 Text("Please select exercise type")
                     .font(.system(size: 24, weight: .bold))
-                    .padding(.top, 10)
+                    .padding(.top, 20)
+                    .padding(.bottom, 20)
                     .foregroundStyle(.white)
+                
                 Spacer()
+                
                 VStack {
-                    Spacer()
                     
-                    //Olympic lifting button
-                    Button {
-                        let generator = UIImpactFeedbackGenerator(style: .medium)
-                         generator.impactOccurred()
-                        //Execute Action
-                        withAnimation {
-                            exercise = "olympic_weightlifting"
-                            muscleView.toggle()
-                        }
-                    } label: {
-                        HStack {
-                            Image("workout1")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 35, height: 35)
-                                .padding(.top)
-                                .padding(.leading)
-                                .padding(.trailing)
-                                .padding(.bottom)
-//                                .background(Color(red: 0.38, green: 0.96, blue: 0.87))
-                                .background(.white)
-                                .cornerRadius(40)
-                            Spacer()
-                            Text("Olympic")
-                                .font(.system(size: 20, weight: .bold))
-                                .foregroundStyle(.white)
-                            Spacer()
-                            Image(systemName: "chevron.right") // Navigation arrow symbol
-                                .foregroundColor(.white)
-                                .font(.system(size: 20))
-                                .padding(.trailing)
-                        }
-                    }
-                    .buttonStyle(.bordered)
-                    .background(
-                                RoundedRectangle(cornerRadius: 40)
-                                    .stroke(Color.white, lineWidth: 2)
-                            )
-                    .background(.black)
-                    .cornerRadius(40)
-                    .padding()
-                    
-                    Spacer()
-                    
-                    //Powerlifting button
-                    Button {
-                        //Execute Action
-                        withAnimation {
-                            exercise = "powerlifting"
-                            muscleView.toggle()
-                        }
-                    } label: {
-                        HStack {
-                            Image("workout2")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 35, height: 35)
-                                .padding(.top)
-                                .padding(.leading)
-                                .padding(.trailing)
-                                .padding(.bottom)
-//                                .background(Color(red: 0.40, green: 0.80, blue: 0.91))
-                                .background(.white)
-                                .cornerRadius(40)
-                            Spacer()
-                            Text("Powerlifting")
-                                .font(.system(size: 20, weight: .bold))
-                                .foregroundStyle(.white)
-                            Spacer()
-                            Image(systemName: "chevron.right") // Navigation arrow symbol
-                                .foregroundColor(.white)
-                                .font(.system(size: 20))
-                                .padding(.trailing)
-                        }
-                    }
-                    .buttonStyle(.bordered)
-                    .background(
-                                RoundedRectangle(cornerRadius: 40)
-                                    .stroke(Color.white, lineWidth: 2)
-                            )
-                    .background(.black)
-                    .cornerRadius(40)
-                    .padding()
-
-                    Spacer()
                     
                     //Bodybuilding button
                     Button {
+                        let generator = UIImpactFeedbackGenerator(style: .medium)
+                         generator.impactOccurred()
                         //Execute Action
                         withAnimation {
                             exercise = "strength"
@@ -144,14 +63,15 @@ struct ExerciseTypeView: View {
                                 RoundedRectangle(cornerRadius: 40)
                                     .stroke(Color.white, lineWidth: 2)
                             )
-                    .background(.black)
+                    .background(Color.black.opacity(0.7))
                     .cornerRadius(40)
-                    .padding()
-                    
-                    Spacer()
+                    .padding(10)
+                
                     
                     //Warmup button
                     Button {
+                        let generator = UIImpactFeedbackGenerator(style: .medium)
+                         generator.impactOccurred()
                         //Execute Action
                         withAnimation {
                             exercise = "stretching"
@@ -186,14 +106,14 @@ struct ExerciseTypeView: View {
                                 RoundedRectangle(cornerRadius: 40)
                                     .stroke(Color.white, lineWidth: 2)
                             )
-                    .background(.black)
+                    .background(Color.black.opacity(0.7))
                     .cornerRadius(40)
-                    .padding()
-                    
-                    Spacer()
+                    .padding(10)
                     
                     //Cardio button
                     Button {
+                        let generator = UIImpactFeedbackGenerator(style: .medium)
+                         generator.impactOccurred()
                         //Execute Action
                         withAnimation {
                             exercise = "cardio"
@@ -228,9 +148,9 @@ struct ExerciseTypeView: View {
                                 RoundedRectangle(cornerRadius: 40)
                                     .stroke(Color.white, lineWidth: 2)
                             )
-                    .background(.black)
+                    .background(Color.black.opacity(0.7))
                     .cornerRadius(40)
-                    .padding()
+                    .padding(10)
                     
                     Spacer()
                 }

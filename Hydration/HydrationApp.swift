@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-@main
+//@main
 struct HydrationApp: App {
     var body: some Scene {
         WindowGroup {

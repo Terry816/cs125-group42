@@ -14,7 +14,7 @@ struct ExerciseSuggestionView: View {
     @State var sideMenu = false
     @State var exerciseDifficulty = false
     @State var loaded = false
-    @State var user = ""
+    @State var exercises: [Exercise] = []
     
     var body: some View {
         NavigationView {
@@ -28,6 +28,7 @@ struct ExerciseSuggestionView: View {
                     ZStack {
                         HStack {
                             Button(action: {
+                                
                                 withAnimation(.spring()) {
                                     sideMenu.toggle()
                                 }
@@ -57,6 +58,8 @@ struct ExerciseSuggestionView: View {
                             VStack {
                                 HStack {
                                     Button {
+                                        let generator = UIImpactFeedbackGenerator(style: .medium)
+                                         generator.impactOccurred()
                                         withAnimation(.spring()) {
                                             exerciseDifficulty.toggle()
                                         }
@@ -72,10 +75,42 @@ struct ExerciseSuggestionView: View {
                                 ScrollView {
                                     Spacer()
                                     if loaded {
-                                        Text(user)
-                                            .font(.system(size: 24, weight: .bold))
-                                            .padding(.top, 10)
-                                            .foregroundStyle(.white)
+                                        ForEach(exercises, id: \.name) { exercise in
+                                                VStack(alignment: .leading, spacing: 8) {
+                                                    Text(exercise.name)
+                                                        .font(.title2)
+                                                        .fontWeight(.bold)
+                                                        .foregroundColor(.white)
+
+                                                    Text("Type: \(exercise.type.capitalized)")
+                                                        .font(.headline)
+                                                        .foregroundColor(.white)
+
+                                                    Text("Difficulty: \(exercise.difficulty.capitalized)")
+                                                        .font(.headline)
+                                                        .foregroundColor(.white)
+
+                                                    Text("Muscle: \(exercise.muscle.capitalized)")
+                                                        .font(.subheadline)
+                                                        .foregroundColor(.white)
+
+                                                    Text("Equipment: \(exercise.equipment.capitalized)")
+                                                        .font(.subheadline)
+                                                        .foregroundColor(.white)
+
+                                                    Text("Instructions: \(exercise.instructions)")
+                                                        .font(.body)
+                                                        .foregroundColor(.white)
+                                                        .padding(.top, 4)
+
+                                                    Divider()
+                                                        .background(Color.white)
+                                                        .padding(.vertical, 8)
+                                                }
+                                                .padding()
+                                                .background(Color.black.opacity(0.3))
+                                                .cornerRadius(8)
+                                            }
                                     }
                                     Spacer()
                                 }
@@ -85,7 +120,7 @@ struct ExerciseSuggestionView: View {
                         }
                         .task {
                             do{
-                                user = try await getUser(muscle: muscle, etype: type, diff: difficulty)
+                                exercises = try await getUser(muscle: muscle, etype: type, diff: difficulty)
                                 loaded.toggle()
                                 
                             } catch GHError.invalidURL {
@@ -101,7 +136,7 @@ struct ExerciseSuggestionView: View {
                         Spacer()
                     }
                 }
-                .background(LinearGradient(gradient: Gradient(colors: [Color(red: 0, green: 0, blue: 0.81), Color(red: 0, green: 0, blue: 0.5)]), startPoint: .top, endPoint: .bottom))
+                .background(LinearGradient(gradient: Gradient(colors: [Color(red: 0, green: 0, blue: 0.91), Color(red: 1, green: 0, blue: 0.75)]), startPoint: .top, endPoint: .bottom))
                 .offset(x: sideMenu ? 250 : 0)
                 .onTapGesture {
                     if sideMenu {
@@ -118,8 +153,14 @@ struct ExerciseSuggestionView: View {
     }
 }
 
-func getUser(muscle: String, etype: String, diff: String) async throws -> String {
-    let endpoint = "https://api.api-ninjas.com/v1/exercises?muscle=\(muscle)&type=\(etype)&difficulty=\(diff)"
+func getUser(muscle: String, etype: String, diff: String) async throws -> [Exercise] {
+    var difficulty = diff
+    var muscle_type = muscle
+    if etype == "cardio" {
+        difficulty = ""
+        muscle_type = ""
+    }
+    let endpoint = "https://api.api-ninjas.com/v1/exercises?muscle=\(muscle_type)&type=\(etype)&difficulty=\(difficulty)"
     guard let url = URL(string: endpoint) else {
         throw GHError.invalidURL
     }
@@ -130,13 +171,23 @@ func getUser(muscle: String, etype: String, diff: String) async throws -> String
         throw GHError.invalidResponse
     }
     do {
-        if let dataString = String(data: data, encoding: .utf8) {
-            return dataString
-        } else {
-            print("Unable to convert data to string")
-        }
+        let decoder = JSONDecoder()
+        let exercises = try decoder.decode([Exercise].self, from: data)
+        // Now `exercises` is an array of `Exercise` structs, you can access each exercise's attributes
+        return exercises
+    } catch {
+        print(error)
+        // Handle or throw the error
     }
-    return ""
+//    do {
+//        if let dataString = String(data: data, encoding: .utf8) {
+//            print(dataString)
+//            return dataString
+//        } else {
+//            print("Unable to convert data to string")
+//        }
+//    }
+    return []
 }
 
 
@@ -144,6 +195,15 @@ enum GHError: Error{
     case invalidURL
     case invalidResponse
     case invalidData
+}
+
+struct Exercise: Decodable {
+    let name: String
+    let type: String
+    let muscle: String
+    let equipment: String
+    let difficulty: String
+    let instructions: String
 }
 
 

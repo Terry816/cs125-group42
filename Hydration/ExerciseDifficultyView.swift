@@ -28,6 +28,7 @@ struct ExerciseDifficultyView: View {
                     ZStack {
                         HStack {
                             Button(action: {
+                                
                                 withAnimation(.spring()) {
                                     sideMenu.toggle()
                                 }
@@ -56,6 +57,8 @@ struct ExerciseDifficultyView: View {
                             ZStack {
                                 HStack {
                                     Button {
+                                        let generator = UIImpactFeedbackGenerator(style: .medium)
+                                         generator.impactOccurred()
                                         withAnimation(.spring()) {
                                             muscleView.toggle()
                                         }
@@ -112,7 +115,7 @@ struct ExerciseDifficultyView: View {
                                     RoundedRectangle(cornerRadius: 40)
                                         .stroke(Color.white, lineWidth: 2)
                                 )
-                                .background(.black)
+                                .background(Color.black.opacity(0.7))
                                 .cornerRadius(40)
                                 .padding(10)
         
@@ -147,44 +150,10 @@ struct ExerciseDifficultyView: View {
                                     RoundedRectangle(cornerRadius: 40)
                                         .stroke(Color.white, lineWidth: 2)
                                 )
-                                .background(.black)
+                                .background(Color.black.opacity(0.7))
                                 .cornerRadius(40)
                                 .padding(10)
         
-                                Button {
-                                    //Execute Action
-                                    withAnimation {
-                                        difficulty = "expert"
-                                        exerciseSuggestion.toggle()
-                                    }
-                                    let generator = UIImpactFeedbackGenerator(style: .medium)
-                                    generator.impactOccurred()
-                                } label: {
-                                    HStack {
-                                        Image(systemName: "staroflife.circle")
-                                            .resizable()
-                                            .frame(width: 60, height: 60)
-                                            .foregroundColor(.white)
-                                        Spacer()
-                                        Text("Expert")
-                                            .font(.system(size: 20, weight: .bold))
-                                            .foregroundStyle(.white)
-                                            .padding(.bottom, 5)
-                                        Spacer()
-                                        Image(systemName: "chevron.right") // Navigation arrow symbol
-                                            .foregroundColor(.white)
-                                            .font(.system(size: 20))
-                                            .padding(.trailing)
-                                    }
-                                }
-                                .buttonStyle(.bordered)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 40)
-                                        .stroke(Color.white, lineWidth: 2)
-                                )
-                                .background(.black)
-                                .cornerRadius(40)
-                                .padding(10)
                                 
                                 Spacer()
                             }
@@ -193,7 +162,7 @@ struct ExerciseDifficultyView: View {
                         Spacer()
                     }
                 }
-                .background(LinearGradient(gradient: Gradient(colors: [Color(red: 0, green: 0, blue: 0.81), Color(red: 0, green: 0, blue: 0.5)]), startPoint: .top, endPoint: .bottom))
+                .background(LinearGradient(gradient: Gradient(colors: [Color(red: 0, green: 0, blue: 0.91), Color(red: 1, green: 0, blue: 0.75)]), startPoint: .top, endPoint: .bottom))
                 .offset(x: sideMenu ? 250 : 0)
                 .onTapGesture {
                     if sideMenu {
