@@ -25,15 +25,21 @@ class AuthViewModel: ObservableObject {
         }
     }
     
-    func signIn(withEmail email: String, password: String) async throws {
-        do {
-            let result = try await Auth.auth().signIn(withEmail: email, password: password)
-            self.userSession = result.user
-            await fetchUser()
-        } catch{
-            print("DEBUG: Failed to log in with error: \(error.localizedDescription)")
+    @Published var errorMessage: String? = nil
+
+        func signIn(withEmail email: String, password: String) async {
+            errorMessage = nil // Reset error message
+            do {
+                let result = try await Auth.auth().signIn(withEmail: email, password: password)
+                self.userSession = result.user
+                await fetchUser()
+            } catch {
+                // Update errorMessage based on the error
+                DispatchQueue.main.async {
+                    self.errorMessage = "Failed to sign in. Please check your email and password and try again."
+                }
+            }
         }
-    }
     
     func createUser(withEmail email: String, password: String, fullname: String, age: Int, gender: String, height: Int, weight: Int) async throws {
         do {
@@ -47,6 +53,7 @@ class AuthViewModel: ObservableObject {
             print("DEBUG: Failed to create user with error \(error.localizedDescription)")
         }
     }
+    
     
     func signOut(){
         do {

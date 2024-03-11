@@ -50,20 +50,22 @@ struct SleepCalcView: View {
     
     @Binding var displayTime: Date
     
+    
     var body: some View {
         VStack {
 
             
             Text("Bedtime Options")
-                .font(.system(size: 24, weight: .bold))
+                .font(.system(size: 24, weight: .bold, design: .rounded))
                 .padding()
             
 
 //            Spacer()
 
             HStack{
-                Text("To wake up refreshed at \(formattedTime(from: displayTime)), you can consider going to sleep at one of the following times:")
+                Text("To wake up refreshed at \(formattedTime(from: displayTime)), we recommend going to sleep at one of the following times:")
                     .multilineTextAlignment(.center)
+                    .font(.system(size: 18, design: .rounded))
             }
 
 //            Spacer()
@@ -237,7 +239,7 @@ struct CircularTimeView: View {
       Circle()
         .trim(from: 0.0, to: min(progress, 1.0))
         .stroke(style: StrokeStyle(lineWidth: 7, lineCap: .round, lineJoin: .round))
-        .foregroundColor(.purple)
+        .foregroundColor(progress == 1 ? Color.green : Color.yellow)
         .rotationEffect(Angle(degrees: 270.0))
         .animation(.linear, value: progress)
         
@@ -253,3 +255,4 @@ struct CircularTimeView: View {
     }
   }
 }
+

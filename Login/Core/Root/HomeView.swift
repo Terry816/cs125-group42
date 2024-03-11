@@ -12,17 +12,31 @@ import FirebaseAuth
 import FirebaseFirestore
 
 struct HomeView: View{
-//    @StateObject var viewModel = AuthViewModel()
-    @EnvironmentObject var viewModel: AuthViewModel
+    @StateObject var viewModel = AuthViewModel()
+//    @EnvironmentObject var viewModel: AuthViewModel
     
     var body: some View{
-        Group{
-            if viewModel.userSession != nil{
-                ProfileView()
-            } else{
-                LoginView()
+        ZStack {
+            VStack {
+                HStack {
+                    Spacer()
+                    Text("UniWell")
+                        .foregroundColor(.white)
+                        .font(.system(size: 30, weight: .heavy))
+                    Spacer()
+                }
+                //Main body of app is here:
+                VStack {
+                    if viewModel.userSession != nil{
+                        ProfileView()
+                    } else{
+                        LoginView()
+                    }
+                    Spacer()
+                }
             }
         }
+        .background(LinearGradient(gradient: Gradient(colors: [Color(red: 0, green: 0, blue: 0), Color(red: 0, green: 0, blue: 0.91)]), startPoint: .top, endPoint: .bottom))
     }
 }
 

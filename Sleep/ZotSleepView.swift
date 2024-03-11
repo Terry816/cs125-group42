@@ -119,8 +119,14 @@ struct ZotSleepView: View {
     @State private var inBedDuration: TimeInterval = 27000          // change minutes for in-bed
     @State private var deepSleepDuration: TimeInterval = 8928       // deep duration is hardcoded for now. need to access AppleWatch for deep data
     
+    
     @State private var bedTime: Date = Date()
     @State private var wakeTime: Date = Date()
+    
+    @State private var deepSleep: TimeInterval = 0
+    @State private var remSleep: TimeInterval = 0
+    @State private var inBedSleep: TimeInterval = 0
+    @State private var aSleep: TimeInterval = 0
     
     @State private var progress: CGFloat = 0.2
 
@@ -157,8 +163,12 @@ struct ZotSleepView: View {
             if success {
                 
                 let endDate = Date()
-                let startDate = endDate.addingTimeInterval(-1.0 * 60.0 * 60.0 * 24.0)
-                let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [])
+                let startDate = endDate.addingTimeInterval(-1.0 * 60.0 * 60.0 * 96.0)
+                let endDate2 = startDate.addingTimeInterval(-1.0 * 60.0 * 60.0 * 24.0)
+                let predicate = HKQuery.predicateForSamples(withStart: endDate2, end: startDate, options: [])
+//                let endDate = Date()
+//                let startDate = endDate.addingTimeInterval(-1.0 * 60.0 * 60.0 * 24.0)
+//                let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [])
                 
                 // Query for sleep data
                 let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
@@ -170,7 +180,7 @@ struct ZotSleepView: View {
 
 //                    var sleepEntries: [String] = []
 //                    var totalDuration: TimeInterval = 0
-                    var inBedStart: Date?
+//                    var inBedStart: Date?
                     var current: Date? = nil
                     
                     var startList: [Date] = []
@@ -191,59 +201,72 @@ struct ZotSleepView: View {
                         
                         print("Start:",startDate)
                         print("End:",endDate)
-//                        let sleepEntry = "Sleep start: \(formattedThirdTime(from: startDate)), end: \(formattedThirdTime(from: endDate))"
-//                        print(sleepEntry)
-//                        sleepEntries.append(sleepEntry)
-
-                        // Calculate the duration of each sleep session
-//                        let duration = endDate.timeIntervalSince(startDate)
-//                        totalDuration += duration
+                        
+                        if value == HKCategoryValueSleepAnalysis.asleepDeep.rawValue {
+                            print("This is deepSleep")
+                            deepSleep += endDate.timeIntervalSince(startDate)
+                        }
+                        
+                        if value == HKCategoryValueSleepAnalysis.asleepREM.rawValue {
+                            print("This is REMSleep")
+                            remSleep += endDate.timeIntervalSince(startDate)
+                        }
                         
                         if value == HKCategoryValueSleepAnalysis.inBed.rawValue {
-                            if inBedStart == nil {
-                                inBedStart = startDate
-                            }
-                        }
-                        else {
-                            if let start = inBedStart {
-//                                inBedDuration = 3600
-                                inBedDuration += endDate.timeIntervalSince(start)
-                                inBedStart = nil
-                            }
+                            print("This is inBed")
+                            print("\(formattedThirdTime(from: startDate))")
+                            print("\(formattedThirdTime(from: endDate))")
+                            inBedSleep += endDate.timeIntervalSince(startDate)
+                            print("LL:", inBedSleep)
                         }
                         
-                        // Check for deep sleep (hypothetical example)
-//                        if value == HKCategoryValueSleepAnalysis.deepSleep.rawValue {
-//                            print("This portion is deep sleep.")
-//                        }
+                        if value == HKCategoryValueSleepAnalysis.asleepUnspecified.rawValue {
+                            print("This is asleep")
+                            print("\(formattedThirdTime(from: startDate))")
+                            print("\(formattedThirdTime(from: endDate))")
+                            aSleep += endDate.timeIntervalSince(startDate)
+                        }
+                        
+//                        print("VALUE", value)
+                        
                     }
 
-                    // Update the sleepData array and totalSleepDuration
-//                    sleepData = ["Sleep start: 10:30pm, end: 6:00am"]
                     
-                    
-                    // Filter startList to only include dates equal to or after the current date
-//                    let filteredStartList = startList.filter { $0 >= current ?? Date() }
-
-                    // Filter endList to only include dates equal to or before the current date
-//                    let filteredEndList = endList.filter { $0 <= current ?? Date() }
-
+                    // startList.last - WOKE UP
+                    // endList.first - WENT TO BED
                     if let firstStartDate = startList.last, let firstEndDate = endList.first {
+                        
                         // Calculate the time interval in seconds
                         bedTime = firstStartDate
                         wakeTime = firstEndDate
                         
                         let timeIntervalInSeconds = firstEndDate.timeIntervalSince(firstStartDate)
                         totalSleepDuration = timeIntervalInSeconds
-                        inBedDuration = timeIntervalInSeconds + 1800
                         
-                    } else {
+                        if inBedDuration == 27000{
+                            inBedDuration = timeIntervalInSeconds + 840
+                        }
+                        else{
+                            inBedDuration = inBedSleep
+                        }
+                        
+                        deepSleepDuration = deepSleep
+                        
+                        
+                    }
+                    else {
                         print("Either start list or end list is empty.")
                     }
+                    
+                    
                     
                     let sleepQualityPercentage = calculateSleepQualityPercentage()
                     let numericValue: CGFloat = CGFloat(sleepQualityPercentage) // Replace with your actual numeric value
                     progress = numericValue / 100.0
+                    
+//                    inBedDuration = inBedSleep - totalSleepDuration
+                    
+                    
                     
 //                    print("Progress:", progress)
 //                    sleepData = sleepEntries
@@ -261,7 +284,7 @@ struct ZotSleepView: View {
     
     var body: some View {
         
-        NavigationView {
+        NavigationStack {
             
             ZStack {
                 
@@ -353,10 +376,10 @@ struct ZotSleepView: View {
                             //--------------------------------------------------------
                             // Circle Progress Bar for SLEEP QUALITY
                             VStack {
-                                Text("Quality")
+                                Text("Sleep Score")
                                     .padding()
                                     .padding(.top, -7)
-                                    .font(.system(size: 18, weight: .bold, design: .rounded))
+                                    .font(.system(size: 16, weight: .bold, design: .rounded))
 
 //                                    .frame(width: 110, height: 40)
                                 CircularProgressView(progress: progress)
@@ -383,7 +406,7 @@ struct ZotSleepView: View {
                             // Right box
                             VStack(alignment: .leading) {
                                 Text("Duration")
-                                    .font(.system(size: 18, weight: .bold, design: .rounded))
+                                    .font(.system(size: 16, weight: .bold, design: .rounded))
                                     .padding(.bottom, 4)
 //                                    .frame(width: 100, height: 50)
                                     
@@ -431,7 +454,7 @@ struct ZotSleepView: View {
                         VStack(alignment: .leading) {
                             
                             Text("Sleep Information")
-                                .font(.system(size: 18, weight: .bold, design: .rounded))
+                                .font(.system(size: 16, weight: .bold, design: .rounded))
                                 .padding(.bottom, 15)
                             
                             HStack{
@@ -440,7 +463,7 @@ struct ZotSleepView: View {
                                     
 
                                 VStack{
-                                    Text("---")
+                                    Text(deepSleep == 0 ? "---" : "\(formattedSecondTime(from: deepSleep))")
                                         .font(.system(size: 18)) // Adjust the size as needed
 
                                     Text("Deep Sleep")
@@ -454,7 +477,7 @@ struct ZotSleepView: View {
                                     .padding(.horizontal,10)
                                 
                                 VStack{
-                                    Text("---")
+                                    Text(deepSleep == 0 ? "---" : "\(formattedSecondTime(from: remSleep))")
                                         .font(.system(size: 18))
 
                                     Text("Fell asleep")
@@ -522,10 +545,12 @@ struct ZotSleepView: View {
                         NavigationLink(destination: SleepResultView()) {
                             Text("Calculate Sleep Time")
                                 .padding()
-                                .background(Color(hue: 1.0, saturation: 0.591, brightness: 0.87))
+                                .background(Color(red: 0, green: 0.3922, blue: 0.6431))
                                 .foregroundColor(.white)
                                 .cornerRadius(10)
+                                .font(.system(size: 20, weight: .bold, design: .rounded))
                         }
+                        
                         Spacer()
                     }
                     .padding(.top)

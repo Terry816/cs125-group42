@@ -57,37 +57,49 @@ struct SleepResultView: View {
                     
                     VStack {
                         
+                        Spacer()
+                        
                         VStack {
                             Spacer()
                             Text("When do you want to wake up?")
-                                .font(.system(size: 20, weight: .bold))
-    
+                                .font(.system(size: 20, weight: .bold, design: .rounded))
+                            
                             //Main content goes here
                             DatePicker("Select Time", selection: $selectedTime, displayedComponents: .hourAndMinute)
-                                            .datePickerStyle(.wheel)
-                                            .labelsHidden()
-                                            .onChange(of: selectedTime) { oldvalue, newValue in
-                                                displayTime = newValue
-                                            }
-    
+                                .datePickerStyle(.wheel)
+                                .labelsHidden()
+                                .onChange(of: selectedTime) { oldvalue, newValue in
+                                    displayTime = newValue
+                                }
+ 
                             Spacer()
                         }
                         
-                        NavigationLink(destination: SleepCalcView(displayTime: $displayTime)) {
-                            Text("Confirm Time: \(formattedTime(from:displayTime))")
-                                .padding()
-                                .background(Color.blue)
-                                .foregroundColor(.white)
-                                .cornerRadius(10)
-                        }
-
-                        HStack{
+                        
+                        VStack{
+                            NavigationLink(destination: SleepCalcView(displayTime: $displayTime)) {
+                                Text("Confirm Time: \(formattedTime(from:displayTime))")
+                                    .padding()
+//                                    .background(Color.blue)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(10)
+                                    .font(.system(size: 20, weight: .bold, design: .rounded))
+                                    .background(Color(red: 0, green: 0.3922, blue: 0.6431))
+                                    .cornerRadius(10)
+                            }
                             Spacer()
                         }
-                        .padding(.top)
-                        .padding(.bottom)
-                        .background(Color(red: 0, green: 0.3922, blue: 0.6431))
+                        .padding(.top, 30)
+                        
+                        
+//                        HStack{
+//                            Spacer()
+//                        }
+//                        .padding(.top)
+//                        .padding(.bottom)
+//                        .background(Color(red: 0, green: 0.3922, blue: 0.6431))
                     }
+                    .padding(.top, 100)
                 }
                 .offset(x: sideMenu ? 300 : 0)
             }
