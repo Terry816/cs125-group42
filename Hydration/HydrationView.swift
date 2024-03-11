@@ -41,6 +41,7 @@ extension CLLocationCoordinate2D{
 
 struct HydrationView: View {
     @State private var sideMenu = false
+    @State private var waterView = false
     @State private var directions: [String] = []
     @State private var showDirections = false
     @State private var showMapView: Bool = false
@@ -81,7 +82,7 @@ struct HydrationView: View {
                 if sideMenu {
                     SideMenuView()
                 }
-                
+                NavigationLink(destination: HydrationStatsView(), isActive: $waterView) {}
                 VStack {
                         Map(position: $camera){
                             UserAnnotation()
@@ -142,12 +143,25 @@ struct HydrationView: View {
                                             Text("ZotWater")
                                                 .foregroundColor(.white)
                                                 .font(.system(size: 30, weight: .heavy))
-                                            Spacer()
                                         }
-                                        .frame(height: 50)
                                         Spacer()
+                                        
+                                    }
+                                    HStack {
+                                        Spacer()
+                                        Button(action: {
+                                            withAnimation(.spring()) {
+                                                waterView.toggle()
+                                            }
+                                        }) {
+                                            Image(systemName: "drop.circle")
+                                                .resizable()
+                                                .frame(width: 30, height: 30)
+                                                .foregroundColor(.white)
+                                        }.padding(.trailing)
                                     }
                                 }
+                                .padding(.bottom)
                             }
                             .background(Color(red: 0, green: 0.3922, blue: 0.6431))
                         }
