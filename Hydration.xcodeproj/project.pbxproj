@@ -42,6 +42,7 @@
 		52C0487B2B783E61001E4884 /* SideMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C0487A2B783E61001E4884 /* SideMenuViewModel.swift */; };
 		52C0487F2B79D79E001E4884 /* ZotFitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C0487E2B79D79E001E4884 /* ZotFitView.swift */; };
 		52C048832B8AC9EE001E4884 /* ExerciseTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C048822B8AC9EE001E4884 /* ExerciseTypeView.swift */; };
+		B691E3232BA1150B003C4233 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B691E3222BA1150B003C4233 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +78,7 @@
 		52C0487E2B79D79E001E4884 /* ZotFitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZotFitView.swift; sourceTree = "<group>"; };
 		52C048822B8AC9EE001E4884 /* ExerciseTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTypeView.swift; sourceTree = "<group>"; };
 		B67480EF2B8B0A9800C94876 /* Hydration.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hydration.entitlements; sourceTree = "<group>"; };
+		B691E3222BA1150B003C4233 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		B6ADE1792B7611AE004CA936 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,6 +101,7 @@
 		5246C21D2B74663D00DB37E7 = {
 			isa = PBXGroup;
 			children = (
+				B691E3222BA1150B003C4233 /* Launch Screen.storyboard */,
 				5246C22D2B74663E00DB37E7 /* Assets.xcassets */,
 				5297319C2B9FB623004D13FD /* Sleep */,
 				5297319B2B9FB5F2004D13FD /* SideMenu */,
@@ -325,6 +328,7 @@
 			files = (
 				5246C2312B74663E00DB37E7 /* Preview Assets.xcassets in Resources */,
 				5246C22E2B74663E00DB37E7 /* Assets.xcassets in Resources */,
+				B691E3232BA1150B003C4233 /* Launch Screen.storyboard in Resources */,
 				529731932B9E994A004D13FD /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
