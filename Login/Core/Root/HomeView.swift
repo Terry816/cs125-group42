@@ -16,23 +16,25 @@ struct HomeView: View{
     
     var body: some View{
         if viewModel.userSession == nil {
-            ZStack {
-                VStack {
-                    HStack {
-                        Spacer()
-                        Text("UniWell")
-                            .foregroundColor(.white)
-                            .font(.system(size: 30, weight: .heavy))
-                        Spacer()
-                    }
-                    //Main body of app is here:
+            NavigationStack {
+                ZStack {
                     VStack {
-                        LoginView()
-                        Spacer()
+                        HStack {
+                            Spacer()
+                            Text("UniWell")
+                                .foregroundColor(.white)
+                                .font(.system(size: 30, weight: .heavy))
+                            Spacer()
+                        }
+                        //Main body of app is here:
+                        VStack {
+                            LoginView()
+                            Spacer()
+                        }
                     }
                 }
+                .background(LinearGradient(gradient: Gradient(colors: [Color(red: 0, green: 0, blue: 0), Color(red: 0, green: 0, blue: 0.91)]), startPoint: .top, endPoint: .bottom))
             }
-            .background(LinearGradient(gradient: Gradient(colors: [Color(red: 0, green: 0, blue: 0), Color(red: 0, green: 0, blue: 0.91)]), startPoint: .top, endPoint: .bottom))
         }
         else {
             ProfileView()
