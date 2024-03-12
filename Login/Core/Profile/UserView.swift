@@ -115,6 +115,16 @@ struct UserView: View {
                         }
                     }
                     
+                    Section("Activity Level"){
+                        Button{
+                            print("Activity Level")
+                        } label: {
+                            SettingsRowView(imageName: "figure.run",
+                                            title: user.activity,
+                                            tintColor: .black)
+                        }
+                    }
+                    
                     Section("Account"){
                         Button{
                             viewModel.signOut()

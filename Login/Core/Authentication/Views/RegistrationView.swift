@@ -17,13 +17,38 @@ struct RegistrationView: View {
     @State private var gender = ""
     @State private var height = 0
     @State private var weight = 0
-    
+    @State private var selectedActivityLevel: ActivityLevel = .sedentary
+
     @State private var isPickerPresented: Bool = false
     @State private var isPickerPresentedheight: Bool = false
     @State private var isPickerPresentedweight: Bool = false
 
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var viewModel: AuthViewModel
+    
+    enum ActivityLevel: Double, CaseIterable, Identifiable {
+        case sedentary = 1.0
+        case lightlyActive = 1.3
+        case moderatelyActive = 1.6
+        case veryActive = 2.0
+
+        var id: Double { self.rawValue }
+
+        var activityDescription: String {
+            switch self {
+            case .sedentary:
+                return "Sedentary"
+            case .lightlyActive:
+                return "Lightly Active"
+            case .moderatelyActive:
+                return "Moderately Active"
+            case .veryActive:
+                return "Very Active"
+            }
+        }
+    }
+    
+    
     
     var body: some View {
         ScrollView{
@@ -104,6 +129,23 @@ struct RegistrationView: View {
                         Divider()
                     }
                     
+                    //activity level
+                    VStack(spacing: 0){
+                        Text("Enter your Activity Level")
+                            .foregroundColor(Color(.darkGray))
+                            .fontWeight(.semibold)
+                            .font(.footnote)
+                        
+                        Picker("Select Activity Level", selection: $selectedActivityLevel) {
+                            ForEach(ActivityLevel.allCases) { level in
+                                Text(level.activityDescription).tag(level)
+                            }
+                        }
+                        .pickerStyle(MenuPickerStyle())
+                        .padding()
+                        
+                    }
+                    
                     InputView(text: $email,
                               title: "Email Address",
                               placeholder: "name@example.com")
@@ -150,8 +192,8 @@ struct RegistrationView: View {
                                                        age: age,
                                                        gender: gender,
                                                        height: height,
-                                                       weight:weight)
-                    }
+                                                       weight:weight,
+                                                       activity: selectedActivityLevel.activityDescription)}
                 } label: {
                     HStack {
                         Text("SIGN UP")
