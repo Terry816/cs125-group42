@@ -12,8 +12,8 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     
-//    @EnvironmentObject var viewModel: AuthViewModel
-    @StateObject var viewModel = AuthViewModel()
+    @EnvironmentObject var viewModel: AuthViewModel
+//    @StateObject var viewModel = AuthViewModel()
     
     var body: some View{
         ZStack {

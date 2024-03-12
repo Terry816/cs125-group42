@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct SideMenuView: View {
+    
+    @EnvironmentObject var viewModel: AuthViewModel
+    
     var body: some View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [Color(red: 0, green: 0, blue: 0), Color(red: 0, green: 0, blue: 0.91)]), startPoint: .top, endPoint: .bottom)
@@ -21,6 +24,7 @@ struct SideMenuView: View {
                     NavigationLink(destination: option.destination.navigationBarBackButtonHidden(true), label: {
                         SideMenuOptionView(viewModel: option)
                     })
+                    .environmentObject(viewModel)
                 }
                 Spacer()
             }
@@ -30,5 +34,5 @@ struct SideMenuView: View {
 }
 
 #Preview {
-    SideMenuView()
+    SideMenuView().environmentObject(AuthViewModel())
 }

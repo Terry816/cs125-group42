@@ -15,7 +15,7 @@ struct UserView: View {
     var body: some View {
         NavigationStack {
             if let user = viewModel.currentUser {
-                //        let user = User.MOCK_USER
+//                        let user = User.MOCK_USER
                 List{
                     Section{
                         HStack{
@@ -138,7 +138,7 @@ struct UserView: View {
 struct UserView_Previews: PreviewProvider {
 
     static var previews: some View {
-        UserView()
+        UserView().environmentObject(AuthViewModel())
     }
 }
 

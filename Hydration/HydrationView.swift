@@ -40,6 +40,7 @@ extension CLLocationCoordinate2D{
 
 
 struct HydrationView: View {
+    @EnvironmentObject var viewModel: AuthViewModel
     @State private var sideMenu = false
     @State private var waterView = false
     @State private var directions: [String] = []
@@ -49,7 +50,6 @@ struct HydrationView: View {
     @State private var isSatelliteView: Bool = false
     @State private var showAlert = false
     @State private var getDirections = false
-
     @State private var routeDisplaying = false
     @State private var route: MKRoute?
     @State private var routeDestination: MKMapItem?
@@ -99,6 +99,11 @@ struct HydrationView: View {
                                         showAlert = true
                                         selectedLocationName = location.name
                                         print("Selected Location Name in onTapGesture: \(selectedLocationName)")
+                                        print(viewModel.currentUser?.weight as Any)
+                                        print(viewModel.currentUser?.age)
+                                        print(viewModel.currentUser?.email)
+                                        print(viewModel.currentUser?.fullname)
+                                        print(viewModel.currentUser?.height)
                                     }
                                     .sheet(isPresented: $showAlert) {
                                         CustomAlertView(showAlert: $showAlert, getDirections: $getDirections, water_name: selectedLocationName)
