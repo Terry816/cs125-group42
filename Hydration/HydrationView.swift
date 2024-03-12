@@ -82,7 +82,7 @@ struct HydrationView: View {
                 if sideMenu {
                     SideMenuView()
                 }
-                NavigationLink(destination: HydrationStatsView(), isActive: $waterView) {}
+                NavigationLink(destination: HydrationStatsView().navigationBarBackButtonHidden(true), isActive: $waterView) {}
                 VStack {
                         Map(position: $camera){
                             UserAnnotation()
@@ -180,7 +180,7 @@ struct HydrationView: View {
                                 Button{
                                     isSatelliteView.toggle()
                                 } label:{
-                                    Label("Toogle", systemImage: "square.fill")
+                                    Label("Toggle", systemImage: "square.fill")
                                 }
                                 .foregroundColor(.white)
                                 .font(.system(size: 18, weight: .bold))
