@@ -99,11 +99,7 @@ struct HydrationView: View {
                                         showAlert = true
                                         selectedLocationName = location.name
                                         print("Selected Location Name in onTapGesture: \(selectedLocationName)")
-                                        print(viewModel.currentUser?.weight as Any)
-                                        print(viewModel.currentUser?.age)
-                                        print(viewModel.currentUser?.email)
-                                        print(viewModel.currentUser?.fullname)
-                                        print(viewModel.currentUser?.height)
+
                                     }
                                     .sheet(isPresented: $showAlert) {
                                         CustomAlertView(showAlert: $showAlert, getDirections: $getDirections, water_name: selectedLocationName)
