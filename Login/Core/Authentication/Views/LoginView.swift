@@ -13,7 +13,6 @@ struct LoginView: View {
     @State private var password = ""
     
     @EnvironmentObject var viewModel: AuthViewModel
-//    @StateObject var viewModel = AuthViewModel()
     
     var body: some View{
         ZStack {
@@ -25,21 +24,43 @@ struct LoginView: View {
                     .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 120)
                     .padding(.vertical, 32)
                 
+                
+                HStack {
+                    Text("Login")
+                        .foregroundColor(.white)
+                        .font(.system(size: 35, weight: .heavy))
+                        .padding(.leading, 40)
+                        .padding(.bottom, 5)
+                    Spacer()
+                }
+                
+                HStack {
+                    Text("Please sign in to continue.")
+                        .foregroundColor(.gray)
+                        .font(.system(size: 20))
+                        .padding(.leading, 40)
+                        .padding(.bottom, 30)
+                    Spacer()
+                }
+                
                 //form fields
                 VStack(spacing: 24){
                     InputView(text: $email,
-                              title: "Email Address",
-                              placeholder: "name@example.com")
+                              title: "EMAIL",
+                              placeholder: "name@example.com",
+                              image: "envelope")
                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
                     
                     InputView(text: $password,
-                              title: "Password",
+                              title: "PASSWORD",
                               placeholder: "Enter your password",
+                              image: "lock",
+                              width: 20,
+                              height: 25,
                               isSecure: true)
                 }
-                .background(.white)
-                .padding(.horizontal)
-                .padding(.top, 12)
+//                .padding(.horizontal)
+//                .background(.white)
                 
                 if let errorMessage = viewModel.errorMessage {
                                     Text(errorMessage)
@@ -53,18 +74,16 @@ struct LoginView: View {
                             await viewModel.signIn(withEmail: email, password: password)
                         }
                     } label: {
-                        HStack {
-                            Text("SIGN IN")
-                                .fontWeight(.semibold)
-                            Image(systemName: "arrow.right")
-                        }
-                        .foregroundColor(.white)
-                        .frame(width: UIScreen.main.bounds.width - 32, height: 48)
+                        Text("LOGIN")
+                            .fontWeight(.semibold)
+                            .foregroundColor(.black)
+                            .padding(.horizontal, 100)
+                            .padding(.vertical, 30)
                     }
-                    .background(Color(.systemBlue))
+                    .background(.white)
                     .disabled(!formIsValid)
-                    .opacity(formIsValid ? 1.0 : 0.5)
-                    .cornerRadius(10)
+                    .opacity(formIsValid ? 1.0 : 0.7)
+                    .cornerRadius(100)
                     .padding(.top, 24)
                     
                     Spacer()
@@ -80,9 +99,10 @@ struct LoginView: View {
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     }
                     .foregroundColor(.white)
-                    .font(.system(size:14))
+                    .font(.system(size:16))
                 }
             }
+//            .background(LinearGradient(gradient: Gradient(colors: [Color(red: 0.14, green: 0.14, blue: 0.14), .black]), startPoint: .top, endPoint: .bottom))
             .background(.clear)
         }
     }
@@ -102,5 +122,6 @@ extension LoginView: AuthenticationFormProtocol {
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
+            .environmentObject(AuthViewModel())
     }
 }

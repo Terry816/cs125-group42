@@ -17,7 +17,7 @@ struct ExerciseSuggestionView: View {
     @State var exercises: [Exercise] = []
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 if sideMenu {
                     SideMenuView()
@@ -108,7 +108,7 @@ struct ExerciseSuggestionView: View {
                                                         .padding(.vertical, 8)
                                                 }
                                                 .padding()
-                                                .background(Color.black.opacity(0.3))
+                                                .background(Color.white.opacity(0.1))
                                                 .cornerRadius(8)
                                             }
                                     }
@@ -136,7 +136,7 @@ struct ExerciseSuggestionView: View {
                         Spacer()
                     }
                 }
-                .background(LinearGradient(gradient: Gradient(colors: [Color(red: 0, green: 0, blue: 0.91), Color(red: 1, green: 0, blue: 0.75)]), startPoint: .top, endPoint: .bottom))
+                .background(LinearGradient(gradient: Gradient(colors: [Color(red: 0.14, green: 0.14, blue: 0.14), .black]), startPoint: .top, endPoint: .bottom))
                 .offset(x: sideMenu ? 250 : 0)
                 .onTapGesture {
                     if sideMenu {

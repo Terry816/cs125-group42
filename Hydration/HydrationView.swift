@@ -164,7 +164,7 @@ struct HydrationView: View {
                                 }
                                 .padding(.bottom)
                             }
-                            .background(Color(red: 0, green: 0.3922, blue: 0.6431))
+                            .background(Color(red: 0.14, green: 0.14, blue: 0.14))
                         }
                         //-------------------------------------------------
                         .safeAreaInset(edge: .bottom){
@@ -189,7 +189,7 @@ struct HydrationView: View {
                             }
                             .padding(.top)
                             .padding(.bottom)
-                            .background(Color(red: 0, green: 0.3922, blue: 0.6431))
+                            .background(.black)
                         }
                         //-------------------------------------------------
                         .onChange(of: getDirections, {oldValue, newValue in
@@ -219,7 +219,7 @@ struct HydrationView: View {
 
 struct Hydration_Previews: PreviewProvider {
     static var previews: some View {
-        HydrationView()
+        HydrationView().environmentObject(AuthViewModel())
     }
 }
 

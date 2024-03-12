@@ -62,12 +62,14 @@ struct RegistrationView: View {
                 VStack(spacing: 24){
                     
                     InputView(text: $fullname,
-                              title: "Full Name",
-                              placeholder: "Enter your Full Name")
+                              title: "NAME",
+                              placeholder: "Enter your Full Name",
+                              image: "person")
                     
                     InputView(text: $gender,
-                              title: "Gender",
-                              placeholder: "Enter your Gender")
+                              title: "GENDER",
+                              placeholder: "Enter your Gender",
+                              image: "person")
                     
                     //age
                     VStack (alignment: .leading, spacing: 0){
@@ -148,12 +150,15 @@ struct RegistrationView: View {
                     
                     InputView(text: $email,
                               title: "Email Address",
-                              placeholder: "name@example.com")
+                              placeholder: "name@example.com",
+                              image: "envelope"
+                    )
                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
                     
                     InputView(text: $password,
                               title: "Password",
                               placeholder: "Enter your password",
+                              image: "lock",
                               isSecure: true)
                     
                     
@@ -161,6 +166,7 @@ struct RegistrationView: View {
                         InputView(text: $confirmPassword,
                                   title: "Confirm Password",
                                   placeholder: "Confirm your password",
+                                  image: "lock",
                                   isSecure: true)
                         
                         if !password.isEmpty && !confirmPassword.isEmpty{
@@ -223,6 +229,7 @@ struct RegistrationView: View {
                 }
                 
             }
+            .background(.black)
         }
     }
     

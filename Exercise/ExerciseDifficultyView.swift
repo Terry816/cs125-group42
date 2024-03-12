@@ -17,7 +17,7 @@ struct ExerciseDifficultyView: View {
     @State var exerciseSuggestion = false
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 if sideMenu {
                     SideMenuView()
@@ -94,7 +94,7 @@ struct ExerciseDifficultyView: View {
                                     generator.impactOccurred()
                                 } label: {
                                     HStack {
-                                        Image(systemName: "staroflife.circle")
+                                        Image(systemName: "1.circle.fill")
                                             .resizable()
                                             .frame(width: 60, height: 60)
                                             .foregroundColor(.white)
@@ -129,7 +129,7 @@ struct ExerciseDifficultyView: View {
                                     generator.impactOccurred()
                                 } label: {
                                     HStack {
-                                        Image(systemName: "staroflife.circle")
+                                        Image(systemName: "2.circle.fill")
                                             .resizable()
                                             .frame(width: 60, height: 60)
                                             .foregroundColor(.white)
@@ -162,7 +162,7 @@ struct ExerciseDifficultyView: View {
                         Spacer()
                     }
                 }
-                .background(LinearGradient(gradient: Gradient(colors: [Color(red: 0, green: 0, blue: 0.91), Color(red: 1, green: 0, blue: 0.75)]), startPoint: .top, endPoint: .bottom))
+                .background(LinearGradient(gradient: Gradient(colors: [Color(red: 0.14, green: 0.14, blue: 0.14), .black]), startPoint: .top, endPoint: .bottom))
                 .offset(x: sideMenu ? 250 : 0)
                 .onTapGesture {
                     if sideMenu {
@@ -179,6 +179,10 @@ struct ExerciseDifficultyView: View {
     }
 }
 
-//#Preview {
-//    ExerciseDifficultyView()
-//}
+struct ExerciseDifficulty_Preview: PreviewProvider {
+    @State static var type = ""
+    @State static var muscle = ""
+    static var previews: some View {
+        ExerciseDifficultyView(type: $type, muscle: $muscle)
+    }
+}
