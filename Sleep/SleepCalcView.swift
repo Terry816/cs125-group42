@@ -248,7 +248,7 @@ struct CircularTimeView: View {
                 .foregroundColor(.black)
                 .font(.system(size: 18, weight: .bold, design: .rounded))
             
-            Text("Cycle")
+            Text("Cycles")
                 .foregroundColor(.black)
                 .font(.system(size: 18, weight: .bold, design: .rounded))
         }

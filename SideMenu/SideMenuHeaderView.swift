@@ -14,7 +14,7 @@ struct SideMenuHeaderView: View {
         
         HStack {
             VStack(alignment: .leading, content: {
-                Text("Zot Health")
+                Text("ZotHealth")
                     .font(.system(size: 36, weight: .bold))
                     .foregroundColor(.white)
                 Spacer()

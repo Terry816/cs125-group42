@@ -53,7 +53,7 @@ struct SleepResultView: View {
                             }
                         }
                     }
-                    .background(Color(red: 0, green: 0.3922, blue: 0.6431))
+                    .background(Color(red: 0.14, green: 0.14, blue: 0.14))
                     
                     VStack {
                         
@@ -84,7 +84,7 @@ struct SleepResultView: View {
                                     .foregroundColor(.white)
                                     .cornerRadius(10)
                                     .font(.system(size: 20, weight: .bold, design: .rounded))
-                                    .background(Color(red: 0, green: 0.3922, blue: 0.6431))
+                                    .background(Color(red: 0.14, green: 0.14, blue: 0.14))
                                     .cornerRadius(10)
                             }
                             Spacer()

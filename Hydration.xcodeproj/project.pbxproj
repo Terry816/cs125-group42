@@ -43,6 +43,7 @@
 		52C0487F2B79D79E001E4884 /* ZotFitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C0487E2B79D79E001E4884 /* ZotFitView.swift */; };
 		52C048832B8AC9EE001E4884 /* ExerciseTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C048822B8AC9EE001E4884 /* ExerciseTypeView.swift */; };
 		B691E3232BA1150B003C4233 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B691E3222BA1150B003C4233 /* Launch Screen.storyboard */; };
+		DEE21C162BA126260083CA46 /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE21C152BA126260083CA46 /* ScoreView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +81,7 @@
 		B67480EF2B8B0A9800C94876 /* Hydration.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hydration.entitlements; sourceTree = "<group>"; };
 		B691E3222BA1150B003C4233 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		B6ADE1792B7611AE004CA936 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		DEE21C152BA126260083CA46 /* ScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 				5297319A2B9FB52F004D13FD /* Exercise */,
 				5297317B2B9E94D7004D13FD /* Login */,
 				5246C2282B74663D00DB37E7 /* Hydration */,
+				DEE21C142BA125F20083CA46 /* ZotScore */,
 				5246C2272B74663D00DB37E7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -258,6 +261,14 @@
 			path = Sleep;
 			sourceTree = "<group>";
 		};
+		DEE21C142BA125F20083CA46 /* ZotScore */ = {
+			isa = PBXGroup;
+			children = (
+				DEE21C152BA126260083CA46 /* ScoreView.swift */,
+			);
+			path = ZotScore;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -365,6 +376,7 @@
 				52C048832B8AC9EE001E4884 /* ExerciseTypeView.swift in Sources */,
 				529731842B9E94D7004D13FD /* AuthViewModel.swift in Sources */,
 				529731812B9E94D7004D13FD /* HomeView.swift in Sources */,
+				DEE21C162BA126260083CA46 /* ScoreView.swift in Sources */,
 				5262AF682B9FC71600007EAC /* ZotSleepView.swift in Sources */,
 				52C048792B783E2E001E4884 /* SideMenuOptionView.swift in Sources */,
 			);
@@ -502,7 +514,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Hydration/Preview Content\"";
-				DEVELOPMENT_TEAM = F5UQSVF4PB;
+				DEVELOPMENT_TEAM = S7R8UZ4629;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Hydration/Info.plist;
@@ -513,6 +525,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -521,7 +534,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = simarcheema.HydrationApp12;
+				PRODUCT_BUNDLE_IDENTIFIER = simarcheema.HydrationApp56;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -540,7 +553,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Hydration/Preview Content\"";
-				DEVELOPMENT_TEAM = F5UQSVF4PB;
+				DEVELOPMENT_TEAM = S7R8UZ4629;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Hydration/Info.plist;
@@ -551,6 +564,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -559,7 +573,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = simarcheema.HydrationApp12;
+				PRODUCT_BUNDLE_IDENTIFIER = simarcheema.HydrationApp56;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

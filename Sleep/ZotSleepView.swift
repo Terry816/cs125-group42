@@ -91,7 +91,7 @@ func formattedCurrentDay() -> String {
 
 func formattedCurrentDate() -> String {
     let formatter = DateFormatter()
-    formatter.dateFormat = "d MMMM yyyy"
+    formatter.dateFormat = "MMMM d, yyyy"
     return formatter.string(from: Date())
    }
 
@@ -162,13 +162,13 @@ struct ZotSleepView: View {
             
             if success {
                 
-                let endDate = Date()
-                let startDate = endDate.addingTimeInterval(-1.0 * 60.0 * 60.0 * 96.0)
-                let endDate2 = startDate.addingTimeInterval(-1.0 * 60.0 * 60.0 * 24.0)
-                let predicate = HKQuery.predicateForSamples(withStart: endDate2, end: startDate, options: [])
 //                let endDate = Date()
-//                let startDate = endDate.addingTimeInterval(-1.0 * 60.0 * 60.0 * 24.0)
-//                let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [])
+//                let startDate = endDate.addingTimeInterval(-1.0 * 60.0 * 60.0 * 96.0)
+//                let endDate2 = startDate.addingTimeInterval(-1.0 * 60.0 * 60.0 * 24.0)
+//                let predicate = HKQuery.predicateForSamples(withStart: endDate2, end: startDate, options: [])
+                let endDate = Date()
+                let startDate = endDate.addingTimeInterval(-1.0 * 60.0 * 60.0 * 24.0)
+                let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [])
                 
                 // Query for sleep data
                 let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
@@ -343,7 +343,7 @@ struct ZotSleepView: View {
                             //--------------------------------------------------------
                         }
                     }
-                    .background(Color(red: 0, green: 0.3922, blue: 0.6431))
+                    .background(Color(red: 0.14, green: 0.14, blue: 0.14))
                     
 
 
@@ -355,7 +355,7 @@ struct ZotSleepView: View {
                         // Date
                         VStack(alignment: .leading) {
                             // Display the current day
-                            Text("Today, \(formattedCurrentDay())")
+                            Text("\(formattedCurrentDay()),")
                                 .font(.system(size: 30, weight: .heavy, design: .rounded))
 //                                .bold()
 //                                .font(.system(size: 30)) // Adjust size
@@ -545,7 +545,7 @@ struct ZotSleepView: View {
                         NavigationLink(destination: SleepResultView()) {
                             Text("Calculate Sleep Time")
                                 .padding()
-                                .background(Color(red: 0, green: 0.3922, blue: 0.6431))
+                                .background(Color(red: 0.14, green: 0.14, blue: 0.14))
                                 .foregroundColor(.white)
                                 .cornerRadius(10)
                                 .font(.system(size: 20, weight: .bold, design: .rounded))
@@ -592,12 +592,18 @@ struct CircularProgressView: View {
         .foregroundColor(.black)
 
       // Foreground or the actual progress bar
-      Circle()
-        .trim(from: 0.0, to: min(progress, 1.0))
-        .stroke(style: StrokeStyle(lineWidth: 20, lineCap: .round, lineJoin: .round))
-        .foregroundColor(.black)
-        .rotationEffect(Angle(degrees: 270.0))
-        .animation(.linear, value: progress)
+//      Circle()
+//        .trim(from: 0.0, to: min(progress, 1.0))
+//        .stroke(style: StrokeStyle(lineWidth: 20, lineCap: .round, lineJoin: .round))
+//        .foregroundColor(.black)
+//        .rotationEffect(Angle(degrees: 270.0))
+//        .animation(.linear, value: progress)
+        Circle()
+            .trim(from: 0.0, to: min(progress, 1.0))
+            .stroke(style: StrokeStyle(lineWidth: 20, lineCap: .round, lineJoin: .round))
+            .foregroundColor(progress >= 0.8 ? .green : (progress >= 0.45 ? .yellow : .red))
+            .rotationEffect(Angle(degrees: 270.0))
+            .animation(.linear, value: progress)
         
         Text("\(Int(progress * 100))%")
             .foregroundColor(.black)
