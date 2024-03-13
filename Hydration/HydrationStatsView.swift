@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Foundation
 
 
 let activityLevelValues: [String: Double] = [
@@ -19,6 +20,7 @@ let activityLevelValues: [String: Double] = [
 struct HydrationStatsView: View {
     @State var sideMenu = false
     @State var hydrationView = false
+    
     
     @EnvironmentObject var viewModel: AuthViewModel
     
@@ -50,8 +52,6 @@ struct HydrationStatsView: View {
 
     
     var body: some View {
-        
-
         
         NavigationStack {
             ZStack {
@@ -144,7 +144,7 @@ struct HydrationStatsView: View {
                                     .padding(.bottom, 10)
                                     .font(.system(size: 16, weight: .bold, design: .rounded))
                                 
-                                CircularWaterProgressView(progress: 1)
+                                CircularWaterProgressView(progress: 0.5)
                                     .frame(width: 115, height: 105)
                                     .padding(.top, 13)
                                     .padding(.bottom, 30)
@@ -154,6 +154,79 @@ struct HydrationStatsView: View {
                             .background(.white.opacity(0.2))
                             .cornerRadius(10)
                             .shadow(radius: 2)
+                            
+                            
+                            //------------------------------------------------------
+                            
+//                            VStack{
+//        //                        Spacer()
+//                                NavigationLink(destination: WaterMeasure()) {
+//                                    Text("Add Drink")
+//                                        .padding()
+//                                        .background(Color(red: 0.14, green: 0.14, blue: 0.14))
+//                                        .foregroundColor(.white)
+//                                        .cornerRadius(10)
+//                                        .font(.system(size: 20, weight: .bold, design: .rounded))
+//                                }
+//                                
+//                                Spacer()
+//                            }
+                            
+                            
+                            
+                            //------------------------------------------------------
+                            // A standard glass contains 8 ounces, and one gallon equals sixteen glasses (each glass has 8 ounces) of water. For daily intake, the general guidelines recommend around 8 glasses or 64 ounces for water.
+                            Spacer()
+
+                            VStack {
+                                HStack(spacing: 0) {
+                                    HStack{
+                                       Text("0")
+                                           .font(.system(size: 40, weight: .bold, design: .rounded))
+                                           .padding(.top, 10)
+                                           .padding(.bottom, 10)
+                                           .foregroundColor(Color.blue)
+   
+                                       VStack{
+                                           Text("Now")
+                                               .font(.system(size: 16, weight: .bold, design: .rounded))
+                                               .padding(.bottom, -15)
+                                           
+                                           Text("OZ")
+                                               .font(.system(size: 30, weight: .bold, design: .rounded))
+                                               .foregroundColor(Color.blue)
+                                       }
+                                   }
+                                    .frame(minWidth: 0, maxWidth: .infinity)
+                                    .background(Color.white)
+                                    .border(Color.gray, width: 1)
+
+                                    HStack{
+                                       Text(String(wt))
+                                            .font(.system(size: 40, weight: .bold, design: .rounded))
+                                            .padding(.top, 10)
+                                            .padding(.bottom, 10)
+                                            .foregroundColor(Color.blue)
+   
+                                       VStack{
+                                           Text("Goal")
+                                               .font(.system(size: 16, weight: .bold, design: .rounded))
+                                               .padding(.bottom, -15)
+                                           
+                                           Text("OZ")
+                                               .font(.system(size: 30, weight: .bold, design: .rounded))
+                                               .foregroundColor(Color.blue)
+                                       }
+                                   }
+                                    .frame(minWidth: 0, maxWidth: .infinity)
+                                    .background(Color.white)
+                                    .border(Color.gray, width: 1)
+                                }
+                                    .frame(minWidth: 0, maxWidth: .infinity)
+
+                            }
+                            //------------------------------------------------------
+                            
                         }
                         .padding(.top, 25)
                         Spacer()
@@ -222,6 +295,35 @@ func waterc (weightInLbs: Double, activityLevel: String) -> Double{
     return w * activityMultiplier
     
 }
+
+//func displayWaterBottle(filledPercentage: Double) {
+//    let totalRows = 20
+//    let filledRows = Int((filledPercentage / 100.0) * Double(totalRows))
+//
+//    for row in 1...totalRows {
+//        if row <= filledRows {
+//            let percentage = Double(row) / Double(totalRows) * 100.0
+//            let fillSymbol = getFillSymbol(percentage: percentage)
+//            print(fillSymbol)
+//        } else {
+//            print("")
+//        }
+//    }
+//    print("")
+//}
+//
+//func getFillSymbol(percentage: Double) -> String {
+//    if percentage <= 25.0 {
+//        return "▓"
+//    } else if percentage <= 50.0 {
+//        return "▓▓"
+//    } else if percentage <= 75.0 {
+//        return "▓▓▓"
+//    } else {
+//        return "▓▓▓▓"
+//    }
+//}
+
 
 
 #Preview {
