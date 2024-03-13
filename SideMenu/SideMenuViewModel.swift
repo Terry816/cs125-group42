@@ -13,6 +13,7 @@ enum SideMenuViewModel: Int, CaseIterable {
     case ZotWater
     case ZotSleep
     case ZotFit
+    case Score
     
     var title : String {
         switch self {
@@ -20,6 +21,8 @@ enum SideMenuViewModel: Int, CaseIterable {
         case .ZotWater: return "ZotWater"
         case .ZotSleep: return "ZotSleep"
         case .ZotFit: return "ZotFit"
+        case .Score: return "Score"
+        
         }
     }
     var imageName: String {
@@ -28,6 +31,8 @@ enum SideMenuViewModel: Int, CaseIterable {
         case .ZotWater: return "drop.circle"
         case .ZotSleep: return "bed.double.circle"
         case .ZotFit: return "heart.circle"
+        case .Score: return "heart.circle"
+            
         }
     }
     var destination: some View {
@@ -36,6 +41,7 @@ enum SideMenuViewModel: Int, CaseIterable {
         case .ZotWater: return AnyView(HydrationView())
         case .ZotSleep: return AnyView(ZotSleepView())
         case .ZotFit: return AnyView(ZotFitView())
+        case .Score: return AnyView(ScoreView())
         }
     }
 }
