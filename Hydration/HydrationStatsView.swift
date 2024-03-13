@@ -21,8 +21,16 @@ struct HydrationStatsView: View {
     @State var hydrationView = false
     
     @EnvironmentObject var viewModel: AuthViewModel
+    
+    //to test comment the below and also comment out on UserView file
     let user = User.MOCK_USER
-
+    
+    var wt : Double {
+        return waterc(weightInLbs: Double(user.weight), activityLevel: user.activity)
+    }
+    
+    
+    //comment this out if you are testing and want to see preview
 //    var user: User? {
 //        viewModel.currentUser
 //    }
@@ -34,9 +42,9 @@ struct HydrationStatsView: View {
 //        return 0.0
 //    }
 
-    var goal: Double {
-            return calculateWaterIntake(weightInLbs: Double(user.weight), heightInCm: Double(user.height), age: user.age, gender: user.gender, activityLevel: user.activity)
-        }
+//    var goal: Double {
+//            return calculateWaterIntake(weightInLbs: Double(user.weight), heightInCm: Double(user.height), age: user.age, gender: user.gender, activityLevel: user.activity)
+//        }
     
     
 
@@ -117,7 +125,9 @@ struct HydrationStatsView: View {
                                     .padding(.top, 10)
                                     .font(.system(size: 20, weight: .bold, design: .rounded))
                                 VStack{
-                                    Text(String(goal))
+//                                    Text(String(goal))
+                                    Text(String(wt))
+                                    Text("ounces")
                                 }
                                 .font(.system(size: 24, weight: .bold, design: .rounded))
                                 .padding(.trailing)
@@ -166,37 +176,53 @@ struct HydrationStatsView: View {
     }
 }
 
-func calculateWaterIntake(weightInLbs: Double, heightInCm: Double, age: Int, gender: String, activityLevel: String) -> Double {
-    let lbsToKgConversionFactor: Double = 2.20462
-    let baseWaterIntakePerKg: Double = 0.03
+
+//this is the incorrect functoin from gpt
+//func calculateWaterIntake(weightInLbs: Double, heightInCm: Double, age: Int, gender: String, activityLevel: String) -> Double {
+//    let lbsToKgConversionFactor: Double = 2.20462
+//    let litersToFluidOuncesConversionFactor: Double = 33.814
+//    let baseWaterIntakePerKg: Double = 0.03
+//    
+//    // Convert weight to kilograms
+//    let weightInKg = weightInLbs / lbsToKgConversionFactor
+//    
+//    // Convert height to meters
+//    let heightInMeters = heightInCm / 100.0
+//    
+//    // Retrieve activity multiplier from dictionary
+//    let activityMultiplier: Double = activityLevelValues[activityLevel] ?? 1.0
+//
+//    // Calculate BMR based on gender
+//    var bmr: Double
+//    if gender == "Male" {
+//        bmr = 10 * weightInKg + 6.25 * heightInMeters - 5 * Double(age) + 5
+//    } else if gender.lowercased() == "female" {
+//        bmr = 10 * weightInKg + 6.25 * heightInMeters - 5 * Double(age) - 161
+//    } else {
+//        bmr = 10 * weightInKg + 6.25 * heightInMeters - 5 * Double(age) + 2
+//    }
+//
+//    // Adjust BMR based on activity level
+//    let totalDailyEnergyExpenditure = bmr * activityMultiplier
+//
+//    // Calculate water intake in liters
+//    let waterIntakeLiters = totalDailyEnergyExpenditure * baseWaterIntakePerKg
+//
+//    // Convert water intake to fluid ounces
+//    let waterIntakeFluidOunces = waterIntakeLiters * litersToFluidOuncesConversionFactor
+//
+//    return waterIntakeFluidOunces
+//}
+
+func waterc (weightInLbs: Double, activityLevel: String) -> Double{
+    let w = weightInLbs / 2
     
-    // Convert weight to kilograms
-    let weightInKg = weightInLbs / lbsToKgConversionFactor
+    let activityMultiplier: Double = activityLevelValues[activityLevel] ?? 1.0
     
-    // Convert height to meters
-    let heightInMeters = heightInCm / 100.0
+    return w * activityMultiplier
     
-    // Retrieve activity multiplier from dictionary
-    let activityMultiplier: Double = activityLevelValues[activityLevel.lowercased()] ?? 1.0
-
-    // Calculate BMR based on gender
-    var bmr: Double
-    if gender.lowercased() == "male" {
-        bmr = 10 * weightInKg + 6.25 * heightInMeters - 5 * Double(age) + 5
-    } else if gender.lowercased() == "female" {
-        bmr = 10 * weightInKg + 6.25 * heightInMeters - 5 * Double(age) - 161
-    } else {
-        bmr = 10 * weightInKg + 6.25 * heightInMeters - 5 * Double(age) + 2
-    }
-
-    // Adjust BMR based on activity level
-    let totalDailyEnergyExpenditure = bmr * activityMultiplier
-
-    // Calculate water intake based on total daily energy expenditure
-    let waterIntake = totalDailyEnergyExpenditure * baseWaterIntakePerKg
-
-    return waterIntake
 }
+
 
 #Preview {
     HydrationStatsView()
