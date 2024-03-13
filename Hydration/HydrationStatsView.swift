@@ -7,10 +7,44 @@
 
 import SwiftUI
 
+
+let activityLevelValues: [String: Double] = [
+    "Sedentary": 1.0,
+    "Lightly Active": 1.3,
+    "Moderately Active": 1.6,
+    "Very Active": 2.0
+]
+
+
 struct HydrationStatsView: View {
     @State var sideMenu = false
     @State var hydrationView = false
+    
+    @EnvironmentObject var viewModel: AuthViewModel
+    let user = User.MOCK_USER
+
+//    var user: User? {
+//        viewModel.currentUser
+//    }
+    
+//    var goal: Double {
+//        if let user = user {
+//            return calculateWaterIntake(weightInLbs: Double(user.weight), heightInCm: Double(user.height), age: user.age, gender: user.gender, activityLevel: user.activity)
+//        }
+//        return 0.0
+//    }
+
+    var goal: Double {
+            return calculateWaterIntake(weightInLbs: Double(user.weight), heightInCm: Double(user.height), age: user.age, gender: user.gender, activityLevel: user.activity)
+        }
+    
+    
+
+    
     var body: some View {
+        
+
+        
         NavigationStack {
             ZStack {
                 if sideMenu {
@@ -43,6 +77,9 @@ struct HydrationStatsView: View {
                             }
                         }
                     }
+                    
+
+                    
                     //Main body of app is here:
                     VStack {
                         ZStack {
@@ -80,8 +117,7 @@ struct HydrationStatsView: View {
                                     .padding(.top, 10)
                                     .font(.system(size: 20, weight: .bold, design: .rounded))
                                 VStack{
-                                    Text("168")
-                                    Text("ounces")
+                                    Text(String(goal))
                                 }
                                 .font(.system(size: 24, weight: .bold, design: .rounded))
                                 .padding(.trailing)
@@ -97,7 +133,7 @@ struct HydrationStatsView: View {
                                     .padding()
                                     .padding(.bottom, 10)
                                     .font(.system(size: 16, weight: .bold, design: .rounded))
-
+                                
                                 CircularWaterProgressView(progress: 1)
                                     .frame(width: 115, height: 105)
                                     .padding(.top, 13)
@@ -130,6 +166,37 @@ struct HydrationStatsView: View {
     }
 }
 
+func calculateWaterIntake(weightInLbs: Double, heightInCm: Double, age: Int, gender: String, activityLevel: String) -> Double {
+    let lbsToKgConversionFactor: Double = 2.20462
+    let baseWaterIntakePerKg: Double = 0.03
+    
+    // Convert weight to kilograms
+    let weightInKg = weightInLbs / lbsToKgConversionFactor
+    
+    // Convert height to meters
+    let heightInMeters = heightInCm / 100.0
+    
+    // Retrieve activity multiplier from dictionary
+    let activityMultiplier: Double = activityLevelValues[activityLevel.lowercased()] ?? 1.0
+
+    // Calculate BMR based on gender
+    var bmr: Double
+    if gender.lowercased() == "male" {
+        bmr = 10 * weightInKg + 6.25 * heightInMeters - 5 * Double(age) + 5
+    } else if gender.lowercased() == "female" {
+        bmr = 10 * weightInKg + 6.25 * heightInMeters - 5 * Double(age) - 161
+    } else {
+        bmr = 10 * weightInKg + 6.25 * heightInMeters - 5 * Double(age) + 2
+    }
+
+    // Adjust BMR based on activity level
+    let totalDailyEnergyExpenditure = bmr * activityMultiplier
+
+    // Calculate water intake based on total daily energy expenditure
+    let waterIntake = totalDailyEnergyExpenditure * baseWaterIntakePerKg
+
+    return waterIntake
+}
 
 #Preview {
     HydrationStatsView()

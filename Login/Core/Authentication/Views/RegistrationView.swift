@@ -199,7 +199,11 @@ struct RegistrationView: View {
                                                        gender: gender,
                                                        height: height,
                                                        weight:weight,
-                                                       activity: selectedActivityLevel.activityDescription)}
+                                                       activity: selectedActivityLevel.activityDescription,
+                                                       water: 0,
+                                                       pictures: []
+            )}
+                    
                 } label: {
                     HStack {
                         Text("SIGN UP")

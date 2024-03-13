@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SideMenuHeaderView: View {
+    @EnvironmentObject var viewModel: AuthViewModel
+
     var body: some View {
         
         HStack {

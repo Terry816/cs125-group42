@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct SideMenuView: View {
-    
+    @EnvironmentObject var viewModel: AuthViewModel
+
     var body: some View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [Color(red: 0, green: 0, blue: 0), Color(red: 0, green: 0, blue: 0.91)]), startPoint: .top, endPoint: .bottom)

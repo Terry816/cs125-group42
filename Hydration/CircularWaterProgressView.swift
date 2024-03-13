@@ -11,6 +11,7 @@ struct CircularWaterProgressView: View {
   let progress: CGFloat
 
   var body: some View {
+      
     ZStack {
       // Background for the progress bar
       Circle()
