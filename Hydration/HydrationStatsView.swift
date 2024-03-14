@@ -189,7 +189,7 @@ struct HydrationStatsView: View {
                             HStack{
                                 //Add water button
                                 Spacer()
-                                NavigationLink(destination: WaterIntakeView()) {
+                                NavigationLink(destination: WaterIntakeView().navigationBarBackButtonHidden()) {
                                     Text("Add Water")
                                         .foregroundColor(.white)
                                         .padding()

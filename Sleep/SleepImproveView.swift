@@ -63,7 +63,7 @@ struct SleepImproveView: View {
                             HStack{
                                 Spacer()
                                 VStack {
-                                    Text("ZotSleep")
+                                    Text("Sleep")
                                         .foregroundColor(.white)
                                         .font(.system(size: 30, weight: .bold))
                                     Spacer()

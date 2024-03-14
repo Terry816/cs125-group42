@@ -25,5 +25,5 @@ struct SideMenuOptionView: View {
 }
 
 #Preview {
-    SideMenuOptionView(viewModel: .ZotWater)
+    SideMenuOptionView(viewModel: .Water)
 }

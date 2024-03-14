@@ -43,7 +43,7 @@ struct ExerciseSuggestionView: View {
                         }
                         HStack {
                             Spacer()
-                            Text("ZotFit")
+                            Text("Fitness")
                                 .foregroundColor(.white)
                                 .font(.system(size: 30, weight: .heavy))
                             Spacer()
