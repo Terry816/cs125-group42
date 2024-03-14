@@ -59,12 +59,6 @@ struct UserView: View {
                                     .font(.system(size: 16))
                                     .foregroundColor(.white)
                                 
-                                Text("Upload photo")
-                                    .foregroundColor(.blue)
-                                    .padding(.top, 5)
-                                    .onTapGesture {
-                                        self.isShowingImagePicker = true
-                                    }
                             }
                             Spacer()
                         }

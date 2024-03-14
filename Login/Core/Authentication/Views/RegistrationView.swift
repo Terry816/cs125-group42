@@ -13,18 +13,17 @@ struct RegistrationView: View {
     @State private var fullname = ""
     @State private var password = ""
     @State private var confirmPassword = ""
-    @State private var age: Int = 0
-    @State private var gender = ""
-    @State private var height = 0
-    @State private var weight = 0
+    @State private var age = ""
+    @State private var height = ""
+    @State private var weight = ""
     @State private var selectedActivityLevel: ActivityLevel = .sedentary
+    @State private var selectedGender: Gender = .male // Default selection
     @State private var loginView = false
-    @State private var isPickerPresented: Bool = false
-    @State private var isPickerPresentedheight: Bool = false
-    @State private var isPickerPresentedweight: Bool = false
+    @State private var ageText: String = ""
 
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var viewModel: AuthViewModel
+    
     
     enum ActivityLevel: Double, CaseIterable, Identifiable {
         case sedentary = 1.0
@@ -47,6 +46,15 @@ struct RegistrationView: View {
             }
         }
     }
+    
+    enum Gender: String, CaseIterable, Identifiable {
+        case male = "Male"
+        case female = "Female"
+        case other = "Other"
+        
+        var id: String { self.rawValue }
+    }
+
     
     var body: some View {
         NavigationStack {
@@ -86,89 +94,162 @@ struct RegistrationView: View {
                                   width: 20,
                                   height: 20)
                         
-                        InputView(text: $gender,
-                                  title: "GENDER",
-                                  placeholder: "Enter your Gender",
-                                  image: "person",
-                                  width: 20,
-                                  height: 20)
+                        
+                        //gender
+                        VStack(spacing: 20) {
+                            HStack{
+                                Image(systemName: "figure.dress.line.vertical.figure")
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
+                                    .foregroundColor(.white)
+                                    .padding(.leading, 5)
+                                    .padding(.trailing, 5)
+                                Text("Select your gender")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                            }
+                             Picker("Gender", selection: $selectedGender) {
+                                 ForEach(Gender.allCases) { gender in
+                                     Text(gender.rawValue).tag(gender)
+                                 }
+                             }
+                             .pickerStyle(SegmentedPickerStyle()) // Use SegmentedPickerStyle for a compact look
+
+                             // Display the selection for demonstration
+                             Text("Selected gender: \(selectedGender.rawValue)")
+                                .foregroundColor(.white)
+                         } .padding()
+                            .background(Color.white.opacity(0.1))
+                            .cornerRadius(25)
+                            .padding(.horizontal)
+                        
+                        
                         //age
-                        VStack (alignment: .leading, spacing: 0){
-                            
-                            Text("Enter your age")
-                                .foregroundColor(Color(.darkGray))
-                                .fontWeight(.semibold)
-                                .font(.footnote)
-                            
-                            TextField("Select your Age", value: $age, formatter: NumberFormatter())
+
+                        VStack(spacing: 20) {
+                            HStack {
+                                Image(systemName: "calendar")
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
+                                    .foregroundColor(.white)
+                                    .padding(.leading, 5)
+                                    .padding(.trailing, 5)
+                                Text("Enter your age")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                            }
+
+                            TextField("Select your Age", text: $age)
+                                .keyboardType(.numberPad) // Suggest numeric keyboard
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .padding()
-                                .frame(width: 150)
-                                .onTapGesture {
-                                    isPickerPresented = true
+                                .padding(.vertical, 8) // Reduced vertical padding for a skinnier look
+                                .frame(height: 40) // Explicit height for skinniness
+                                .background(Color.white)
+                                .cornerRadius(8)
+                                .onChange(of: age) { newValue in
+                                    // Keep only numbers in the input
+                                    age = newValue.filter { $0.isNumber }
                                 }
-                                .sheet(isPresented: $isPickerPresented) {
-                                    agePickerView()
-                                }
-                            Divider()
                         }
+                        .padding()
+                        .background(Color.white.opacity(0.1))
+                        .cornerRadius(25)
+                        .padding(.horizontal)
+
                         
-                        //height
-                        VStack (alignment: .leading, spacing: 0){
-                            Text("Enter your Height (cm)")
-                                .foregroundColor(Color(.darkGray))
-                                .fontWeight(.semibold)
-                                .font(.footnote)
-                            
-                            TextField("Select your Height (cm)", value: $height, formatter: NumberFormatter())
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .padding()
-                                .frame(width: 150)
-                                .onTapGesture {
-                                    isPickerPresentedheight = true
+                        //Height
+                        VStack(spacing: 20) {
+                            VStack(spacing: 20) {
+                                HStack {
+                                    Image(systemName: "ruler")
+                                        .resizable()
+                                        .frame(width: 30, height: 20)
+                                        .foregroundColor(.white)
+                                        .padding(.leading, 5)
+                                        .padding(.trailing, 5)
+                                    Text("Enter your height (cm)")
+                                        .font(.headline)
+                                        .foregroundColor(.white)
                                 }
-                                .sheet(isPresented: $isPickerPresentedheight) {
-                                    heightPickerView()
+
+                                TextField("Enter your Height", text: $height)
+                                    .keyboardType(.numberPad)
+                                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                                    .padding(.vertical, 8)
+                                    .frame(height: 40)
+                                    .background(Color.white)
+                                    .cornerRadius(8)
+                                    .onChange(of: height) { newValue in
+                                        height = newValue.filter { $0.isNumber }
+                                    }
+                            }
+                            .padding()
+                            .background(Color.white.opacity(0.1))
+                            .cornerRadius(25)
+                            .padding(.horizontal)
+
+                            // Weight input
+                            VStack(spacing: 20) {
+                                HStack {
+                                    Image(systemName: "scalemass")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                        .foregroundColor(.white)
+                                        .padding(.leading, 5)
+                                        .padding(.trailing, 5)
+                                    Text("Enter your weight (lbs)")
+                                        .font(.headline)
+                                        .foregroundColor(.white)
                                 }
-                            Divider()
+
+                                TextField("Enter your Weight", text: $weight)
+                                    .keyboardType(.numberPad)
+                                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                                    .padding(.vertical, 8)
+                                    .frame(height: 40)
+                                    .background(Color.white)
+                                    .cornerRadius(8)
+                                    .onChange(of: weight) { newValue in
+                                        weight = newValue.filter { $0.isNumber }
+                                    }
+                            }
+                            .padding()
+                            .background(Color.white.opacity(0.1))
+                            .cornerRadius(25)
+                            .padding(.horizontal)
                         }
+
                         
-                        //weight
-                        VStack (alignment: .leading, spacing: 0){
-                            Text("Enter your Weight (lbs)")
-                                .foregroundColor(Color(.darkGray))
-                                .fontWeight(.semibold)
-                                .font(.footnote)
-                            
-                            TextField("Select your Weight (lbs)", value: $weight, formatter: NumberFormatter())
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .padding()
-                                .frame(width: 150)
-                                .onTapGesture {
-                                    isPickerPresentedweight = true
-                                }
-                                .sheet(isPresented: $isPickerPresentedweight) {
-                                    weightPickerView()
-                                }
-                            Divider()
-                        }
-                        
-                        //activity level
-                        VStack(spacing: 0){
-                            Text("Enter your Activity Level")
-                                .foregroundColor(Color(.darkGray))
-                                .fontWeight(.semibold)
-                                .font(.footnote)
-                            
-                            Picker("Select Activity Level", selection: $selectedActivityLevel) {
+                                            
+                        // Activity Level
+                        VStack(spacing: 20) {
+                            HStack {
+                                Image(systemName: "figure.walk")
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
+                                    .foregroundColor(.white)
+                                    .padding(.leading, 5)
+                                    .padding(.trailing, 5)
+                                Text("Select your Activity Level")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                            }
+                            Picker("Activity Level", selection: $selectedActivityLevel) {
                                 ForEach(ActivityLevel.allCases) { level in
                                     Text(level.activityDescription).tag(level)
                                 }
                             }
-                            .pickerStyle(MenuPickerStyle())
-                            .padding()
-                            
+                            Text("Selected Activity Level: \(selectedActivityLevel.activityDescription)")
+                               .foregroundColor(.white)
                         }
+                        .padding()
+                        .background(Color.white.opacity(0.1))
+                        .cornerRadius(25)
+                        .padding(.horizontal)
+
+
+                        
+                        
                         
                         InputView(text: $email,
                                   title: "Email Address",
@@ -217,10 +298,10 @@ struct RegistrationView: View {
                             try await viewModel.createUser(withEmail: email,
                                                            password: password,
                                                            fullname: fullname,
-                                                           age: age,
-                                                           gender: gender,
-                                                           height: height,
-                                                           weight:weight,
+                                                           age: Int(age) ?? 0,
+                                                           gender: selectedGender.rawValue,
+                                                           height: Int(height) ?? 0,
+                                                           weight: Int(weight) ?? 0,
                                                            activity: selectedActivityLevel.activityDescription,
                                                            water: 0,
                                                            pictures: []
@@ -261,73 +342,6 @@ struct RegistrationView: View {
     }
     
     
-    func agePickerView() -> some View {
-        return VStack {
-            Text("Select your Age")
-                .font(.headline)
-                .padding()
-
-            Picker("Age", selection: $age) {
-                ForEach(1...100, id: \.self) { value in
-                    Text("\(value)")
-                }
-            }
-            .pickerStyle(WheelPickerStyle())
-            .labelsHidden()
-            .padding()
-
-            Button("Done") {
-                isPickerPresented = false
-            }
-            .padding()
-        }
-        
-    }
-    
-    func heightPickerView() -> some View {
-        return VStack {
-            Text("Select your Height (cm)")
-                .font(.headline)
-                .padding()
-            
-            Picker("Height", selection: $height) {
-                ForEach(1...300, id: \.self) { value in
-                    Text("\(value)")
-                }
-            }
-            .pickerStyle(WheelPickerStyle())
-            .labelsHidden()
-            .padding()
-            
-            Button("Done") {
-                isPickerPresentedheight = false
-            }
-            .padding()
-        }
-    }
-    
-    func weightPickerView() -> some View {
-        return VStack {
-            Text("Select your weight (lbs)")
-                .font(.headline)
-                .padding()
-            
-            Picker("Weight", selection: $weight) {
-                ForEach(1...500, id: \.self) { value in
-                    Text("\(value)")
-                }
-            }
-            .pickerStyle(WheelPickerStyle())
-            .labelsHidden()
-            .padding()
-            
-            Button("Done") {
-                isPickerPresentedweight = false
-            }
-            .padding()
-        }
-    }
-    
 }
 
 // Authentication Protocol
@@ -338,9 +352,12 @@ extension RegistrationView: AuthenticationFormProtocol {
         && !password.isEmpty
         && password.count > 5
         && confirmPassword == password
-        && age != 0
-        && height != 0
-        && weight != 0
+        && Int(age) != 0
+        && age != ""
+        && height != ""
+        && weight != ""
+        && Int(height) != 0
+        && Int(weight) != 0
         && !fullname.isEmpty
     }
 }
