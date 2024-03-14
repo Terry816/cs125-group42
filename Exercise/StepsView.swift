@@ -13,7 +13,7 @@ struct StepsView: View {
     @State var sideMenu = false
     @State var fitView = false
     @State private var steps_day = 0.0
-    @State private var steps_week = 1.0
+    @State private var steps_week = 0.0
     @State private var goal = 10000.0
     @State private var isAuthorized = false
     
@@ -74,7 +74,7 @@ struct StepsView: View {
                     let totalSteps = samples.reduce(0, {$0 + $1.quantity.doubleValue(for: HKUnit.count())})
                     steps_day = totalSteps
                     
-                    let transferStep = Int(steps_day / goal)
+                    let transferStep = Int(steps_week / goal)
                     DataModel.fitPercent = transferStep
                     
                 }

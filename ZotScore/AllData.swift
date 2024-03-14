@@ -9,9 +9,9 @@ import Foundation
 
 
 struct DataModel {
-    static var sleepPercent: Int = 20
-    static var fitPercent: Int = 40
-    static var waterPercent: Int = 80
+    static var sleepPercent: Int = 100
+    static var fitPercent: Int = 100
+    static var waterPercent: Int = 100
 }
 
 
