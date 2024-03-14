@@ -21,6 +21,7 @@
 		527F674F2BA27D8200193CC7 /* SleepCalcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527F674A2BA27D8200193CC7 /* SleepCalcView.swift */; };
 		527F67532BA294F500193CC7 /* AllData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527F67522BA294F500193CC7 /* AllData.swift */; };
 		527F67552BA2950400193CC7 /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527F67542BA2950400193CC7 /* ScoreView.swift */; };
+		527F67572BA2F04D00193CC7 /* StepsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527F67562BA2F04D00193CC7 /* StepsView.swift */; };
 		5297317C2B9E94D7004D13FD /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529731632B9E94D7004D13FD /* InputView.swift */; };
 		5297317D2B9E94D7004D13FD /* SettingsRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529731642B9E94D7004D13FD /* SettingsRowView.swift */; };
 		5297317E2B9E94D7004D13FD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529731662B9E94D7004D13FD /* LoginView.swift */; };
@@ -66,6 +67,7 @@
 		527F674A2BA27D8200193CC7 /* SleepCalcView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SleepCalcView.swift; sourceTree = "<group>"; };
 		527F67522BA294F500193CC7 /* AllData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllData.swift; sourceTree = "<group>"; };
 		527F67542BA2950400193CC7 /* ScoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
+		527F67562BA2F04D00193CC7 /* StepsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsView.swift; sourceTree = "<group>"; };
 		529731632B9E94D7004D13FD /* InputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		529731642B9E94D7004D13FD /* SettingsRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsRowView.swift; sourceTree = "<group>"; };
 		529731662B9E94D7004D13FD /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 		5297319A2B9FB52F004D13FD /* Exercise */ = {
 			isa = PBXGroup;
 			children = (
+				527F67562BA2F04D00193CC7 /* StepsView.swift */,
 				52C0487E2B79D79E001E4884 /* ZotFitView.swift */,
 				52C048822B8AC9EE001E4884 /* ExerciseTypeView.swift */,
 				52BEE20D2B904EFE00F90F3A /* MuscleGroupView.swift */,
@@ -371,6 +374,7 @@
 				527F674E2BA27D8200193CC7 /* SleepImproveView.swift in Sources */,
 				5246C22A2B74663D00DB37E7 /* HydrationApp.swift in Sources */,
 				52C048772B783E19001E4884 /* SideMenuHeaderView.swift in Sources */,
+				527F67572BA2F04D00193CC7 /* StepsView.swift in Sources */,
 				529731832B9E94D7004D13FD /* SwiftUIApp.swift in Sources */,
 				52C0487B2B783E61001E4884 /* SideMenuViewModel.swift in Sources */,
 				5297317C2B9E94D7004D13FD /* InputView.swift in Sources */,

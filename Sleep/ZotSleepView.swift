@@ -31,12 +31,11 @@ struct ZotSleepView: View {
     @State private var sleepData: [String] = [] // Store sleep data here
     @State private var totalSleepDuration: TimeInterval = 0
     @State private var inBedDuration: TimeInterval = 27000          // change minutes for in-bed
-    @State private var deepSleepDuration: TimeInterval = 8928       // deep duration is hardcoded for now. need to access AppleWatch for deep data
+    @State private var deepSleepDuration: TimeInterval = 8928      // deep duration is hardcoded for now. need to access AppleWatch for deep data
     
     
     @State private var bedTime: Date = Date()
     @State private var wakeTime: Date = Date()
-    
     @State private var deepSleep: TimeInterval = 0
     @State private var remSleep: TimeInterval = 0
     @State private var inBedSleep: TimeInterval = 0
@@ -75,11 +74,6 @@ struct ZotSleepView: View {
         healthStore.requestAuthorization(toShare: nil, read: [sleepType]) { (success, error) in
             
             if success {
-                
-//                let endDate = Date()
-//                let startDate = endDate.addingTimeInterval(-1.0 * 60.0 * 60.0 * 96.0)
-//                let endDate2 = startDate.addingTimeInterval(-1.0 * 60.0 * 60.0 * 24.0)
-//                let predicate = HKQuery.predicateForSamples(withStart: endDate2, end: startDate, options: [])
                 let endDate = Date()
                 let startDate = endDate.addingTimeInterval(-1.0 * 60.0 * 60.0 * 24.0)
                 let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [])
