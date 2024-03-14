@@ -19,6 +19,8 @@
 		527F674D2BA27D8200193CC7 /* ZotSleepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527F67482BA27D8200193CC7 /* ZotSleepView.swift */; };
 		527F674E2BA27D8200193CC7 /* SleepImproveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527F67492BA27D8200193CC7 /* SleepImproveView.swift */; };
 		527F674F2BA27D8200193CC7 /* SleepCalcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527F674A2BA27D8200193CC7 /* SleepCalcView.swift */; };
+		527F67532BA294F500193CC7 /* AllData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527F67522BA294F500193CC7 /* AllData.swift */; };
+		527F67552BA2950400193CC7 /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527F67542BA2950400193CC7 /* ScoreView.swift */; };
 		5297317C2B9E94D7004D13FD /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529731632B9E94D7004D13FD /* InputView.swift */; };
 		5297317D2B9E94D7004D13FD /* SettingsRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529731642B9E94D7004D13FD /* SettingsRowView.swift */; };
 		5297317E2B9E94D7004D13FD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529731662B9E94D7004D13FD /* LoginView.swift */; };
@@ -46,7 +48,6 @@
 		52C048832B8AC9EE001E4884 /* ExerciseTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C048822B8AC9EE001E4884 /* ExerciseTypeView.swift */; };
 		B691E3232BA1150B003C4233 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B691E3222BA1150B003C4233 /* Launch Screen.storyboard */; };
 		DED7A72A2BA264610033309C /* WaterIntakeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED7A7292BA264610033309C /* WaterIntakeView.swift */; };
-		DEE21C162BA126260083CA46 /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE21C152BA126260083CA46 /* ScoreView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,8 @@
 		527F67482BA27D8200193CC7 /* ZotSleepView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZotSleepView.swift; sourceTree = "<group>"; };
 		527F67492BA27D8200193CC7 /* SleepImproveView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SleepImproveView.swift; sourceTree = "<group>"; };
 		527F674A2BA27D8200193CC7 /* SleepCalcView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SleepCalcView.swift; sourceTree = "<group>"; };
+		527F67522BA294F500193CC7 /* AllData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllData.swift; sourceTree = "<group>"; };
+		527F67542BA2950400193CC7 /* ScoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
 		529731632B9E94D7004D13FD /* InputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		529731642B9E94D7004D13FD /* SettingsRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsRowView.swift; sourceTree = "<group>"; };
 		529731662B9E94D7004D13FD /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -87,7 +90,6 @@
 		B691E3222BA1150B003C4233 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		B6ADE1792B7611AE004CA936 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DED7A7292BA264610033309C /* WaterIntakeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterIntakeView.swift; sourceTree = "<group>"; };
-		DEE21C152BA126260083CA46 /* ScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,7 +275,8 @@
 		DEE21C142BA125F20083CA46 /* ZotScore */ = {
 			isa = PBXGroup;
 			children = (
-				DEE21C152BA126260083CA46 /* ScoreView.swift */,
+				527F67522BA294F500193CC7 /* AllData.swift */,
+				527F67542BA2950400193CC7 /* ScoreView.swift */,
 			);
 			path = ZotScore;
 			sourceTree = "<group>";
@@ -361,6 +364,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5246C22C2B74663D00DB37E7 /* HydrationView.swift in Sources */,
+				527F67552BA2950400193CC7 /* ScoreView.swift in Sources */,
+				527F67532BA294F500193CC7 /* AllData.swift in Sources */,
 				52C0487F2B79D79E001E4884 /* ZotFitView.swift in Sources */,
 				529731952B9FAD6F004D13FD /* ProfileView.swift in Sources */,
 				527F674E2BA27D8200193CC7 /* SleepImproveView.swift in Sources */,
@@ -389,7 +394,6 @@
 				52C048832B8AC9EE001E4884 /* ExerciseTypeView.swift in Sources */,
 				529731842B9E94D7004D13FD /* AuthViewModel.swift in Sources */,
 				529731812B9E94D7004D13FD /* HomeView.swift in Sources */,
-				DEE21C162BA126260083CA46 /* ScoreView.swift in Sources */,
 				52C048792B783E2E001E4884 /* SideMenuOptionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,10 +9,10 @@ import Foundation
 import SwiftUI
 
 struct ScoreView: View {
-    @State var progressValue: Float = 0.49 // SLEEP SCORE
-    @State private var degress: Double = -100
     
     @State private var sideMenu = false
+    
+    let average = Double(DataModel.fitPercent + DataModel.waterPercent + DataModel.sleepPercent) / 300.0
     
     var body: some View {
         
@@ -26,7 +26,7 @@ struct ScoreView: View {
                 
                 VStack {
                     
-                    // Top bar ZOTSLEEP
+                    // Top bar
                     HStack(alignment: .center){
                         ZStack{
                             
@@ -50,7 +50,7 @@ struct ScoreView: View {
                                 Spacer()
                                 VStack {
                                     
-                                    Text("ZotSleep")
+                                    Text("Score")
                                         .foregroundColor(.white)
                                         .font(.system(size: 30, weight: .bold))
                                     Spacer()
@@ -63,18 +63,25 @@ struct ScoreView: View {
                         }
                     }
                     .background(Color(red: 0.14, green: 0.14, blue: 0.14))
+                   
                     Spacer()
+                    
                     VStack {
                         
+                        VStack{
+                            Text("Lifestyle Score")
+                                .font(.system(size: 24, weight: .heavy, design: .rounded))
+                        }
+                        .padding()
+                        .padding(.bottom, 10)
+                        
                         ZStack {
-                            ProgressBar(progress: self.$progressValue)
+                            ProgressBar(progress: Binding<Float>(
+                                get: { Float(average) },
+                                set: { _ in }
+                            ))
                                 .frame(width: 250.0, height: 250.0)
-                                .padding(40.0)
-                            
-                            ProgressBarTriangle(progress: self.$progressValue)
-                                .frame(width: 280.0, height: 290.0)
-                                .rotationEffect(.degrees(degress), anchor: .bottom)
-                                .offset(x: 0, y: -150)
+//                                .padding(40.0)
                         }
                         
                         
@@ -91,7 +98,7 @@ struct ScoreView: View {
                                 Image(systemName: "drop.fill")
                                 Text("Water")
                                 Spacer()
-                                Text("70")
+                                Text("\(DataModel.waterPercent)")
                             }
                             .padding()
                             
@@ -101,7 +108,7 @@ struct ScoreView: View {
                                 Image(systemName: "bed.double.fill")
                                 Text("Sleep")
                                 Spacer()
-                                Text("70")
+                                Text("\(DataModel.sleepPercent)")
                             }
                             .padding()
                             
@@ -111,7 +118,7 @@ struct ScoreView: View {
                                 Image(systemName: "heart.fill")
                                 Text("Fit")
                                 Spacer()
-                                Text("70")
+                                Text("\(DataModel.fitPercent)")
                             }
                             .padding()
                             
@@ -120,9 +127,11 @@ struct ScoreView: View {
                         .padding()
                         .font(.system(size: 16, weight: .bold, design: .rounded))
                     }
+                    
                     Spacer()
                 }
                 .background(Color.white)
+                //--------------------------------------------------------
                 .offset(x: sideMenu ? 250 : 0)
                 //--------------------------------------------------------
                 .onTapGesture {
@@ -132,6 +141,7 @@ struct ScoreView: View {
                         }
                     }
                 }
+                //--------------------------------------------------------
             }
             .onAppear {
                 sideMenu = false
@@ -148,15 +158,9 @@ struct ScoreView: View {
             VStack{
                 
                 VStack{
-                    Text("Lifestyle Score")
-                        .font(.system(size: 24, weight: .heavy, design: .rounded))
-                }
-                .padding()
-                
-                VStack{
                     ZStack {
                         Circle()
-                            .trim(from: 0.25, to: 0.75) // Trim the outer circle to create a semi-circle
+                            .trim(from: 0.25, to: 0.75)
                             .stroke(style: StrokeStyle(lineWidth: 12.0, lineCap: .round, lineJoin: .round))
                             .opacity(0.3)
                             .foregroundColor(Color.gray)
@@ -184,33 +188,22 @@ struct ScoreView: View {
                             .font(.system(size: 20, weight: .bold, design: .rounded))
                             
                         }
-                        .padding(.top, 15)
+//                        .padding(.top, 15)
                     }
                 }
             }
             
         }
     }
-    
-    struct ProgressBarTriangle: View {
-        @Binding var progress: Float
-        
-        
-        var body: some View {
-            ZStack {
-                Image("triangle").resizable().frame(width: 10, height: 10, alignment: .center)
-            }
-        }
-    }
 }
 
 func scoreDescription(for score: Double) -> String {
     if score < 50 {
-        return "Bad"
+        return "Unhealthy"
     } else if score >= 50 && score < 80 {
-        return "OK"
+        return "Moderate"
     } else {
-        return "Great"
+        return "Healthy"
     }
 }
 
