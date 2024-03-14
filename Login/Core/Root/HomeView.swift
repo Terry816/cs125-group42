@@ -18,13 +18,6 @@ struct HomeView: View{
             NavigationStack {
                 ZStack {
                     VStack {
-//                        HStack {
-//                            Spacer()
-//                            Text("UniWell")
-//                                .foregroundColor(.white)
-//                                .font(.system(size: 30, weight: .heavy))
-//                            Spacer()
-//                        }
                         //Main body of app is here:
                         VStack {
                             LoginView()

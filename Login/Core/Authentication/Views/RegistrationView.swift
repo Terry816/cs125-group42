@@ -18,7 +18,7 @@ struct RegistrationView: View {
     @State private var height = 0
     @State private var weight = 0
     @State private var selectedActivityLevel: ActivityLevel = .sedentary
-
+    @State private var loginView = false
     @State private var isPickerPresented: Bool = false
     @State private var isPickerPresentedheight: Bool = false
     @State private var isPickerPresentedweight: Bool = false
@@ -48,192 +48,215 @@ struct RegistrationView: View {
         }
     }
     
-    
-    
     var body: some View {
-        ScrollView{
-            VStack{
-                Image("temporary")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 120)
-                    .padding(.vertical, 32)
-                
-                VStack(spacing: 24){
-                    
-                    InputView(text: $fullname,
-                              title: "NAME",
-                              placeholder: "Enter your Full Name",
-                              image: "person")
-                    
-                    InputView(text: $gender,
-                              title: "GENDER",
-                              placeholder: "Enter your Gender",
-                              image: "person")
-                    
-                    //age
-                    VStack (alignment: .leading, spacing: 0){
-                        Text("Enter your age")
-                            .foregroundColor(Color(.darkGray))
-                            .fontWeight(.semibold)
-                            .font(.footnote)
-                        
-                        TextField("Select your Age", value: $age, formatter: NumberFormatter())
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .padding()
-                            .frame(width: 150)
-                            .onTapGesture {
-                                isPickerPresented = true
+        NavigationStack {
+            NavigationLink(destination: HomeView().navigationBarBackButtonHidden(true), isActive: $loginView) {}
+            
+            ScrollView{
+                VStack{
+                    ZStack {
+                        HStack {
+                            Button {
+                                let generator = UIImpactFeedbackGenerator(style: .medium)
+                                 generator.impactOccurred()
+                                withAnimation(.spring()) {
+                                    loginView.toggle()
+                                }
+                            } label : {
+                                Label("", systemImage: "xmark")
+                                    .font(.system(size: 22, weight: .bold))
+                                    .padding(.top, 10)
+                                    .padding(.leading, 20)
+                                    .foregroundColor(.white)
                             }
-                            .sheet(isPresented: $isPickerPresented) {
-                                agePickerView()
-                            }
-                        Divider()
-                    }
-                    
-                    //height
-                    VStack (alignment: .leading, spacing: 0){
-                        Text("Enter your Height (cm)")
-                            .foregroundColor(Color(.darkGray))
-                            .fontWeight(.semibold)
-                            .font(.footnote)
-                        
-                        TextField("Select your Height (cm)", value: $height, formatter: NumberFormatter())
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .padding()
-                            .frame(width: 150)
-                            .onTapGesture {
-                                isPickerPresentedheight = true
-                            }
-                            .sheet(isPresented: $isPickerPresentedheight) {
-                                heightPickerView()
-                            }
-                        Divider()
-                    }
-                    
-                    //weight
-                    VStack (alignment: .leading, spacing: 0){
-                        Text("Enter your Weight (lbs)")
-                            .foregroundColor(Color(.darkGray))
-                            .fontWeight(.semibold)
-                            .font(.footnote)
-                        
-                        TextField("Select your Weight (lbs)", value: $weight, formatter: NumberFormatter())
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .padding()
-                            .frame(width: 150)
-                            .onTapGesture {
-                                isPickerPresentedweight = true
-                            }
-                            .sheet(isPresented: $isPickerPresentedweight) {
-                                weightPickerView()
-                            }
-                        Divider()
-                    }
-                    
-                    //activity level
-                    VStack(spacing: 0){
-                        Text("Enter your Activity Level")
-                            .foregroundColor(Color(.darkGray))
-                            .fontWeight(.semibold)
-                            .font(.footnote)
-                        
-                        Picker("Select Activity Level", selection: $selectedActivityLevel) {
-                            ForEach(ActivityLevel.allCases) { level in
-                                Text(level.activityDescription).tag(level)
-                            }
+                            Spacer()
                         }
-                        .pickerStyle(MenuPickerStyle())
-                        .padding()
-                        
                     }
+                    Image("loginPage")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 200, height: 200)
+                        .padding(.bottom, 10)
                     
-                    InputView(text: $email,
-                              title: "Email Address",
-                              placeholder: "name@example.com",
-                              image: "envelope"
-                    )
-                    .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
-                    
-                    InputView(text: $password,
-                              title: "Password",
-                              placeholder: "Enter your password",
-                              image: "lock",
-                              isSecure: true)
-                    
-                    
-                    ZStack(alignment: .trailing){
-                        InputView(text: $confirmPassword,
-                                  title: "Confirm Password",
-                                  placeholder: "Confirm your password",
+                    VStack(spacing: 24){
+                        InputView(text: $fullname,
+                                  title: "NAME",
+                                  placeholder: "Enter your Full Name",
+                                  image: "person",
+                                  width: 20,
+                                  height: 20)
+                        
+                        InputView(text: $gender,
+                                  title: "GENDER",
+                                  placeholder: "Enter your Gender",
+                                  image: "person",
+                                  width: 20,
+                                  height: 20)
+                        //age
+                        VStack (alignment: .leading, spacing: 0){
+                            
+                            Text("Enter your age")
+                                .foregroundColor(Color(.darkGray))
+                                .fontWeight(.semibold)
+                                .font(.footnote)
+                            
+                            TextField("Select your Age", value: $age, formatter: NumberFormatter())
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .padding()
+                                .frame(width: 150)
+                                .onTapGesture {
+                                    isPickerPresented = true
+                                }
+                                .sheet(isPresented: $isPickerPresented) {
+                                    agePickerView()
+                                }
+                            Divider()
+                        }
+                        
+                        //height
+                        VStack (alignment: .leading, spacing: 0){
+                            Text("Enter your Height (cm)")
+                                .foregroundColor(Color(.darkGray))
+                                .fontWeight(.semibold)
+                                .font(.footnote)
+                            
+                            TextField("Select your Height (cm)", value: $height, formatter: NumberFormatter())
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .padding()
+                                .frame(width: 150)
+                                .onTapGesture {
+                                    isPickerPresentedheight = true
+                                }
+                                .sheet(isPresented: $isPickerPresentedheight) {
+                                    heightPickerView()
+                                }
+                            Divider()
+                        }
+                        
+                        //weight
+                        VStack (alignment: .leading, spacing: 0){
+                            Text("Enter your Weight (lbs)")
+                                .foregroundColor(Color(.darkGray))
+                                .fontWeight(.semibold)
+                                .font(.footnote)
+                            
+                            TextField("Select your Weight (lbs)", value: $weight, formatter: NumberFormatter())
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .padding()
+                                .frame(width: 150)
+                                .onTapGesture {
+                                    isPickerPresentedweight = true
+                                }
+                                .sheet(isPresented: $isPickerPresentedweight) {
+                                    weightPickerView()
+                                }
+                            Divider()
+                        }
+                        
+                        //activity level
+                        VStack(spacing: 0){
+                            Text("Enter your Activity Level")
+                                .foregroundColor(Color(.darkGray))
+                                .fontWeight(.semibold)
+                                .font(.footnote)
+                            
+                            Picker("Select Activity Level", selection: $selectedActivityLevel) {
+                                ForEach(ActivityLevel.allCases) { level in
+                                    Text(level.activityDescription).tag(level)
+                                }
+                            }
+                            .pickerStyle(MenuPickerStyle())
+                            .padding()
+                            
+                        }
+                        
+                        InputView(text: $email,
+                                  title: "Email Address",
+                                  placeholder: "name@example.com",
+                                  image: "envelope"
+                        )
+                        .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                        
+                        InputView(text: $password,
+                                  title: "Password",
+                                  placeholder: "Enter your password",
                                   image: "lock",
                                   isSecure: true)
                         
-                        if !password.isEmpty && !confirmPassword.isEmpty{
-                            if password == confirmPassword{
-                                Image(systemName: "checkmark.circle.fill")
-                                    .imageScale(.large)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.green)
-                            } else{
-                                Image(systemName: "xmark.circle.fill")
-                                    .imageScale(.large)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.red)
+                        
+                        ZStack(alignment: .trailing){
+                            InputView(text: $confirmPassword,
+                                      title: "Confirm Password",
+                                      placeholder: "Confirm your password",
+                                      image: "lock",
+                                      isSecure: true)
+                            
+                            if !password.isEmpty && !confirmPassword.isEmpty{
+                                if password == confirmPassword{
+                                    Image(systemName: "checkmark.circle.fill")
+                                        .imageScale(.large)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.green)
+                                } else{
+                                    Image(systemName: "xmark.circle.fill")
+                                        .imageScale(.large)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.red)
+                                }
                             }
                         }
                     }
-                }
-                .padding(.horizontal)
-                .padding(.top, 12)
-                
-                
-                
-                
-                Button {
-                    Task{
-                        try await viewModel.createUser(withEmail: email,
-                                                       password: password,
-                                                       fullname: fullname,
-                                                       age: age,
-                                                       gender: gender,
-                                                       height: height,
-                                                       weight:weight,
-                                                       activity: selectedActivityLevel.activityDescription,
-                                                       water: 0,
-                                                       pictures: []
-            )}
+                    .padding(.horizontal)
+                    .padding(.top, 12)
                     
-                } label: {
-                    HStack {
-                        Text("SIGN UP")
-                            .fontWeight(.semibold)
-                        Image(systemName: "arrow.right")
+                    
+                    
+                    
+                    Button {
+                        Task{
+                            try await viewModel.createUser(withEmail: email,
+                                                           password: password,
+                                                           fullname: fullname,
+                                                           age: age,
+                                                           gender: gender,
+                                                           height: height,
+                                                           weight:weight,
+                                                           activity: selectedActivityLevel.activityDescription,
+                                                           water: 0,
+                                                           pictures: []
+                )}
+                        
+                    } label: {
+                        HStack {
+                            Text("SIGN UP")
+                                .fontWeight(.semibold)
+                            Image(systemName: "arrow.right")
+                        }
+                        .foregroundColor(.white)
+                        .frame(width: UIScreen.main.bounds.width-32, height: 48)
                     }
-                    .foregroundColor(.white)
-                    .frame(width: UIScreen.main.bounds.width-32, height: 48)
-                }
-                .background(Color(.systemBlue))
-                .disabled(!formIsValid)
-                .opacity(formIsValid ? 1.0 : 0.5)
-                .cornerRadius(10)
-                .padding(.top, 24)
-                
-                Spacer()
-                
-                Button {
-                    dismiss()
-                } label: {
-                    HStack (){
-                        Text("Already have an account?")
-                        Text("Sign in")
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .background(Color(.systemBlue))
+                    .disabled(!formIsValid)
+                    .opacity(formIsValid ? 1.0 : 0.5)
+                    .cornerRadius(10)
+                    .padding(.top, 24)
+                    
+                    Spacer()
+                    
+                    Button {
+                        dismiss()
+                    } label: {
+                        HStack (){
+                            Text("Already have an account?")
+                            Text("Sign in")
+                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        }
+                        .font(.system(size:14))
                     }
-                    .font(.system(size:14))
+                    
                 }
-                
             }
-            .background(.black)
+            .background(LinearGradient(gradient: Gradient(colors: [Color(red: 0, green: 0, blue: 0), Color(red: 0.25, green: 0.30, blue: 0.59)]), startPoint: .top, endPoint: .bottom))
         }
     }
     
