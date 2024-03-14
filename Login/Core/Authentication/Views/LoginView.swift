@@ -18,12 +18,11 @@ struct LoginView: View {
         ZStack {
             VStack{
                 //image
-                Image("hydration_icon")
+                Image("loginPage")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 120)
-                    .padding(.vertical, 32)
-                
+                    .frame(width: 200, height: 200)
+                    .padding(.bottom, 10)
                 
                 HStack {
                     Text("Login")
@@ -36,7 +35,7 @@ struct LoginView: View {
                 
                 HStack {
                     Text("Please sign in to continue.")
-                        .foregroundColor(.gray)
+                        .foregroundColor(Color(red: 0.9, green: 0.9, blue: 0.9))
                         .font(.system(size: 20))
                         .padding(.leading, 40)
                         .padding(.bottom, 30)
@@ -77,7 +76,7 @@ struct LoginView: View {
                         Text("LOGIN")
                             .fontWeight(.semibold)
                             .foregroundColor(.black)
-                            .padding(.horizontal, 100)
+                            .padding(.horizontal, 90)
                             .padding(.vertical, 30)
                     }
                     .background(.white)

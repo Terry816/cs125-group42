@@ -73,6 +73,8 @@ struct UserView: View {
                     .fill(Color.white) // Sets the color of the divider to blue
                     .frame(height: 2)
                     .padding(.horizontal, 40)
+                
+                
                 List{
                     //age
                     Section("Age"){
@@ -143,6 +145,7 @@ struct UserView: View {
                     .foregroundColor(.white)
                 }
                 .scrollContentBackground(.hidden)
+                .buttonStyle(BorderlessButtonStyle())
             }
         }
 //        .background(.black)
