@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct ScoreView: View {
-    @State var progressValue: Float = 1 // SLEEP SCORE
+    @State var progressValue: Float = 0.49 // SLEEP SCORE
     @State private var degress: Double = -100
     
     @State private var sideMenu = false
@@ -63,7 +63,7 @@ struct ScoreView: View {
                         }
                     }
                     .background(Color(red: 0.14, green: 0.14, blue: 0.14))
-                    
+                    Spacer()
                     VStack {
                         
                         ZStack {
@@ -120,6 +120,7 @@ struct ScoreView: View {
                         .padding()
                         .font(.system(size: 16, weight: .bold, design: .rounded))
                     }
+                    Spacer()
                 }
                 .background(Color.white)
                 .offset(x: sideMenu ? 250 : 0)
@@ -242,4 +243,3 @@ struct ContentView_Previews: PreviewProvider {
         ScoreView()
     }
 }
-

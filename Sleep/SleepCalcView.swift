@@ -49,169 +49,226 @@ func calculateSecondBedtime(displayTime: String) -> String {
 struct SleepCalcView: View {
     
     @Binding var displayTime: Date
-    
+    @State private var sideMenu = false
+    @State private var sleepResult = false
     
     var body: some View {
-        VStack {
-
-            
-            Text("Bedtime Options")
-                .font(.system(size: 24, weight: .bold, design: .rounded))
-                .padding()
-            
-
-//            Spacer()
-
-            HStack{
-                Text("To wake up refreshed at \(formattedTime(from: displayTime)), we recommend going to sleep at one of the following times:")
-                    .multilineTextAlignment(.center)
-                    .font(.system(size: 18, design: .rounded))
-            }
-
-//            Spacer()
-
-//            VStack{
-//
-//                Text(calculateBedtime(displayTime: formattedTime(from: displayTime)))
-//
-//                Text(calculateSecondBedtime(displayTime: formattedTime(from: displayTime)))
-//
-//            }
-            
-            VStack(alignment: .leading) {
-                
-                Text("Suggested")
-                    .font(.system(size: 18, weight: .bold, design: .rounded))
-                    .padding(.bottom, 10)
-                
-                HStack{
-                    
-                    VStack(alignment: .leading){
-                        
-                        HStack{
-                            Image(systemName: "moon.fill")
-                                .font(.system(size: 20))
-                                .padding(.horizontal,10)
-                                
-
-                            VStack{
-                                Text(calculateBedtime(displayTime: formattedTime(from: displayTime)))
-                                    .font(.system(size: 18))
-                                    .padding(.horizontal,10)
-
-                                Text("Bedtime")
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary) // Lighter text color
+        NavigationStack {
+            ZStack {
+                if sideMenu {
+                    SideMenuView()
+                }
+                NavigationLink(destination: SleepResultView().navigationBarBackButtonHidden(true), isActive: $sleepResult) {}
+                VStack {
+                    HStack(alignment: .center){
+                        ZStack{
+                            HStack{
+                                Button(action: {
+                                    withAnimation(.spring()) {
+                                        sideMenu.toggle()
+                                    }
+                                }) {
+                                    Image(systemName: "line.horizontal.3")
+                                        .resizable()
+                                        .frame(width: 30, height: 20)
+                                        .foregroundColor(.white)
+                                }.padding([.leading])
+                                Spacer()
                             }
-                            .padding(.horizontal, 8)
-                            .padding(.top, 15)
-                        }
-
-                        
-                        Text("    |")
-                            .padding(.bottom, 5)
-                
-                        HStack{
-                            Image(systemName: "zzz")
-                                .font(.system(size: 26))
-                                .padding(.horizontal,10)
-                            
-                            VStack{
-                                Text(formattedTime(from: displayTime))
-                                    .font(.system(size: 18))
-                                
-                                Text("Wake Time")
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
+                            HStack{
+                                Spacer()
+                                VStack {
+                                    Text("Sleep")
+                                        .foregroundColor(.white)
+                                        .font(.system(size: 30, weight: .bold))
+                                    Spacer()
+                                }
+                                .frame(height: 50)
+                                Spacer()
                             }
-                            .padding(.horizontal, 8)
                         }
                     }
-                    
-                    CircularTimeView(progress: 1)
-                        .frame(width: 115, height: 105)
-//                        .padding(.top, 13)
-                }
-                .padding(.bottom, 15)
-//                            .padding(.horizontal, 10)
-            }
-            .font(.headline)
-            .foregroundColor(.black)
-            .padding(20)
-            .background(Color(.systemGray6))
-            .cornerRadius(10)
-            .shadow(radius: 2)
-            .padding(.horizontal,10)
-            .padding(.top,10)
-            .padding(.bottom, 8)
-            
-            VStack(alignment: .leading) {
-                
-                Text("Alternative")
-                    .font(.system(size: 18, weight: .bold, design: .rounded))
-                    .padding(.bottom, 10)
-                
-                HStack{
-                    
-                    VStack(alignment: .leading){
-                        
-                        HStack{
-                            Image(systemName: "moon.fill")
-                                .font(.system(size: 20))
-                                .padding(.horizontal,10)
-                                
-
-                            VStack{
-                                Text(calculateSecondBedtime(displayTime: formattedTime(from: displayTime)))
-                                    .font(.system(size: 18))
-                                    .padding(.horizontal,10)
-
-                                Text("Bedtime")
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary) // Lighter text color
+                    .background(Color(red: 0.14, green: 0.14, blue: 0.14))
+                    //Main body of app is here:
+                    VStack {
+                        ZStack {
+                            HStack {
+                                Button {
+                                    let generator = UIImpactFeedbackGenerator(style: .medium)
+                                    generator.impactOccurred()
+                                    withAnimation(.spring()) {
+                                        sleepResult.toggle()
+                                    }
+                                } label : {
+                                    Label("", systemImage: "arrow.left")
+                                        .font(.system(size: 22, weight: .bold))
+                                        .padding(.top, 10)
+                                        .padding(.leading, 10)
+                                        .foregroundColor(.black)
+                                }
+                                Spacer()
                             }
-                            .padding(.horizontal, 8)
-                            .padding(.top, 15)
+                            HStack {
+                                Text("Bedtime Options")
+                                    .font(.system(size: 24, weight: .bold, design: .rounded))
+                                    .padding()
+                                .foregroundStyle(.black)
+                            }
                         }
-
-                        
-                        Text("    |")
-                            .padding(.bottom, 5)
-                
-                        HStack{
-                            Image(systemName: "zzz")
-                                .font(.system(size: 26))
-                                .padding(.horizontal,10)
-                            
-                            VStack{
-                                Text(formattedTime(from: displayTime))
-                                    .font(.system(size: 18))
-                                
-                                Text("Wake Time")
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
+                        Spacer()
+                        VStack {
+                            HStack{
+                                Text("To wake up refreshed at \(formattedTime(from: displayTime)), we recommend going to sleep at one of the following times:")
+                                    .multilineTextAlignment(.center)
+                                    .font(.system(size: 18, design: .rounded))
+                                    .foregroundStyle(.black)
+                                    .padding(.horizontal)
                             }
-                            .padding(.horizontal, 8)
+                            
+                            VStack(alignment: .leading) {
+                                Text("Suggested")
+                                    .font(.system(size: 18, weight: .bold, design: .rounded))
+                                    .padding(.bottom, 10)
+                                
+                                HStack{
+                                    VStack(alignment: .leading){
+                                        
+                                        HStack{
+                                            Image(systemName: "moon.fill")
+                                                .font(.system(size: 20))
+                                                .padding(.horizontal,10)
+                                                
+
+                                            VStack{
+                                                Text(calculateBedtime(displayTime: formattedTime(from: displayTime)))
+                                                    .font(.system(size: 18))
+                                                    .padding(.horizontal,10)
+
+                                                Text("Bedtime")
+                                                    .font(.subheadline)
+                                                    .foregroundColor(.secondary)
+                                            }
+                                            .padding(.horizontal, 8)
+                                            .padding(.top, 15)
+                                        }
+
+                                        
+                                        Text("    |")
+                                            .padding(.bottom, 5)
+                                
+                                        HStack{
+                                            Image(systemName: "zzz")
+                                                .font(.system(size: 26))
+                                                .padding(.horizontal,10)
+                                            
+                                            VStack{
+                                                Text(formattedTime(from: displayTime))
+                                                    .font(.system(size: 18))
+                                                
+                                                Text("Wake Time")
+                                                    .font(.subheadline)
+                                                    .foregroundColor(.secondary)
+                                            }
+                                            .padding(.horizontal, 8)
+                                        }
+                                    }
+                                    
+                                    CircularTimeView(progress: 1)
+                                        .frame(width: 115, height: 105)
+                //                        .padding(.top, 13)
+                                }
+                                .padding(.bottom, 15)
+                //                            .padding(.horizontal, 10)
+                            }
+                            .font(.headline)
+                            .foregroundColor(.black)
+                            .padding(20)
+                            .background(Color(.systemGray6))
+                            .cornerRadius(10)
+                            .shadow(radius: 2)
+                            .padding(.horizontal,10)
+                            .padding(.top,10)
+                            .padding(.bottom, 8)
+                            
+                            VStack(alignment: .leading) {
+                                Text("Alternative")
+                                    .font(.system(size: 18, weight: .bold, design: .rounded))
+                                    .padding(.bottom, 10)
+                                
+                                HStack{
+                                    
+                                    VStack(alignment: .leading){
+                                        
+                                        HStack{
+                                            Image(systemName: "moon.fill")
+                                                .font(.system(size: 20))
+                                                .padding(.horizontal,10)
+                                                
+
+                                            VStack{
+                                                Text(calculateSecondBedtime(displayTime: formattedTime(from: displayTime)))
+                                                    .font(.system(size: 18))
+                                                    .padding(.horizontal,10)
+
+                                                Text("Bedtime")
+                                                    .font(.subheadline)
+                                                    .foregroundColor(.secondary) // Lighter text color
+                                            }
+                                            .padding(.horizontal, 8)
+                                            .padding(.top, 15)
+                                        }
+
+                                        
+                                        Text("    |")
+                                            .padding(.bottom, 5)
+                                
+                                        HStack{
+                                            Image(systemName: "zzz")
+                                                .font(.system(size: 26))
+                                                .padding(.horizontal,10)
+                                            
+                                            VStack{
+                                                Text(formattedTime(from: displayTime))
+                                                    .font(.system(size: 18))
+                                                
+                                                Text("Wake Time")
+                                                    .font(.subheadline)
+                                                    .foregroundColor(.secondary)
+                                            }
+                                            .padding(.horizontal, 8)
+                                        }
+                                    }
+                                    CircularTimeView(progress: 2)
+                                        .frame(width: 115, height: 105)
+                                }
+                                .padding(.bottom, 15)
+                            }
+                            .font(.headline)
+                            .foregroundColor(.black)
+                            .padding(20)
+                            .background(Color(.systemGray6))
+                            .cornerRadius(10)
+                            .shadow(radius: 2)
+                            .padding(.horizontal,10)
+                            .padding(.top,10)
+                            .padding(.bottom, 8)
+                        }
+                        Spacer()
+                    }
+                }
+                .background(.white)
+                .offset(x: sideMenu ? 250 : 0)
+                .onTapGesture {
+                    if sideMenu {
+                        withAnimation {
+                            sideMenu = false
                         }
                     }
-                    CircularTimeView(progress: 2)
-                        .frame(width: 115, height: 105)
-//                        .padding(.top, 13)
                 }
-                .padding(.bottom, 15)
-//                            .padding(.horizontal, 10)
             }
-            .font(.headline)
-            .foregroundColor(.black)
-            .padding(20)
-            .background(Color(.systemGray6))
-            .cornerRadius(10)
-            .shadow(radius: 2)
-            .padding(.horizontal,10)
-            .padding(.top,10)
-            .padding(.bottom, 8)
-            
-            Spacer()
+            .onAppear {
+                sideMenu = false
+            }
         }
     }
 }
@@ -219,7 +276,6 @@ struct SleepCalcView: View {
 struct SleepLastView: PreviewProvider {
     @State private static var displayTime = Date()
     static var previews: some View {
-        
         SleepCalcView(displayTime: $displayTime)
     }
 }

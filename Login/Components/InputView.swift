@@ -56,7 +56,7 @@ struct InputView: View {
         }
         .padding()
         .background(Color.white.opacity(0.1))
-        .background(Color.black.opacity(0.2))
+//        .background(Color.black.opacity(0.2))
         .cornerRadius(25)
         .padding(.horizontal)
     }

@@ -13,19 +13,18 @@ import FirebaseFirestore
 
 struct HomeView: View{
     @EnvironmentObject var viewModel: AuthViewModel
-    
     var body: some View{
         if viewModel.userSession == nil {
             NavigationStack {
                 ZStack {
                     VStack {
-                        HStack {
-                            Spacer()
-                            Text("UniWell")
-                                .foregroundColor(.white)
-                                .font(.system(size: 30, weight: .heavy))
-                            Spacer()
-                        }
+//                        HStack {
+//                            Spacer()
+//                            Text("UniWell")
+//                                .foregroundColor(.white)
+//                                .font(.system(size: 30, weight: .heavy))
+//                            Spacer()
+//                        }
                         //Main body of app is here:
                         VStack {
                             LoginView()
@@ -33,7 +32,7 @@ struct HomeView: View{
                         }
                     }
                 }
-                .background(LinearGradient(gradient: Gradient(colors: [Color(red: 0.14, green: 0.14, blue: 0.14), .black]), startPoint: .top, endPoint: .bottom))
+                .background(LinearGradient(gradient: Gradient(colors: [Color(red: 0, green: 0, blue: 0), Color(red: 0.25, green: 0.30, blue: 0.59)]), startPoint: .top, endPoint: .bottom))
             }
         }
         else {
