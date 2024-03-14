@@ -216,7 +216,6 @@ struct ZotSleepView: View {
                 }
                 //--------------------------------------------------------
                 VStack {
-                    
                     // Top bar ZOTSLEEP
                     HStack(alignment: .center){
                         ZStack{

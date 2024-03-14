@@ -129,6 +129,7 @@ struct SleepImproveView: View {
                     }
                     // ------------------------------------
                 }
+                .background(.white)
                 .offset(x: sideMenu ? 300 : 0)
             }
             .onAppear {
