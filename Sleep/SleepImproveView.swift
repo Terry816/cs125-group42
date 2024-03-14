@@ -91,30 +91,13 @@ struct SleepImproveView: View {
                             }
                             Spacer()
                         }
-                        HStack {
-                            Spacer()
-                            Text("Sleep Quality")
-                                .font(.system(size: 24, weight: .bold))
-                                .padding(.top, 10)
-                                .foregroundStyle(.black)
-                            Spacer()
+                        
+                        VStack{
+                            
                         }
+
                     }
                     // put code ----------------------------
-                    VStack {
-                        
-                        Spacer()
-                        
-                        VStack {
-                            
-                            Text("Your sleep quality score is \(Int(progress * 100))%")
-                                .font(.system(size: 20, weight: .bold, design: .rounded))
-                            
-                            Spacer()
-                        }
-                        
-                    }
-                    .padding(.top, 25)
                     
                     List(sleepRecommendations) { recommendation in
                         VStack(alignment: .leading) {
