@@ -195,9 +195,7 @@ struct ZotSleepView: View {
     }
     
     var body: some View {
-        
         NavigationStack {
-            
             ZStack {
                 
                 if sideMenu {
@@ -455,7 +453,7 @@ struct ZotSleepView: View {
                     
                     VStack{
 //                        Spacer()
-                        NavigationLink(destination: SleepResultView()) {
+                        NavigationLink(destination: SleepResultView().navigationBarBackButtonHidden()) {
                             Text("Calculate Sleep Time")
                                 .padding()
                                 .background(Color(red: 0.14, green: 0.14, blue: 0.14))
@@ -472,7 +470,7 @@ struct ZotSleepView: View {
                     
                     VStack{
 //                        Spacer()
-                        NavigationLink(destination: SleepImproveView(progress: $progress)) {
+                        NavigationLink(destination: SleepImproveView(progress: $progress).navigationBarBackButtonHidden()) {
                             Text("Improve Sleep Score ")
                                 .padding()
                                 .background(Color(red: 0.14, green: 0.14, blue: 0.14))

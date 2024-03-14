@@ -12,18 +12,19 @@ import HealthKit
 
 
 struct SleepResultView: View {
-//    var displayTime: String
+    @State private var sleep = false
     @State private var sideMenu = false
     @State private var selectedTime = Date()
     @State private var displayTime = Date()
     
     var body: some View {
         
-//        NavigationView {
+        NavigationStack {
             ZStack {
                 if sideMenu {
                     SideMenuView()
                 }
+                NavigationLink(destination: ZotSleepView().navigationBarBackButtonHidden(true), isActive: $sleep) {}
                 VStack {
                     HStack(alignment: .center){
                         ZStack{
@@ -43,7 +44,7 @@ struct SleepResultView: View {
                             HStack{
                                 Spacer()
                                 VStack {
-                                    Text("ZotSleep")
+                                    Text("Sleep")
                                         .foregroundColor(.white)
                                         .font(.system(size: 30, weight: .bold))
                                     Spacer()
@@ -54,33 +55,60 @@ struct SleepResultView: View {
                         }
                     }
                     .background(Color(red: 0.14, green: 0.14, blue: 0.14))
-                    
+                    ZStack {
+                        HStack {
+                            Button {
+                                let generator = UIImpactFeedbackGenerator(style: .medium)
+                                 generator.impactOccurred()
+                                withAnimation(.spring()) {
+                                    sleep.toggle()
+                                }
+                            } label : {
+                                Label("", systemImage: "arrow.left")
+                                    .font(.system(size: 22, weight: .bold))
+                                    .padding(.top, 10)
+                                    .padding(.leading, 10)
+                                    .foregroundColor(.black)
+                            }
+                            Spacer()
+                        }
+                        HStack {
+                            Spacer()
+                            Text("Select Wake Up Time")
+                                .font(.system(size: 24, weight: .bold))
+                                .padding(.top, 10)
+                                .foregroundStyle(.black)
+                            Spacer()
+                        }
+                    }
                     VStack {
-                        
                         Spacer()
-                        
                         VStack {
                             Spacer()
                             Text("When do you want to wake up?")
                                 .font(.system(size: 20, weight: .bold, design: .rounded))
+                                .foregroundStyle(.black)
                             
                             //Main content goes here
                             DatePicker("Select Time", selection: $selectedTime, displayedComponents: .hourAndMinute)
+                                .cornerRadius(30)
                                 .datePickerStyle(.wheel)
                                 .labelsHidden()
                                 .onChange(of: selectedTime) { oldvalue, newValue in
                                     displayTime = newValue
                                 }
+                                
+                            
+                            
  
                             Spacer()
                         }
-                        
+
                         
                         VStack{
-                            NavigationLink(destination: SleepCalcView(displayTime: $displayTime)) {
+                            NavigationLink(destination: SleepCalcView(displayTime: $displayTime).navigationBarBackButtonHidden()) {
                                 Text("Confirm Time: \(formattedTime(from:displayTime))")
                                     .padding()
-//                                    .background(Color.blue)
                                     .foregroundColor(.white)
                                     .cornerRadius(10)
                                     .font(.system(size: 20, weight: .bold, design: .rounded))
@@ -90,25 +118,17 @@ struct SleepResultView: View {
                             Spacer()
                         }
                         .padding(.top, 30)
-                        
-                        
-//                        HStack{
-//                            Spacer()
-//                        }
-//                        .padding(.top)
-//                        .padding(.bottom)
-//                        .background(Color(red: 0, green: 0.3922, blue: 0.6431))
                     }
                     .padding(.top, 100)
                 }
+                .background(.white)
                 .offset(x: sideMenu ? 300 : 0)
             }
             .onAppear {
                 sideMenu = false
             }
-//        }
+        }
     }
-    
 }
 
 

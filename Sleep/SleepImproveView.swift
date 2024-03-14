@@ -22,7 +22,7 @@ struct SleepImproveView: View {
     // --------------------------------------------------
     
     @State private var sideMenu = false
-    
+    @State private var sleep = false
     @Binding var progress: CGFloat
     
     let sleepRecommendations = [
@@ -38,12 +38,12 @@ struct SleepImproveView: View {
         ]
     
     var body: some View {
-        
-//        NavigationView {
+        NavigationStack {
             ZStack {
                 if sideMenu {
                     SideMenuView()
                 }
+                NavigationLink(destination: ZotSleepView().navigationBarBackButtonHidden(true), isActive: $sleep) {}
                 VStack {
                     HStack(alignment: .center){
                         ZStack{
@@ -74,7 +74,32 @@ struct SleepImproveView: View {
                         }
                     }
                     .background(Color(red: 0.14, green: 0.14, blue: 0.14))
-                    
+                    ZStack {
+                        HStack {
+                            Button {
+                                let generator = UIImpactFeedbackGenerator(style: .medium)
+                                 generator.impactOccurred()
+                                withAnimation(.spring()) {
+                                    sleep.toggle()
+                                }
+                            } label : {
+                                Label("", systemImage: "arrow.left")
+                                    .font(.system(size: 22, weight: .bold))
+                                    .padding(.top, 10)
+                                    .padding(.leading, 10)
+                                    .foregroundColor(.black)
+                            }
+                            Spacer()
+                        }
+                        HStack {
+                            Spacer()
+                            Text("Sleep Quality")
+                                .font(.system(size: 24, weight: .bold))
+                                .padding(.top, 10)
+                                .foregroundStyle(.black)
+                            Spacer()
+                        }
+                    }
                     // put code ----------------------------
                     VStack {
                         
@@ -82,7 +107,7 @@ struct SleepImproveView: View {
                         
                         VStack {
                             
-                            Text("Your score quality score is \(Int(progress * 100))%")
+                            Text("Your sleep quality score is \(Int(progress * 100))%")
                                 .font(.system(size: 20, weight: .bold, design: .rounded))
                             
                             Spacer()
@@ -102,9 +127,6 @@ struct SleepImproveView: View {
                         }
                         .background(recommendation.ageRange.contains(user.age) ? Color.yellow.opacity(0.3) : Color.clear)
                     }
-                    .navigationTitle("Sleep Recommendations")
-                    
-                    
                     // ------------------------------------
                 }
                 .offset(x: sideMenu ? 300 : 0)
@@ -112,7 +134,7 @@ struct SleepImproveView: View {
             .onAppear {
                 sideMenu = false
             }
-//        }
+        }
     }
     
 }
