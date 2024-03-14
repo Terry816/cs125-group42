@@ -175,6 +175,8 @@ struct ZotSleepView: View {
                     let sleepQualityPercentage = calculateSleepQualityPercentage()
                     let numericValue: CGFloat = CGFloat(sleepQualityPercentage) // Replace with your actual numeric value
                     progress = numericValue / 100.0
+                    let transfer = Int(progress * 100)
+                    DataModel.waterPercent = transfer
                     
 //                    inBedDuration = inBedSleep - totalSleepDuration
                     
