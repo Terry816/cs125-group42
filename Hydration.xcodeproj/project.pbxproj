@@ -12,11 +12,13 @@
 		5246C22E2B74663E00DB37E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5246C22D2B74663E00DB37E7 /* Assets.xcassets */; };
 		5246C2312B74663E00DB37E7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5246C2302B74663E00DB37E7 /* Preview Assets.xcassets */; };
 		5246C2382B74667500DB37E7 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246C2372B74667500DB37E7 /* LocationManager.swift */; };
-		5262AF672B9FC71600007EAC /* SleepCalcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5262AF642B9FC71600007EAC /* SleepCalcView.swift */; };
-		5262AF682B9FC71600007EAC /* ZotSleepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5262AF652B9FC71600007EAC /* ZotSleepView.swift */; };
-		5262AF692B9FC71600007EAC /* SleepResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5262AF662B9FC71600007EAC /* SleepResultView.swift */; };
 		5262AF6B2B9FCED700007EAC /* HydrationStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5262AF6A2B9FCED700007EAC /* HydrationStatsView.swift */; };
 		5262AF6D2BA0FE1900007EAC /* CircularWaterProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5262AF6C2BA0FE1900007EAC /* CircularWaterProgressView.swift */; };
+		527F674B2BA27D8200193CC7 /* SleepFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527F67462BA27D8200193CC7 /* SleepFunctions.swift */; };
+		527F674C2BA27D8200193CC7 /* SleepResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527F67472BA27D8200193CC7 /* SleepResultView.swift */; };
+		527F674D2BA27D8200193CC7 /* ZotSleepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527F67482BA27D8200193CC7 /* ZotSleepView.swift */; };
+		527F674E2BA27D8200193CC7 /* SleepImproveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527F67492BA27D8200193CC7 /* SleepImproveView.swift */; };
+		527F674F2BA27D8200193CC7 /* SleepCalcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527F674A2BA27D8200193CC7 /* SleepCalcView.swift */; };
 		5297317C2B9E94D7004D13FD /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529731632B9E94D7004D13FD /* InputView.swift */; };
 		5297317D2B9E94D7004D13FD /* SettingsRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529731642B9E94D7004D13FD /* SettingsRowView.swift */; };
 		5297317E2B9E94D7004D13FD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529731662B9E94D7004D13FD /* LoginView.swift */; };
@@ -53,11 +55,13 @@
 		5246C22D2B74663E00DB37E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5246C2302B74663E00DB37E7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5246C2372B74667500DB37E7 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		5262AF642B9FC71600007EAC /* SleepCalcView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SleepCalcView.swift; sourceTree = "<group>"; };
-		5262AF652B9FC71600007EAC /* ZotSleepView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZotSleepView.swift; sourceTree = "<group>"; };
-		5262AF662B9FC71600007EAC /* SleepResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SleepResultView.swift; sourceTree = "<group>"; };
 		5262AF6A2B9FCED700007EAC /* HydrationStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HydrationStatsView.swift; sourceTree = "<group>"; };
 		5262AF6C2BA0FE1900007EAC /* CircularWaterProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularWaterProgressView.swift; sourceTree = "<group>"; };
+		527F67462BA27D8200193CC7 /* SleepFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SleepFunctions.swift; sourceTree = "<group>"; };
+		527F67472BA27D8200193CC7 /* SleepResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SleepResultView.swift; sourceTree = "<group>"; };
+		527F67482BA27D8200193CC7 /* ZotSleepView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZotSleepView.swift; sourceTree = "<group>"; };
+		527F67492BA27D8200193CC7 /* SleepImproveView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SleepImproveView.swift; sourceTree = "<group>"; };
+		527F674A2BA27D8200193CC7 /* SleepCalcView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SleepCalcView.swift; sourceTree = "<group>"; };
 		529731632B9E94D7004D13FD /* InputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		529731642B9E94D7004D13FD /* SettingsRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsRowView.swift; sourceTree = "<group>"; };
 		529731662B9E94D7004D13FD /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -254,9 +258,11 @@
 		5297319C2B9FB623004D13FD /* Sleep */ = {
 			isa = PBXGroup;
 			children = (
-				5262AF642B9FC71600007EAC /* SleepCalcView.swift */,
-				5262AF662B9FC71600007EAC /* SleepResultView.swift */,
-				5262AF652B9FC71600007EAC /* ZotSleepView.swift */,
+				527F674A2BA27D8200193CC7 /* SleepCalcView.swift */,
+				527F67462BA27D8200193CC7 /* SleepFunctions.swift */,
+				527F67492BA27D8200193CC7 /* SleepImproveView.swift */,
+				527F67472BA27D8200193CC7 /* SleepResultView.swift */,
+				527F67482BA27D8200193CC7 /* ZotSleepView.swift */,
 			);
 			path = Sleep;
 			sourceTree = "<group>";
@@ -351,17 +357,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5262AF672B9FC71600007EAC /* SleepCalcView.swift in Sources */,
 				5246C22C2B74663D00DB37E7 /* HydrationView.swift in Sources */,
 				52C0487F2B79D79E001E4884 /* ZotFitView.swift in Sources */,
 				529731952B9FAD6F004D13FD /* ProfileView.swift in Sources */,
+				527F674E2BA27D8200193CC7 /* SleepImproveView.swift in Sources */,
 				5246C22A2B74663D00DB37E7 /* HydrationApp.swift in Sources */,
 				52C048772B783E19001E4884 /* SideMenuHeaderView.swift in Sources */,
 				529731832B9E94D7004D13FD /* SwiftUIApp.swift in Sources */,
 				52C0487B2B783E61001E4884 /* SideMenuViewModel.swift in Sources */,
 				5297317C2B9E94D7004D13FD /* InputView.swift in Sources */,
 				52BEE2102B91443C00F90F3A /* ExerciseDifficultyView.swift in Sources */,
+				527F674B2BA27D8200193CC7 /* SleepFunctions.swift in Sources */,
+				527F674D2BA27D8200193CC7 /* ZotSleepView.swift in Sources */,
 				52BEE2122B915BBD00F90F3A /* ExerciseSuggestionView.swift in Sources */,
+				527F674F2BA27D8200193CC7 /* SleepCalcView.swift in Sources */,
 				52BEE20E2B904EFE00F90F3A /* MuscleGroupView.swift in Sources */,
 				52C048752B783E06001E4884 /* SideMenuView.swift in Sources */,
 				5262AF6B2B9FCED700007EAC /* HydrationStatsView.swift in Sources */,
@@ -371,13 +380,12 @@
 				529731802B9E94D7004D13FD /* UserView.swift in Sources */,
 				5262AF6D2BA0FE1900007EAC /* CircularWaterProgressView.swift in Sources */,
 				5297317E2B9E94D7004D13FD /* LoginView.swift in Sources */,
-				5262AF692B9FC71600007EAC /* SleepResultView.swift in Sources */,
+				527F674C2BA27D8200193CC7 /* SleepResultView.swift in Sources */,
 				5297317F2B9E94D7004D13FD /* RegistrationView.swift in Sources */,
 				52C048832B8AC9EE001E4884 /* ExerciseTypeView.swift in Sources */,
 				529731842B9E94D7004D13FD /* AuthViewModel.swift in Sources */,
 				529731812B9E94D7004D13FD /* HomeView.swift in Sources */,
 				DEE21C162BA126260083CA46 /* ScoreView.swift in Sources */,
-				5262AF682B9FC71600007EAC /* ZotSleepView.swift in Sources */,
 				52C048792B783E2E001E4884 /* SideMenuOptionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -514,7 +522,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Hydration/Preview Content\"";
-				DEVELOPMENT_TEAM = S7R8UZ4629;
+				DEVELOPMENT_TEAM = F5UQSVF4PB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Hydration/Info.plist;
@@ -534,7 +542,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = simarcheema.HydrationApp56;
+				PRODUCT_BUNDLE_IDENTIFIER = simarcheema.HydrationApp51;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -553,7 +561,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Hydration/Preview Content\"";
-				DEVELOPMENT_TEAM = S7R8UZ4629;
+				DEVELOPMENT_TEAM = F5UQSVF4PB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Hydration/Info.plist;
@@ -573,7 +581,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = simarcheema.HydrationApp56;
+				PRODUCT_BUNDLE_IDENTIFIER = simarcheema.HydrationApp51;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

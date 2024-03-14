@@ -9,93 +9,6 @@ import SwiftUI
 import HealthKit
 
 
-struct TimePickerView: UIViewRepresentable {
-    @Binding var selectedTime: Date
-
-    func makeUIView(context: Context) -> UIDatePicker {
-        let timePicker = UIDatePicker()
-        timePicker.datePickerMode = .time
-        timePicker.addTarget(context.coordinator, action: #selector(Coordinator.timeChanged(_:)), for: .valueChanged)
-        return timePicker
-    }
-
-    func updateUIView(_ uiView: UIDatePicker, context: Context) {
-        uiView.date = selectedTime
-    }
-
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
-
-    class Coordinator: NSObject {
-        var parent: TimePickerView
-
-        init(_ parent: TimePickerView) {
-            self.parent = parent
-        }
-
-        @objc func timeChanged(_ timePicker: UIDatePicker) {
-            parent.selectedTime = timePicker.date
-        }
-    }
-}
-
-
-func formattedTime(from date: Date) -> String {
-    let formatter = DateFormatter()
-    formatter.timeStyle = .short
-    return formatter.string(from: date)
-}
-
-
-func formattedSecondTime(from timeInterval: TimeInterval) -> String {
-    let formatter = DateComponentsFormatter()
-    formatter.allowedUnits = [.hour, .minute]
-    formatter.unitsStyle = .abbreviated
-
-    return formatter.string(from: timeInterval) ?? ""
-}
-
-
-func formattedThirdTime(from date: Date) -> String {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "h:mm a"
-    return formatter.string(from: date)
-}
-
-
-func extractBedtime(from sleepEntry: String) -> String {
-    guard let startIndex = sleepEntry.range(of: "start: ")?.upperBound,
-          let endIndex = sleepEntry.range(of: ", end:")?.lowerBound else {
-        return "Unknown"
-    }
-
-    let bedtime = String(sleepEntry[startIndex..<endIndex])
-    return bedtime
-}
-
-func extractWakeUpTime(from sleepEntry: String) -> String {
-    guard let startIndex = sleepEntry.range(of: "end: ")?.upperBound else {
-        return "Unknown"
-    }
-
-    let wakeUpTime = String(sleepEntry[startIndex...])
-    return wakeUpTime
-}
-
-func formattedCurrentDay() -> String {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "EEEE"
-    return formatter.string(from: Date())
-   }
-
-func formattedCurrentDate() -> String {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "MMMM d, yyyy"
-    return formatter.string(from: Date())
-   }
-
-
 struct ZotSleepView: View {
     @State private var sideMenu = false
     @State private var selectedTime = Date()
@@ -107,6 +20,7 @@ struct ZotSleepView: View {
     
     @State private var isAuthorized = false
     var healthStore: HKHealthStore = HKHealthStore()
+    
     
     
 //    "Sleep start: 2022-02-20 22:30:00 +0000, end: 2022-02-21 07:00:00 +0000",
@@ -178,9 +92,7 @@ struct ZotSleepView: View {
                         return
                     }
 
-//                    var sleepEntries: [String] = []
-//                    var totalDuration: TimeInterval = 0
-//                    var inBedStart: Date?
+
                     var current: Date? = nil
                     
                     var startList: [Date] = []
@@ -331,7 +243,7 @@ struct ZotSleepView: View {
                                 Spacer()
                                 VStack {
                                     
-                                    Text("ZotSleep")
+                                    Text("Sleep")
                                         .foregroundColor(.white)
                                         .font(.system(size: 30, weight: .bold))
                                     Spacer()
@@ -480,7 +392,7 @@ struct ZotSleepView: View {
                                     Text(deepSleep == 0 ? "---" : "\(formattedSecondTime(from: remSleep))")
                                         .font(.system(size: 18))
 
-                                    Text("Fell asleep")
+                                    Text("REM sleep")
                                         .font(.subheadline)
                                         .foregroundColor(.secondary)
                                 }
@@ -540,6 +452,7 @@ struct ZotSleepView: View {
 
                     //--------------------------------------------------------
                     // SLEEP HOURS (Navigation)
+                    
                     VStack{
 //                        Spacer()
                         NavigationLink(destination: SleepResultView()) {
@@ -554,8 +467,24 @@ struct ZotSleepView: View {
                         Spacer()
                     }
                     .padding(.top)
-                    .padding(.bottom)
+//                    .padding(.bottom)
 //                    .background(Color(red: 0, green: 0.3922, blue: 0.6431))
+                    
+                    VStack{
+//                        Spacer()
+                        NavigationLink(destination: SleepImproveView(progress: $progress)) {
+                            Text("Improve Sleep Score ")
+                                .padding()
+                                .background(Color(red: 0.14, green: 0.14, blue: 0.14))
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                                .font(.system(size: 20, weight: .bold, design: .rounded))
+                        }
+                        
+                        Spacer()
+                    }
+//                    .padding(.top)
+                    .padding(.bottom)
                     
                     //--------------------------------------------------------
                 }
@@ -578,39 +507,6 @@ struct ZotSleepView: View {
     }
 }
 
-
-
-struct CircularProgressView: View {
-  let progress: CGFloat
-
-  var body: some View {
-    ZStack {
-      // Background for the progress bar
-      Circle()
-        .stroke(lineWidth: 20)
-        .opacity(0.1)
-        .foregroundColor(.black)
-
-      // Foreground or the actual progress bar
-//      Circle()
-//        .trim(from: 0.0, to: min(progress, 1.0))
-//        .stroke(style: StrokeStyle(lineWidth: 20, lineCap: .round, lineJoin: .round))
-//        .foregroundColor(.black)
-//        .rotationEffect(Angle(degrees: 270.0))
-//        .animation(.linear, value: progress)
-        Circle()
-            .trim(from: 0.0, to: min(progress, 1.0))
-            .stroke(style: StrokeStyle(lineWidth: 20, lineCap: .round, lineJoin: .round))
-            .foregroundColor(progress >= 0.8 ? .green : (progress >= 0.45 ? .yellow : .red))
-            .rotationEffect(Angle(degrees: 270.0))
-            .animation(.linear, value: progress)
-        
-        Text("\(Int(progress * 100))%")
-            .foregroundColor(.black)
-            .font(.custom("Oswald", fixedSize: 20))
-    }
-  }
-}
 
 #Preview {
     ZotSleepView()

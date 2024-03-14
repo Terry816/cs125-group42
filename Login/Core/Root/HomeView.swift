@@ -15,7 +15,7 @@ struct HomeView: View{
     @EnvironmentObject var viewModel: AuthViewModel
     
     var body: some View{
-        if viewModel.userSession == nil {
+        if $viewModel.userSession == nil {
             NavigationStack {
                 ZStack {
                     VStack {
