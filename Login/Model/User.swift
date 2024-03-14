@@ -28,7 +28,7 @@ struct User : Identifiable, Codable{
     var height: Int
     var weight: Int
     var activity: String
-    var water: Int
+    var water: Double
     
     var pictures: [String] // Assuming you store picture URLs as strings
 
@@ -37,5 +37,5 @@ struct User : Identifiable, Codable{
 }
 
 extension User {
-    static var MOCK_USER = User(id: NSUUID().uuidString, fullname: "Terry Kim", email: "test@gmail.com", age: 20, gender: "Male", height: 190, weight: 250, activity: "Sedentary", water: 0, pictures: [])
+    static var MOCK_USER = User(id: NSUUID().uuidString, fullname: "Terry Kim", email: "test@gmail.com", age: 20, gender: "Male", height: 190, weight: 250, activity: "Very Active", water: 30, pictures: [])
 }

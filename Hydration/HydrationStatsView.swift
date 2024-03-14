@@ -20,39 +20,38 @@ let activityLevelValues: [String: Double] = [
 struct HydrationStatsView: View {
     @State var sideMenu = false
     @State var hydrationView = false
-    
+    @State private var showingConfirmation = false
+
     
     @EnvironmentObject var viewModel: AuthViewModel
     
     //to test comment the below and also comment out on UserView file
-    let user = User.MOCK_USER
-    
-    var wt : Double {
-        return waterc(weightInLbs: Double(user.weight), activityLevel: user.activity)
-    }
-    
-    
-    //comment this out if you are testing and want to see preview
-//    var user: User? {
-//        viewModel.currentUser
+//    let user = User.MOCK_USER
+//    
+//    var waterIntake : Double { 
+//        return calculateWaterIntake(age: user.age, activityLevel: user.activity, gender: user.gender, weightInPounds: Double(user.weight))
 //    }
-    
-//    var goal: Double {
-//        if let user = user {
-//            return calculateWaterIntake(weightInLbs: Double(user.weight), heightInCm: Double(user.height), age: user.age, gender: user.gender, activityLevel: user.activity)
-//        }
-//        return 0.0
+//    
+//    var percent : Double {
+//        return calculateWaterPercentage(userWater: user.water, totalWaterIntake: waterIntake)
 //    }
-
-//    var goal: Double {
-//            return calculateWaterIntake(weightInLbs: Double(user.weight), heightInCm: Double(user.height), age: user.age, gender: user.gender, activityLevel: user.activity)
-//        }
     
     
 
     
     var body: some View {
+        //comment this out if you are testing and want to see preview
+
+        let user = viewModel.currentUser
         
+        var waterIntake : Double {
+            return calculateWaterIntake(age: user?.age ?? 0, activityLevel: user?.activity ?? "Sedentary", gender: user?.gender ?? "Male", weightInPounds: Double(user?.weight ?? 250))
+        }
+        
+        var percent : Double {
+            return calculateWaterPercentage(userWater: user?.water ?? 0, totalWaterIntake: waterIntake)
+        }
+//
         NavigationStack {
             ZStack {
                 if sideMenu {
@@ -119,15 +118,15 @@ struct HydrationStatsView: View {
                         
                         VStack{
                             HStack {
-                                Text("Goal for the Day:")
+                                Text("Remaining Daily Water:")
                                     .padding()
                                     .padding(.bottom, 10)
                                     .padding(.top, 10)
                                     .font(.system(size: 20, weight: .bold, design: .rounded))
                                 VStack{
-//                                    Text(String(goal))
-                                    Text(String(wt))
-                                    Text("ounces")
+                                    Text(String(waterIntake - (user?.water ?? 0)))
+                                    Text("fluid oz")
+
                                 }
                                 .font(.system(size: 24, weight: .bold, design: .rounded))
                                 .padding(.trailing)
@@ -138,14 +137,14 @@ struct HydrationStatsView: View {
                             .cornerRadius(10)
                             .shadow(radius: 2)
 
+                            //water progress bar
                             VStack{
                                 Text("Water Progress")
                                     .padding()
                                     .padding(.bottom, 10)
                                     .font(.system(size: 16, weight: .bold, design: .rounded))
-                                
-                                CircularWaterProgressView(progress: 0.5)
-                                    .frame(width: 115, height: 105)
+                                CircularWaterProgressView(progress: percent)
+                                    .frame(width: 300, height: 250)
                                     .padding(.top, 13)
                                     .padding(.bottom, 30)
                             }
@@ -155,33 +154,57 @@ struct HydrationStatsView: View {
                             .cornerRadius(10)
                             .shadow(radius: 2)
                             
-                            
-                            //------------------------------------------------------
-                            
-//                            VStack{
-//        //                        Spacer()
-//                                NavigationLink(destination: WaterMeasure()) {
-//                                    Text("Add Drink")
-//                                        .padding()
-//                                        .background(Color(red: 0.14, green: 0.14, blue: 0.14))
-//                                        .foregroundColor(.white)
-//                                        .cornerRadius(10)
-//                                        .font(.system(size: 20, weight: .bold, design: .rounded))
-//                                }
-//                                
-//                                Spacer()
-//                            }
+                            Spacer()
                             
                             
                             
-                            //------------------------------------------------------
-                            // A standard glass contains 8 ounces, and one gallon equals sixteen glasses (each glass has 8 ounces) of water. For daily intake, the general guidelines recommend around 8 glasses or 64 ounces for water.
+                            HStack{
+                                //Add water button
+                                Spacer()
+                                NavigationLink(destination: WaterIntakeView()) {
+                                    Text("Add Water")
+                                        .foregroundColor(.white)
+                                        .padding()
+                                        .background(Color.blue)
+                                        .cornerRadius(10)
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                                Spacer()
+                                
+                                Button(action: {
+                                    // Show confirmation dialog
+                                    showingConfirmation = true
+                                }) {
+                                    Text("Clear")
+                                        .foregroundColor(.white)
+                                        .padding()
+                                        .background(Color.blue)
+                                        .cornerRadius(10)
+                                }
+                                .alert(isPresented: $showingConfirmation) {
+                                    Alert(
+                                        title: Text("Are you sure?"),
+                                        message: Text("This will clear all water from your intake."),
+                                        primaryButton: .default(Text("Yes")) {
+                                            // Clear water action
+                                            clearWater()
+                                        },
+                                        secondaryButton: .cancel(Text("Cancel"))
+                                    )
+                                }
+                                
+                                
+                                Spacer()
+                            }
+                        
+                            
+                            
                             Spacer()
 
                             VStack {
                                 HStack(spacing: 0) {
                                     HStack{
-                                       Text("0")
+                                        Text(String(user?.water ?? 0))
                                            .font(.system(size: 40, weight: .bold, design: .rounded))
                                            .padding(.top, 10)
                                            .padding(.bottom, 10)
@@ -202,7 +225,7 @@ struct HydrationStatsView: View {
                                     .border(Color.gray, width: 1)
 
                                     HStack{
-                                       Text(String(wt))
+                                       Text(String(waterIntake))
                                             .font(.system(size: 40, weight: .bold, design: .rounded))
                                             .padding(.top, 10)
                                             .padding(.bottom, 10)
@@ -213,7 +236,7 @@ struct HydrationStatsView: View {
                                                .font(.system(size: 16, weight: .bold, design: .rounded))
                                                .padding(.bottom, -15)
                                            
-                                           Text("OZ")
+                                           Text("fl oz")
                                                .font(.system(size: 30, weight: .bold, design: .rounded))
                                                .foregroundColor(Color.blue)
                                        }
@@ -247,82 +270,77 @@ struct HydrationStatsView: View {
             }
         }
     }
-}
-
-
-//this is the incorrect functoin from gpt
-//func calculateWaterIntake(weightInLbs: Double, heightInCm: Double, age: Int, gender: String, activityLevel: String) -> Double {
-//    let lbsToKgConversionFactor: Double = 2.20462
-//    let litersToFluidOuncesConversionFactor: Double = 33.814
-//    let baseWaterIntakePerKg: Double = 0.03
-//    
-//    // Convert weight to kilograms
-//    let weightInKg = weightInLbs / lbsToKgConversionFactor
-//    
-//    // Convert height to meters
-//    let heightInMeters = heightInCm / 100.0
-//    
-//    // Retrieve activity multiplier from dictionary
-//    let activityMultiplier: Double = activityLevelValues[activityLevel] ?? 1.0
-//
-//    // Calculate BMR based on gender
-//    var bmr: Double
-//    if gender == "Male" {
-//        bmr = 10 * weightInKg + 6.25 * heightInMeters - 5 * Double(age) + 5
-//    } else if gender.lowercased() == "female" {
-//        bmr = 10 * weightInKg + 6.25 * heightInMeters - 5 * Double(age) - 161
-//    } else {
-//        bmr = 10 * weightInKg + 6.25 * heightInMeters - 5 * Double(age) + 2
-//    }
-//
-//    // Adjust BMR based on activity level
-//    let totalDailyEnergyExpenditure = bmr * activityMultiplier
-//
-//    // Calculate water intake in liters
-//    let waterIntakeLiters = totalDailyEnergyExpenditure * baseWaterIntakePerKg
-//
-//    // Convert water intake to fluid ounces
-//    let waterIntakeFluidOunces = waterIntakeLiters * litersToFluidOuncesConversionFactor
-//
-//    return waterIntakeFluidOunces
-//}
-
-func waterc (weightInLbs: Double, activityLevel: String) -> Double{
-    let w = weightInLbs / 2
     
-    let activityMultiplier: Double = activityLevelValues[activityLevel] ?? 1.0
-    
-    return w * activityMultiplier
+    func clearWater() {
+            // Clear water action
+            Task {
+                do {
+                    try await viewModel.updateUserAttributes(water: 0)
+                } catch {
+                    // Handle error here
+                    print("Error updating user attributes: \(error)")
+                }
+            }
+    }
     
 }
 
-//func displayWaterBottle(filledPercentage: Double) {
-//    let totalRows = 20
-//    let filledRows = Int((filledPercentage / 100.0) * Double(totalRows))
-//
-//    for row in 1...totalRows {
-//        if row <= filledRows {
-//            let percentage = Double(row) / Double(totalRows) * 100.0
-//            let fillSymbol = getFillSymbol(percentage: percentage)
-//            print(fillSymbol)
-//        } else {
-//            print("")
-//        }
-//    }
-//    print("")
-//}
-//
-//func getFillSymbol(percentage: Double) -> String {
-//    if percentage <= 25.0 {
-//        return "▓"
-//    } else if percentage <= 50.0 {
-//        return "▓▓"
-//    } else if percentage <= 75.0 {
-//        return "▓▓▓"
-//    } else {
-//        return "▓▓▓▓"
-//    }
-//}
+
+
+
+func calculateWaterIntake(age: Int, activityLevel: String, gender: String, weightInPounds: Double) -> Double {
+    var baseWaterIntake: Double = 0
+    
+    // Determine base water intake based on age and gender
+    if age >= 1 && age <= 3 {
+        baseWaterIntake = 44
+    } else if age >= 4 && age <= 8 {
+        baseWaterIntake = 56
+    } else if age >= 9 && age <= 13 {
+        baseWaterIntake = 64
+    } else if age >= 14 && age <= 18 {
+        baseWaterIntake = gender.lowercased() == "male" ? 125 : 91
+    } else if age >= 19 {
+        baseWaterIntake = gender.lowercased() == "male" ? 125 : 91
+    } else {
+        // Handle invalid age
+        return 0
+    }
+    
+    switch activityLevel {
+    case "Sedentary":
+        baseWaterIntake *= 1.0
+    case "Lightly Active":
+        baseWaterIntake *= 1.1
+    case "Moderately Active":
+        baseWaterIntake *= 1.3
+    case "Very Active":
+        baseWaterIntake *= 1.5
+    default:
+        return 0
+    }
+    
+    return baseWaterIntake
+}
+
+
+func calculateWaterPercentage(userWater: Double, totalWaterIntake: Double) -> Double {
+    guard totalWaterIntake > 0 else {
+        return 0.0 // Avoid division by zero
+    }
+    
+    // Calculate the percentage
+    let percentage = userWater / totalWaterIntake
+    
+    if percentage >= 1{
+        return 1
+    } else{
+        return percentage
+    }
+            
+}
+
+
 
 
 

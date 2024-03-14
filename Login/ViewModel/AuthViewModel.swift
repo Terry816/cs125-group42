@@ -41,7 +41,7 @@ class AuthViewModel: ObservableObject {
             }
         }
     
-    func createUser(withEmail email: String, password: String, fullname: String, age: Int, gender: String, height: Int, weight: Int, activity: String, water: Int, pictures: [String]) async throws {
+    func createUser(withEmail email: String, password: String, fullname: String, age: Int, gender: String, height: Int, weight: Int, activity: String, water: Double, pictures: [String]) async throws {
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
             self.userSession = result.user
@@ -76,4 +76,54 @@ class AuthViewModel: ObservableObject {
         self.currentUser = try? snapshot.data(as: User.self)
         
     }
+    
+    func updateUserAttributes(age: Int? = nil, gender: String? = nil, height: Int? = nil, weight: Int? = nil, activity: String? = nil, water: Double? = nil, pictures: [String]? = nil) async throws {
+        guard let currentUser = self.currentUser else {
+            print("No current user found.")
+            return
+        }
+
+        let userRef = Firestore.firestore().collection("users").document(currentUser.id)
+
+        var updatedData: [String: Any] = [:]
+
+        if let age = age {
+            updatedData["age"] = age
+        }
+
+        if let gender = gender {
+            updatedData["gender"] = gender
+        }
+
+        if let height = height {
+            updatedData["height"] = height
+        }
+
+        if let weight = weight {
+            updatedData["weight"] = weight
+        }
+
+        if let activity = activity {
+            updatedData["activity"] = activity
+        }
+
+        if let water = water {
+            updatedData["water"] = water
+        }
+
+        if let pictures = pictures {
+            updatedData["pictures"] = pictures
+        }
+
+        do {
+            try await userRef.setData(updatedData, merge: true)
+            // Refresh current user data after update
+            await fetchUser()
+            print("User attributes updated successfully.")
+        } catch {
+            print("Failed to update user attributes: \(error.localizedDescription)")
+        }
+    }
+
+    
 }
