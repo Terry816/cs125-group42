@@ -77,7 +77,7 @@ struct HydrationStatsView: View {
                             }
                             HStack {
                                 Spacer()
-                                Text("ZotWater")
+                                Text("Water")
                                     .foregroundColor(.white)
                                     .font(.system(size: 30, weight: .heavy))
                                 Spacer()
@@ -117,25 +117,57 @@ struct HydrationStatsView: View {
                         }
                         
                         VStack{
-                            HStack {
-                                Text("Remaining Daily Water:")
-                                    .padding()
-                                    .padding(.bottom, 10)
-                                    .padding(.top, 10)
-                                    .font(.system(size: 20, weight: .bold, design: .rounded))
-                                VStack{
-                                    Text(String(waterIntake - (user?.water ?? 0)))
-                                    Text("fluid oz")
+                            VStack {
+                                
+                                HStack(spacing: 0) {
+                                    HStack{
+                                        Text(String(user?.water ?? 0))
+                                           .font(.system(size: 40, weight: .bold, design: .rounded))
+                                           .padding(.top, 10)
+                                           .padding(.bottom, 10)
+                                           .foregroundColor(Color.blue)
+   
+                                       VStack{
+                                           Text("Now")
+                                               .font(.system(size: 16, weight: .bold, design: .rounded))
+                                               .padding(.bottom, -15)
+                                           
+                                           Text("OZ")
+                                               .font(.system(size: 30, weight: .bold, design: .rounded))
+                                               .foregroundColor(Color.blue)
+                                       }
+                                   }
+                                    .frame(minWidth: 0, maxWidth: .infinity)
+                                    .border(Color.gray, width: 0.5)
+                                    .foregroundColor(.white)
+                                    .background(Color.white.opacity(0.2))
+                                    
 
+                                    HStack{
+                                       Text(String(waterIntake))
+                                            .font(.system(size: 40, weight: .bold, design: .rounded))
+                                            .padding(.top, 10)
+                                            .padding(.bottom, 10)
+                                            .foregroundColor(Color.blue)
+   
+                                       VStack{
+                                           Text("Goal")
+                                               .font(.system(size: 16, weight: .bold, design: .rounded))
+                                               .padding(.bottom, -15)
+                                               .foregroundColor(.white)
+                                           
+                                           Text("fl oz")
+                                               .font(.system(size: 30, weight: .bold, design: .rounded))
+                                               .foregroundColor(Color.blue)
+                                       }
+                                   }
+                                    .frame(minWidth: 0, maxWidth: .infinity)
+                                    .background(Color.white.opacity(0.2))
+                                    .border(Color.gray, width: 0.5)
                                 }
-                                .font(.system(size: 24, weight: .bold, design: .rounded))
-                                .padding(.trailing)
+                                    .frame(minWidth: 0, maxWidth: .infinity)
+
                             }
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .background(.white.opacity(0.2))
-                            .cornerRadius(10)
-                            .shadow(radius: 2)
 
                             //water progress bar
                             VStack{
@@ -150,14 +182,10 @@ struct HydrationStatsView: View {
                             }
                             .font(.headline)
                             .foregroundColor(.white)
-                            .background(.white.opacity(0.2))
                             .cornerRadius(10)
                             .shadow(radius: 2)
                             
                             Spacer()
-                            
-                            
-                            
                             HStack{
                                 //Add water button
                                 Spacer()
@@ -200,54 +228,6 @@ struct HydrationStatsView: View {
                             
                             
                             Spacer()
-
-                            VStack {
-                                HStack(spacing: 0) {
-                                    HStack{
-                                        Text(String(user?.water ?? 0))
-                                           .font(.system(size: 40, weight: .bold, design: .rounded))
-                                           .padding(.top, 10)
-                                           .padding(.bottom, 10)
-                                           .foregroundColor(Color.blue)
-   
-                                       VStack{
-                                           Text("Now")
-                                               .font(.system(size: 16, weight: .bold, design: .rounded))
-                                               .padding(.bottom, -15)
-                                           
-                                           Text("OZ")
-                                               .font(.system(size: 30, weight: .bold, design: .rounded))
-                                               .foregroundColor(Color.blue)
-                                       }
-                                   }
-                                    .frame(minWidth: 0, maxWidth: .infinity)
-                                    .background(Color.white)
-                                    .border(Color.gray, width: 1)
-
-                                    HStack{
-                                       Text(String(waterIntake))
-                                            .font(.system(size: 40, weight: .bold, design: .rounded))
-                                            .padding(.top, 10)
-                                            .padding(.bottom, 10)
-                                            .foregroundColor(Color.blue)
-   
-                                       VStack{
-                                           Text("Goal")
-                                               .font(.system(size: 16, weight: .bold, design: .rounded))
-                                               .padding(.bottom, -15)
-                                           
-                                           Text("fl oz")
-                                               .font(.system(size: 30, weight: .bold, design: .rounded))
-                                               .foregroundColor(Color.blue)
-                                       }
-                                   }
-                                    .frame(minWidth: 0, maxWidth: .infinity)
-                                    .background(Color.white)
-                                    .border(Color.gray, width: 1)
-                                }
-                                    .frame(minWidth: 0, maxWidth: .infinity)
-
-                            }
                             //------------------------------------------------------
                             
                         }
@@ -345,5 +325,5 @@ func calculateWaterPercentage(userWater: Double, totalWaterIntake: Double) -> Do
 
 
 #Preview {
-    HydrationStatsView()
+    HydrationStatsView().environmentObject(AuthViewModel())
 }

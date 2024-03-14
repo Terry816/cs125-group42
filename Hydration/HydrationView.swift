@@ -141,7 +141,7 @@ struct HydrationView: View {
                                     HStack{
                                         Spacer()
                                         VStack {
-                                            Text("ZotWater")
+                                            Text("Water")
                                                 .foregroundColor(.white)
                                                 .font(.system(size: 30, weight: .heavy))
                                         }
