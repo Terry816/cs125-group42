@@ -49,6 +49,7 @@ struct HydrationStatsView: View {
         }
         
         var percent : Double {
+            DataModel.waterPercent = Int(calculateWaterPercentage(userWater: user?.water ?? 0, totalWaterIntake: waterIntake) * 100)
             return calculateWaterPercentage(userWater: user?.water ?? 0, totalWaterIntake: waterIntake)
         }
 //
