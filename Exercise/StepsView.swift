@@ -80,7 +80,7 @@ struct StepsView: View {
                 healthStore.execute(query)
                 
                 stepsCount = HKQuantityType.quantityType(forIdentifier: .stepCount)!
-                startDate = Calendar.current.startOfDay(for: Date())
+                startDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())
                 predicate = HKQuery.predicateForSamples(withStart: startDate, end: Date(), options: .strictStartDate)
                 
                 query = HKSampleQuery(sampleType: stepsCount, predicate: predicate, limit: Int(HKObjectQueryNoLimit), sortDescriptors: nil) { (query, results, error) in
