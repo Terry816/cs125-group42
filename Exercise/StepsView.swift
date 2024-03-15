@@ -39,6 +39,8 @@ struct StepsView: View {
             } else if age > 50 {
                 goal *= 0.9
             }
+            
+            print("goalllll:", goal)
         } else {
             // Handle the case where user, weight, or height might be nil
         }
@@ -78,7 +80,7 @@ struct StepsView: View {
                 healthStore.execute(query)
                 
                 stepsCount = HKQuantityType.quantityType(forIdentifier: .stepCount)!
-                startDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())
+                startDate = Calendar.current.startOfDay(for: Date())
                 predicate = HKQuery.predicateForSamples(withStart: startDate, end: Date(), options: .strictStartDate)
                 
                 query = HKSampleQuery(sampleType: stepsCount, predicate: predicate, limit: Int(HKObjectQueryNoLimit), sortDescriptors: nil) { (query, results, error) in
@@ -88,6 +90,7 @@ struct StepsView: View {
 
                     let totalSteps = samples.reduce(0, {$0 + $1.quantity.doubleValue(for: HKUnit.count())})
                     steps_day = totalSteps
+                    print("Steps for the day:", steps_day)
                     
                     
                     

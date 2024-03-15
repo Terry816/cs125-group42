@@ -534,7 +534,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Hydration/Preview Content\"";
-				DEVELOPMENT_TEAM = F5UQSVF4PB;
+				DEVELOPMENT_TEAM = S7R8UZ4629;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Hydration/Info.plist;
@@ -554,7 +554,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = simarcheema.HydrationApp51;
+				PRODUCT_BUNDLE_IDENTIFIER = simarcheema.HydrationApp56;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -573,7 +573,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Hydration/Preview Content\"";
-				DEVELOPMENT_TEAM = F5UQSVF4PB;
+				DEVELOPMENT_TEAM = S7R8UZ4629;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Hydration/Info.plist;
@@ -593,7 +593,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = simarcheema.HydrationApp51;
+				PRODUCT_BUNDLE_IDENTIFIER = simarcheema.HydrationApp56;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
