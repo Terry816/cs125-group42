@@ -60,8 +60,23 @@ struct StepsView: View {
 
                     let totalSteps = samples.reduce(0, {$0 + $1.quantity.doubleValue(for: HKUnit.count())})
                     steps_week = totalSteps
+                    
+                    if steps_week >= goal{
+                        DataModel.fitPercent = 100
+                        print("Steps for WEEK:", steps_week)
+                        print("GOAL:", goal)
+                        print("GOOD")
+                    }
+                    else{
+                        let transferStep = Double(steps_week) / Double(goal)
+                        DataModel.fitPercent = Int(transferStep * 100)
+                        print("LESS THAN GOAL:", Int(transferStep))
+                        print("BAD")
+                    }
+                    
                 }
                 healthStore.execute(query)
+                
                 stepsCount = HKQuantityType.quantityType(forIdentifier: .stepCount)!
                 startDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())
                 predicate = HKQuery.predicateForSamples(withStart: startDate, end: Date(), options: .strictStartDate)
@@ -74,13 +89,6 @@ struct StepsView: View {
                     let totalSteps = samples.reduce(0, {$0 + $1.quantity.doubleValue(for: HKUnit.count())})
                     steps_day = totalSteps
                     
-                    if steps_week >= goal{
-                        DataModel.fitPercent = 100
-                    }
-                    else{
-                        let transferStep = Double(steps_week) / Double(goal)
-                        DataModel.fitPercent = Int(transferStep * 100)
-                    }
                     
                     
                 }
