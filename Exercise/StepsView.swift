@@ -74,8 +74,14 @@ struct StepsView: View {
                     let totalSteps = samples.reduce(0, {$0 + $1.quantity.doubleValue(for: HKUnit.count())})
                     steps_day = totalSteps
                     
-                    let transferStep = Int(steps_week / goal)
-                    DataModel.fitPercent = transferStep
+                    if steps_week >= goal{
+                        DataModel.fitPercent = 100
+                    }
+                    else{
+                        let transferStep = Double(steps_week) / Double(goal)
+                        DataModel.fitPercent = Int(transferStep * 100)
+                    }
+                    
                     
                 }
                 healthStore.execute(query)
