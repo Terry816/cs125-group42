@@ -28,5 +28,6 @@ Context Data Sources:
 * iOS HealthKit
 * iOS MapKit
 
+Our application harnesses these data sources to generate personalized recommendations tailored to each user’s needs and goals. User information is securely stored in the Firebase Realtime Database, ensuring privacy and accessibility within the user’s account. We leverage data from the Apple Health app to monitor sleep activity, including metrics such as deep sleep, REM sleep, total sleep duration, and time spent in bed. Users manually input wakeup times to contribute to the calculation of optimal sleep schedules. The Steps dashboard also integrates data from the Health app to display user’s step count alongside personalized step goals. Additionally, manual input of hydration levels enables our system to calculate customized recommendations for water intake. For enhanced user convenience, our app employs the MapKit framework to pinpoint water refill stations on campus and provide efficient navigation directions. Furthermore, users are provided with a “Lifestyle Score,” offering an overall assessment of their health status. This score breakdown empowers users to identify areas for improvement and focus their efforts accordingly.
 
 
